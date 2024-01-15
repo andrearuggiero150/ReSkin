@@ -1,8 +1,8 @@
-<%@ page import="model.customer" %>
 <!DOCTYPE html>
 <html>
 <head>
   <title>ReSkin - Home</title>
+  <link rel="stylesheet" href="css/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -56,14 +56,14 @@
               <a class="dropdown-item" href="#">LogOut</a>
             </div>
             <%} else {%>
-            <form class="dropdown-menu dropdown-menu-lg-end dropdown-menu-start p-4 was-validated" id="loginDropdown" style="width: 300px" method="post" action="loginServlet">
+            <form class="dropdown-menu dropdown-menu-lg-end dropdown-menu-start p-4" id="loginDropdown" style="width: 300px" method="post" action="loginServlet">
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="email@example.com" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                <input type="text" class="form-control" id="email" name="email" placeholder="email@example.com" required>
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?!.*\s).{8,}$">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
               </div>
               <div class="mb-3">
               </div>
@@ -114,7 +114,7 @@
   <div id="liveToast0" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
       <div class="toast-body">
-        Utente non trovato. Registrati ora!
+        Utente non trovato controlla email e password inseriti. Se non hai un account registrati ora!
       </div>
       <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
@@ -134,7 +134,17 @@
   <div id="liveToast-2" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
       <div class="toast-body">
-        Credenziali non valide!
+        Email inserita non valida!
+      </div>
+      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast-3" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        Password inserita non valida!
       </div>
       <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
@@ -150,6 +160,17 @@
     </div>
   </div>
 </div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToastreg" class="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        Registrazione avvenuta con successo! Ora puoi effettuare il login.
+      </div>
+      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
 
 
 
@@ -159,6 +180,7 @@
   const toastLiveExample2 = document.getElementById('liveToast2')
   const toastLiveExample_1 = document.getElementById('liveToast-1')
   const toastLiveExample_2 = document.getElementById('liveToast-2')
+  const toastLiveExample_3 = document.getElementById('liveToast-3')
   document.addEventListener("DOMContentLoaded", function() {
     setTimeout(function() {
       let loginSuccess = <%= request.getAttribute("loginSuccess") %>;
@@ -182,35 +204,11 @@
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample_2)
         toastBootstrap.show()
       }
-    })})
-
-  document.addEventListener('DOMContentLoaded', function () {
-    var loginDropdown = document.getElementById('loginDropdown');
-    var buttonsInsideDropdown = loginDropdown.querySelectorAll('button');
-    buttonsInsideDropdown.forEach(function(button) {
-      button.addEventListener('click', function (e) {
-        if (validateFields()) {
-          loginDropdown.classList.remove('show');
-        } else {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      });
-    });
-
-    function validateFields() {
-      var emailInput = document.getElementById('email');
-      var passwordInput = document.getElementById('password');
-
-      if (emailInput.validity.valid && passwordInput.validity.valid) {
-        return true;
-      } else {
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample_2)
+      if (loginSuccess == -3) {
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample_3)
         toastBootstrap.show()
-        return false;
       }
-    }
-  });
+    })})
 
   document.addEventListener("DOMContentLoaded", function() {
     setTimeout(function() {
@@ -232,6 +230,15 @@
       }, 100);
     });
   });
+
+  const toastreg = document.getElementById('liveToastreg')
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+      let registerSuccess = <%= request.getAttribute("registerSuccess") %>;
+      if (registerSuccess == 1) {
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastreg)
+        toastBootstrap.show()
+      }})})
 </script>
 </body>
 </html>

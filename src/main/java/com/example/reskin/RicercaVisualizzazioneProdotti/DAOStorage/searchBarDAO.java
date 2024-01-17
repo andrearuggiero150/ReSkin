@@ -1,4 +1,4 @@
-package com.example.reskin.RicercaVisualizzazioneProdotti.DAOStorage;
+package com.example.reskin.ricercaVisualizzazioneProdotti.DAOStorage;
 
 import com.example.reskin.connectionPool;
 

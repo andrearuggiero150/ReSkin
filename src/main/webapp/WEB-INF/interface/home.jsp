@@ -91,13 +91,20 @@
 </nav>
 
 
-<div class="searchBar">
-    <form method="post" action="gamePageServlet">
-        <input type="text" id="search-bar" placeholder="Cerca per nome" name="nomeGioco">
-        <div id="results-container"></div>
-    </form>
-</div>
-
+<form method="get">
+    <div class="input-group bg-dark" style="padding: 10px 50px;">
+        <input id="search-bar" type="text" class="form-control" placeholder="Cerca..." name="cerca">
+        <div class="dropdown" >
+            <ul class="dropdown-menu" id="results-container">
+            </ul>
+        </div>
+        <button class="btn btn-outline-light" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+        </button>
+    </div>
+</form>
 
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="liveToast1" class="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
@@ -259,12 +266,13 @@
         inputBarraDiRicerca.on('input', function () {
             console.log("Sei nella funzione inputBarraDiRicerca")
             var termineCercato = inputBarraDiRicerca.val();
+            console.log("Termine cercato: " ,termineCercato)
             if (termineCercato === '') {
                 listaRisultati.empty().hide();
             } else {
 
                 $.ajax({
-                    url: '',
+                    url: 'searchBarServlet',
                     method: 'POST',
                     data: {nomeProdotto: termineCercato},
                     dataType: 'json',
@@ -273,7 +281,7 @@
 
                         if (rispostaDatabase.length > 0) {
                             $.each(rispostaDatabase, function (indice, nome) {
-                                var nomeElemento = $('<p>' + nome + '</p>');
+                                var nomeElemento = $('<li><a class="dropdown-item" href="#">' + nome + '</a></li>');
                                 nomeElemento.click(function () {
                                     inputBarraDiRicerca.val(nome);
                                     listaRisultati.hide();
@@ -282,10 +290,13 @@
                             });
                             listaRisultati.show();
                         } else {
-                            listaRisultati.append('<p>Nessun risultato trovato</p>');
+                            listaRisultati.append('<li><a class="dropdown-item" href="#">' +'Nessun elemento' +'</a></li>');
                             listaRisultati.show();
                         }
-                    }
+                    },
+                });
+                $(document).ajaxError(function(e, xhr, opt){
+                    alert("Errore nella richiesta AJAX. URL Servlet: " + opt.url + ". Status errore: " + xhr.status + ". Testo errore: " + xhr.statusText);
                 });
             }
         });

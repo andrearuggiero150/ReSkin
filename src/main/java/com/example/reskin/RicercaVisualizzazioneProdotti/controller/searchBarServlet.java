@@ -1,5 +1,5 @@
-package com.example.reskin.RicercaVisualizzazioneProdotti.controller;
-import com.example.reskin.RicercaVisualizzazioneProdotti.DAOStorage.searchBarDAO;
+package com.example.reskin.ricercaVisualizzazioneProdotti.controller;
+import com.example.reskin.ricercaVisualizzazioneProdotti.DAOStorage.searchBarDAO;
 import com.google.gson.JsonArray;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

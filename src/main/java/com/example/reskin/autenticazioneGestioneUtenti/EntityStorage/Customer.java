@@ -5,7 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Customer {
+public abstract class Customer {
     private int id;
     private String nome;
     private String cognome;

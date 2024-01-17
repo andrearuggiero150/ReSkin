@@ -1,0 +1,7 @@
+com.example.reskin
+com.example.reskin.autenticazioneGestioneUtenti.controller
+com.example.reskin.autenticazioneGestioneUtenti.DAOStorage
+com.example.reskin.autenticazioneGestioneUtenti.EntityStorage
+com.example.reskin.ricercaVisualizzazioneProdotti.controller
+com.example.reskin.ricercaVisualizzazioneProdotti.DAOStorage
+com.example.reskin.ricercaVisualizzazioneProdotti.EntityStorage

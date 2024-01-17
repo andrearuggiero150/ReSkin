@@ -70,6 +70,6 @@ public class registrationServlet extends HttpServlet {
                 dispatcher.forward(req, resp);
             }
         }
-        //non c'è bisogno di fare un controllo sul check dei termini in quanto se viene modificato il required dall'tool del browser bootstap effettua autmaticamente un refresh
+        //non c'è bisogno di fare un controllo sul check dei termini in quanto se viene modificato il required dal tool del browser bootstap effettua automaticamente un refresh
     }
 }

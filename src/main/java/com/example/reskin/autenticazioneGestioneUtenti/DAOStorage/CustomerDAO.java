@@ -59,4 +59,22 @@ public class CustomerDAO {
         }
         return 1;
     }
+    public static int registerAdmin(Admin admin) {
+        try (Connection connection = connectionPool.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Customer (nome, cognome, passwordhash, email, isAdmin) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, admin.getNome());
+            preparedStatement.setString(2, admin.getCognome());
+            preparedStatement.setString(3, admin.getPassword());
+            preparedStatement.setString(4, admin.getEmail());
+            preparedStatement.setBoolean(5, true);
+            if (preparedStatement.executeUpdate() != 1) {
+                return 0;
+            }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            return 2;
+        } catch (SQLException e) {
+            return 0;
+        }
+        return 1;
+    }
 }

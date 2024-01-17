@@ -4,14 +4,15 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <title>ReSkin - Registrati</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>ReSkin - Registrazione Admin</title>
 </head>
 <body class="bg-dark text-light register">
 <div class="container">
     <div class="login-form mx-auto text-center registerForm">
         <img src="resources/logo.png" alt="Logo" style="width:360px; height: 80px;">
-        <form class="row g-3" method="post" action="registrationServlet">
-            <b> Registrazione </b>
+        <form class="row g-3" method="post" action="registrationAdminServlet">
+            <b> Registrazione Admin </b>
             <div class="col-md-6">
                 <label for="nome" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" placeholder="Mario" required>
@@ -20,13 +21,9 @@
                 <label for="cognome" class="form-label">Cognome</label>
                 <input type="text" class="form-control" id="cognome" name="cognome" placeholder="Rossi" required>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <label for="email" class="form-label">Email</label>
                 <input type="text" class="form-control" id="email" name="email" required placeholder="email@example.com">
-            </div>
-            <div class="col-md-6">
-                <label for="PIVA" class="form-label">Partita IVA</label>
-                <input type="text" class="form-control" id="PIVA" name="PIVA" placeholder="12345678910">
             </div>
             <div class="col-md-12">
                 <label for="password" class="form-label">Password</label>
@@ -39,7 +36,6 @@
             </div>
         </form>
     </div>
-    <a href="registrationAdminServlet" class="fixed-bottom p-2"><button class="btn btn-outline-light">Registrazione Admin</button></a>
 </div>
 
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
@@ -106,7 +102,7 @@
     <div id="liveToast-5" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                PIVA inserita non valida!
+                Il software esterno non è raggiungibile. Inviaci un email a inditexreskin@clientsupport.com per notificarci il disservizio e permetterci di risolvere
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
@@ -115,10 +111,9 @@
 
 
 
-
 <script>
-    const toastLiveExample0 = document.getElementById('liveToast0')
     const toastLiveExample2 = document.getElementById('liveToast2')
+    const toastLiveExample0 = document.getElementById('liveToast0')
     const toastLiveExample_1 = document.getElementById('liveToast-1')
     const toastLiveExample_2 = document.getElementById('liveToast-2')
     const toastLiveExample_3 = document.getElementById('liveToast-3')
@@ -160,3 +155,4 @@
 </script>
 </body>
 </html>
+

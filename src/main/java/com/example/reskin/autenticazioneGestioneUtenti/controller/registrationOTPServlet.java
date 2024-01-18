@@ -17,7 +17,7 @@ import java.net.Socket;
 public class registrationOTPServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        doPost(req, resp);
     }
 
     @Override
@@ -29,6 +29,26 @@ public class registrationOTPServlet extends HttpServlet {
             req.setAttribute("email", req.getParameter("email"));
             req.setAttribute("password", req.getParameter("password"));
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageOTP.jsp");
+            dispatcher.forward(req, resp);
+        }
+        if(req.getParameter("email")==null || !req.getParameter("email").matches("^[a-zA-Z0-9.-]{1,29}[a-zA-Z0-9]@[a-zA-Z0-9.-]{1,29}[a-zA-Z0-9]\\.[a-zA-Z]{1,5}$")) {
+            req.setAttribute("registerSuccess", -1);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
+            dispatcher.forward(req, resp);
+        }
+        if(req.getParameter("password")==null || !req.getParameter("password").matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,30}$")) {
+            req.setAttribute("registerSuccess", -2);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
+            dispatcher.forward(req, resp);
+        }
+        if(req.getParameter("nome")==null || !req.getParameter("nome").matches("^.{2,30}$")) {
+            req.setAttribute("registerSuccess", -3);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
+            dispatcher.forward(req, resp);
+        }
+        if(req.getParameter("cognome")==null || !req.getParameter("cognome").matches("^.{2,30}$")) {
+            req.setAttribute("registerSuccess", -4);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
             dispatcher.forward(req, resp);
         }
         else {
@@ -44,34 +64,9 @@ public class registrationOTPServlet extends HttpServlet {
                 String stringa = req.getParameter("otp");
 
                 oos.writeObject(stringa);
+                boolean bool = (boolean) ois.readObject();
 
-                boolean bool = false;
-                try {
-                    bool = (boolean) ois.readObject();
-                } catch (ClassNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
                 if(bool) {
-                    if(req.getParameter("email")==null || !req.getParameter("email").matches("^[a-zA-Z0-9.-]{1,29}[a-zA-Z0-9]@[a-zA-Z0-9.-]{1,29}[a-zA-Z0-9]\\.[a-zA-Z]{1,5}$")) {
-                        req.setAttribute("registerSuccess", -1);
-                        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
-                        dispatcher.forward(req, resp);
-                    }
-                    if(req.getParameter("password")==null || !req.getParameter("password").matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,30}$")) {
-                        req.setAttribute("registerSuccess", -2);
-                        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
-                        dispatcher.forward(req, resp);
-                    }
-                    if(req.getParameter("nome")==null || !req.getParameter("nome").matches("^.{2,30}$")) {
-                        req.setAttribute("registerSuccess", -3);
-                        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
-                        dispatcher.forward(req, resp);
-                    }
-                    if(req.getParameter("cognome")==null || !req.getParameter("cognome").matches("^.{2,30}$")) {
-                        req.setAttribute("registerSuccess", -4);
-                        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
-                        dispatcher.forward(req, resp);
-                    }
                     Admin a = new Admin();
                     a.setNome(req.getParameter("nome"));
                     a.setCognome(req.getParameter("cognome"));
@@ -80,7 +75,7 @@ public class registrationOTPServlet extends HttpServlet {
                     int i = CustomerDAO.registerAdmin(a);
                     if (i == 1) {
                         req.setAttribute("registerSuccess", 1);
-                        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/home.jsp");
+                        RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
                         dispatcher.forward(req, resp);
                     }
                     if (i == 2) {
@@ -106,6 +101,10 @@ public class registrationOTPServlet extends HttpServlet {
                 socket.close();
             } catch (ConnectException ce) {
                 req.setAttribute("registerSuccess", -5);
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
+                dispatcher.forward(req, resp);
+            } catch (ClassNotFoundException e) {
+                req.setAttribute("registerSuccess", 0);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
                 dispatcher.forward(req, resp);
             }

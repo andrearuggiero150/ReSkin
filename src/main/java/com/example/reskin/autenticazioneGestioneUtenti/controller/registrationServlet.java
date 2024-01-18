@@ -56,7 +56,7 @@ public class registrationServlet extends HttpServlet {
             int i = CustomerDAO.registerCliente(c);
             if(i == 1) {
                 req.setAttribute("registerSuccess", 1);
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/home.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
                 dispatcher.forward(req, resp);
             }
             if(i == 2) {

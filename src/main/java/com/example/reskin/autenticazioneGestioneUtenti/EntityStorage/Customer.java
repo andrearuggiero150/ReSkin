@@ -20,7 +20,7 @@ public abstract class Customer {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
-        setPassword(password);
+        this.password = password;
     }
 
     public int getId() {
@@ -60,7 +60,7 @@ public abstract class Customer {
     }
 
     public void setPassword(String password) {
-        this.password = cryptPassword(password);
+        this.password = password;
     }
 
     public static String cryptPassword(String password) {

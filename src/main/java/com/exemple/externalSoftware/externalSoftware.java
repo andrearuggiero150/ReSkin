@@ -1,13 +1,11 @@
 package com.exemple.externalSoftware;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Random;
 
-public class Server {
+public class externalSoftware {
     public static void main(String[] args) throws Exception {
         System.out.println("Server");
         ServerSocket serverSocket = new ServerSocket(7878);

@@ -31,7 +31,7 @@ public class CustomerDAO {
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             if(resultSet.getBoolean(7)) {
-                customer = new Admin(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(6), resultSet.getString(5));
+                Admin a = new Admin(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(6), resultSet.getString(5));
             }
             else {
                 customer = new Cliente(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(6), resultSet.getString(5), resultSet.getString(4));
@@ -46,7 +46,7 @@ public class CustomerDAO {
             preparedStatement.setString(1, cliente.getNome());
             preparedStatement.setString(2, cliente.getCognome());
             preparedStatement.setString(3, cliente.getPiva());
-            preparedStatement.setString(4, cliente.getPassword());
+            preparedStatement.setString(4, Customer.cryptPassword(cliente.getPassword()));
             preparedStatement.setString(5, cliente.getEmail());
             preparedStatement.setBoolean(6, false);
             if (preparedStatement.executeUpdate() != 1) {
@@ -64,7 +64,7 @@ public class CustomerDAO {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Customer (nome, cognome, passwordhash, email, isAdmin) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, admin.getNome());
             preparedStatement.setString(2, admin.getCognome());
-            preparedStatement.setString(3, admin.getPassword());
+            preparedStatement.setString(3, Customer.cryptPassword(admin.getPassword()));
             preparedStatement.setString(4, admin.getEmail());
             preparedStatement.setBoolean(5, true);
             if (preparedStatement.executeUpdate() != 1) {

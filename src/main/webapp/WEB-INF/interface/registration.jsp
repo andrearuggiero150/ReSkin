@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>ReSkin - Registrati</title>
 </head>
 <body class="bg-dark text-light register">
@@ -30,7 +31,7 @@
             </div>
             <div class="col-md-12">
                 <label for="password" class="form-label">Password</label>
-                <input type="text" class="form-control" id="password" name="password" required placeholder="Password">
+                <input type="password" class="form-control" id="password" name="password" required placeholder="Password">
                 <small id="passTips" class="form-text text-start text-light">- Contenere almeno 8 caratteri e massimo 30<br>- Contenere almeno una lettera minuscola ed una maiuscola<br>- Contenere almeno 1 numero<br>- Contenere almeno un carattere speciale tra @$!%*?&</small>
             </div>
             <div class="col-12">
@@ -39,7 +40,7 @@
             </div>
         </form>
     </div>
-    <a href="registrationAdminServlet" class="fixed-bottom p-2"><button class="btn btn-outline-light">Registrazione Admin</button></a>
+    <a href="registrationAdminServlet" class="fixed-bottom p-2 btn btn-outline-light">Registrazione Admin</a>
 </div>
 
 <div class="toast-container position-fixed bottom-0 end-0 p-3">

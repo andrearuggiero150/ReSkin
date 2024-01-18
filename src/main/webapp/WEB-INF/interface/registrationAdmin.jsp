@@ -27,7 +27,7 @@
             </div>
             <div class="col-md-12">
                 <label for="password" class="form-label">Password</label>
-                <input type="text" class="form-control" id="password" name="password" required placeholder="Password">
+                <input type="password" class="form-control" id="password" name="password" required placeholder="Password">
                 <small id="passTips" class="form-text text-start text-light">- Contenere almeno 8 caratteri e massimo 30<br>- Contenere almeno una lettera minuscola ed una maiuscola<br>- Contenere almeno 1 numero<br>- Contenere almeno un carattere speciale tra @$!%*?&</small>
             </div>
             <div class="col-12">

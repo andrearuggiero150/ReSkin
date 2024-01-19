@@ -84,7 +84,7 @@
 <form method="post" action="${pageContext.request.contextPath}/listaProdottiServlet" style="margin-bottom: 0;">
     <div class="dropdown">
         <div class="input-group bg-dark" style="padding: 10px 50px;">
-            <input id="search-bar" type="text" class="form-control" placeholder="Cerca..." name="cerca">
+            <input id="search-bar" type="text" class="form-control" placeholder="Cerca..." name="nomeProdotto">
             <ul class="dropdown-menu" id="results-container">
             </ul>
             <button class="btn btn-outline-light" type="submit">

@@ -70,12 +70,12 @@
     <div class="col g-0">
         <div class="card h-80 w-75 border-white bg-dark mx-auto my-5 g-0">
             <div class="card-header border-white">
-                <small class="card-title text-white"><%=prodotto.getNome()%>
-                </small>
+                <h5 class="card-title text-white"><%=prodotto.getNome()%>
+                </h5>
             </div>
             <div class="card-body align-content-center">
                 <div class="flex flex-column flex-fill">
-                    <img src="${pageContext.request.contextPath}/resources/Prodotto%20di%20prova.jpg"
+                    <img src="..."
                          class="card-img-top" style="height: 180px; width: 180px" alt="IMMAGINE PRODOTTO">
                 </div>
                 <p class="card-text text-white"><%=prodotto.getDescrizione()%>

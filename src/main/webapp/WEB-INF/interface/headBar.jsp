@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="index.html">
             <img src="resources/logo.png" alt="Logo" style="width:180px; height: 40px;">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigationBar">
@@ -81,42 +81,36 @@
 </nav>
 
 
-<form method="get">
-    <div class="input-group bg-dark" style="padding: 10px 50px;">
-        <input id="search-bar" type="text" class="form-control" placeholder="Cerca..." name="cerca">
-        <div class="dropdown" >
+<form method="post" action="${pageContext.request.contextPath}/listaProdottiServlet" style="margin-bottom: 0;">
+    <div class="dropdown">
+        <div class="input-group bg-dark" style="padding: 10px 50px;">
+            <input id="search-bar" type="text" class="form-control" placeholder="Cerca..." name="cerca">
             <ul class="dropdown-menu" id="results-container">
             </ul>
+            <button class="btn btn-outline-light" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                     viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </button>
         </div>
-        <button class="btn btn-outline-light" type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg>
-        </button>
     </div>
 </form>
 <script>
     $(document).ready(function () {
         var inputBarraDiRicerca = $('#search-bar');
         var listaRisultati = $('#results-container');
-
-
         inputBarraDiRicerca.on('input', function () {
-            console.log("Sei nella funzione inputBarraDiRicerca")
             var termineCercato = inputBarraDiRicerca.val();
-            console.log("Termine cercato: " ,termineCercato)
             if (termineCercato === '') {
                 listaRisultati.empty().hide();
             } else {
-
                 $.ajax({
                     url: 'searchBarServlet',
                     method: 'POST',
-                    data: {nomeProdotto: termineCercato},
-                    dataType: 'json',
+                    data: {nomeGioco: termineCercato}, dataType: 'json',
                     success: function (rispostaDatabase) {
                         listaRisultati.empty();
-
                         if (rispostaDatabase.length > 0) {
                             $.each(rispostaDatabase, function (indice, nome) {
                                 var nomeElemento = $('<li><a class="dropdown-item" href="#">' + nome + '</a></li>');
@@ -126,15 +120,20 @@
                                 });
                                 listaRisultati.append(nomeElemento);
                             });
+
+                            var offset = inputBarraDiRicerca.offset();
+                            listaRisultati.css({
+                                width: inputBarraDiRicerca.outerWidth(),
+                                top: '45px',
+                                left: offset.left,
+                                position: 'absolute'
+                            });
                             listaRisultati.show();
                         } else {
-                            listaRisultati.append('<li><a class="dropdown-item" href="#">' +'Nessun elemento' +'</a></li>');
+                            listaRisultati.append('<li><a class="dropdown-item" href="#">' + 'Nessun risultato trovato' + '</a></li>');
                             listaRisultati.show();
                         }
-                    },
-                });
-                $(document).ajaxError(function(e, xhr, opt){
-                    alert("Errore nella richiesta AJAX. URL Servlet: " + opt.url + ". Status errore: " + xhr.status + ". Testo errore: " + xhr.statusText);
+                    }
                 });
             }
         });

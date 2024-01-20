@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-<jsp:include page="headBar.jsp"></jsp:include>
+<jsp:include page="headBar.jsp"/>
 
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="liveToast1" class="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">

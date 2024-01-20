@@ -14,10 +14,9 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-<jsp:include page="headBar.jsp"></jsp:include>
+<jsp:include page="headBar.jsp"/>
 <div>
     <div class="dropdown bg-dark d-flex justify-content-center" style="padding: 20px">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -67,7 +66,8 @@
 
 <div class=" row row-cols-1 row-cols-md-4 g-0">
     <%for (Prodotto prodotto : listaProdoto) {%>
-    <div class="col g-0">
+    <%int id=prodotto.getProductID();%>
+    <div class="col g-0" onclick="">
         <div class="card h-80 w-75 border-white bg-dark mx-auto my-5 g-0">
             <div class="card-header border-white">
                 <h5 class="card-title text-white"><%=prodotto.getNome()%>
@@ -89,7 +89,9 @@
                 <%} else {%>
                 <small class="text-white">Non disponibile</small>
                 <% } %>
-                <button href="#" class="btn btn-primary bg-white text-dark">Vai al prodotto</button>
+                <button class="btn btn-primary bg-white" style="border-color: #212121;">
+                    <a style="text-decoration: none; color: #212121; border-color: #212121" href="prodottoServlet?id=<%=id%>">Vai al prodotto</a>
+                </button>
             </div>
         </div>
     </div>

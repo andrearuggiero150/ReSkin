@@ -96,6 +96,7 @@
         </div>
     </div>
 </form>
+
 <script>
     $(document).ready(function () {
         var inputBarraDiRicerca = $('#search-bar');

@@ -27,14 +27,11 @@ public class listaProdottiServlet extends HttpServlet {
         }
         else {
             listaProdotti=searchBarDAO.allProdotti();
-            System.out.println("Quantità prodotti: " +listaProdotti.size());
-            for(int i=0; i<listaProdotti.size();i++){
-                System.out.println("Nome prodotto: " +listaProdotti.get(i).getNome());
-            }
         }
         req.setAttribute("listaProdotti", listaProdotti);
         RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/listaProdotti.jsp");
-        dispatcher.forward(req, resp);    }
+        dispatcher.forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

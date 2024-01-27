@@ -42,6 +42,7 @@
                              style="width: 300px">
                             <a class="dropdown-item" href="POPAdminServlet">Scrivi POP</a>
                             <a class="dropdown-item" href="#">Visualizza Ordini </a>
+                            <a class="dropdown-item" href="gestisciInserzioniServlet">Visualizza Inserzioni </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/logoutServlet">LogOut</a>
                         </div>

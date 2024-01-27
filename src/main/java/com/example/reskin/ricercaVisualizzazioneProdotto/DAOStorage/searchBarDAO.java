@@ -1,6 +1,7 @@
 package com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage;
 
 import com.example.reskin.connectionPool;
+import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Category;
 import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto;
 
 import java.sql.Connection;
@@ -90,5 +91,40 @@ public class searchBarDAO {
             throw new RuntimeException(e);
         }
         return prodotti;
+    }
+
+    public static List<Category> allCategory() {
+        List<Category> categorie = new ArrayList<>();
+        try (Connection connection = connectionPool.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT Category.categoryID, Category.nome, Category.descrizione FROM Category ORDER BY Category.categoryID");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Category categoria = new Category();
+                categoria.setCategoryID(resultSet.getInt(1));
+                categoria.setNome(resultSet.getString(2));
+                categoria.setDescrizione(resultSet.getString(3));
+                categorie.add(categoria);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return categorie;
+    }
+
+
+    public static String getCategoryName(int id){
+        String nomeCategoria = null;
+        try(Connection connection=connectionPool.getConnection()){
+            PreparedStatement preparedStatement= connection.prepareStatement("SELECT nome FROM Category WHERE Category.categoryID=?");
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            while (resultSet.next()){
+                nomeCategoria=resultSet.getString(1);
+            }
+        } catch (SQLException e){
+
+            throw new RuntimeException(e);
+        }
+        return nomeCategoria;
     }
 }

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-    public class POP {
+public class POP {
     private int id;
     private String testo;
     private LocalDateTime data;
@@ -61,11 +61,11 @@ import java.util.GregorianCalendar;
         this.customerId = customerId;
     }
 
-        public String getEmail() {
+    public String getEmail() {
             return email;
         }
 
-        public void setEmail(String email) {
+    public void setEmail(String email) {
             this.email = email;
         }
-    }
+}

@@ -12,13 +12,9 @@ public class Prodotto {
     private int quantita;
     private double prezzo;
     private int categoryId;
-
     private int productID;
 
-
-
     public Prodotto(){
-
     }
 
     public Prodotto(String productId, String nome, String descrizione, Blob binaryImage, double larghezza, double lunghezza, int quantita, double prezzo, int categoryId) {

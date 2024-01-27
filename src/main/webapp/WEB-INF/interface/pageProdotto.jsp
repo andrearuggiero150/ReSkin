@@ -1,10 +1,4 @@
-<%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto" %><%--
-  Created by IntelliJ IDEA.
-  User: giovi
-  Date: 19/01/2024
-  Time: 14:51
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

@@ -40,7 +40,7 @@
             </div>
         </form>
     </div>
-    <a href="registrationAdminServlet" class="fixed-bottom p-2 btn btn-outline-light">Registrazione Admin</a>
+    <a href="registrationAdminServlet" class="bottom p-2 btn btn-outline-light">Registrazione Admin</a>
 </div>
 
 <div class="toast-container position-fixed bottom-0 end-0 p-3">

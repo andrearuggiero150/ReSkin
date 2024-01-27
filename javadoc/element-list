@@ -2,6 +2,10 @@ com.example.reskin
 com.example.reskin.autenticazioneGestioneUtenti.controller
 com.example.reskin.autenticazioneGestioneUtenti.DAOStorage
 com.example.reskin.autenticazioneGestioneUtenti.EntityStorage
-com.example.reskin.ricercaVisualizzazioneProdotti.controller
-com.example.reskin.ricercaVisualizzazioneProdotti.DAOStorage
-com.example.reskin.ricercaVisualizzazioneProdotti.EntityStorage
+com.example.reskin.gestioneNotifiche.controller
+com.example.reskin.gestioneNotifiche.DAOStorage
+com.example.reskin.gestioneNotifiche.EntityStorage
+com.example.reskin.ricercaVisualizzazioneProdotto.controller
+com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage
+com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage
+com.exemple.externalSoftware

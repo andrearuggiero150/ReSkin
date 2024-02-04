@@ -1,21 +1,17 @@
 package com.example.reskin.gestioneInserzioni.controller;
-
 import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
 import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Category;
-import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/modificaInserzioneServlet")
-public class modificaInserzioneServlet extends HttpServlet {
+@WebServlet("/redirectNuovaInserzioneServlet")
+public class redirectNuovaInserzioneServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,18 +21,12 @@ public class modificaInserzioneServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
         else {
-            Prodotto prodottoDaModificare;
-            int id=Integer.parseInt(req.getParameter("idProdotto"));
-            System.out.println("ID Prodotto: "+id);
-            prodottoDaModificare= searchBarDAO.prodottoFromID(id);
-            String nomeCategoria=searchBarDAO.getCategoryName(prodottoDaModificare.getCategoryId());
             List<Category> listaCategorie=searchBarDAO.allCategory();
-            req.setAttribute("prodottoDaModificare", prodottoDaModificare);
-            req.setAttribute("nomeCategoria", nomeCategoria);
             req.setAttribute("listaCategorie", listaCategorie);
-            RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/pageModificaInserzione.jsp");
-            dispatcher.forward(req, resp);
+            RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/pageAggiungiNuovaInserzione.jsp");
+            dispatcher.forward(req,resp);
         }
+
     }
 
     @Override

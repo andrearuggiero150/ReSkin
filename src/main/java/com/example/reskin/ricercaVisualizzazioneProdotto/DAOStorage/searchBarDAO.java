@@ -56,7 +56,7 @@ public class searchBarDAO {
                 prodotto.setProductID(id);
                 prodotto.setNome(resultSet.getString(1));
                 prodotto.setDescrizione(resultSet.getString(2));
-                prodotto.setBinaryImage(resultSet.getBlob(3));
+                prodotto.setBinaryImage(resultSet.getBytes(3));
                 prodotto.setLarghezza(resultSet.getDouble(4));
                 prodotto.setLunghezza(resultSet.getDouble(5));
                 prodotto.setQuantita(resultSet.getInt(6));
@@ -79,7 +79,7 @@ public class searchBarDAO {
                 prodotto.setProductID(resultSet.getInt(1));
                 prodotto.setNome(resultSet.getString(2));
                 prodotto.setDescrizione(resultSet.getString(3));
-                prodotto.setBinaryImage(resultSet.getBlob(4));
+                prodotto.setBinaryImage(resultSet.getBytes(4));
                 prodotto.setLarghezza(resultSet.getDouble(5));
                 prodotto.setLunghezza(resultSet.getDouble(6));
                 prodotto.setQuantita(resultSet.getInt(7));
@@ -126,5 +126,78 @@ public class searchBarDAO {
             throw new RuntimeException(e);
         }
         return nomeCategoria;
+    }
+
+    public static List<Prodotto> productFilteredByCategory(int idCategoria){
+        List<Prodotto> prodottiFiltrati = new ArrayList<>();
+        try(Connection connection=connectionPool.getConnection()){
+            PreparedStatement preparedStatement=connection.prepareStatement("SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Product.categoryID=? AND Category.categoryID=Product.categoryID ORDER BY Product.productID");
+            preparedStatement.setInt(1,idCategoria);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Prodotto prodotto = new Prodotto();
+                prodotto.setProductID(resultSet.getInt(1));
+                prodotto.setNome(resultSet.getString(2));
+                prodotto.setDescrizione(resultSet.getString(3));
+                prodotto.setBinaryImage(resultSet.getBytes(4));
+                prodotto.setLarghezza(resultSet.getDouble(5));
+                prodotto.setLunghezza(resultSet.getDouble(6));
+                prodotto.setQuantita(resultSet.getInt(7));
+                prodotto.setPrezzo(resultSet.getDouble(8));
+                prodotto.setCategoryId(resultSet.getInt(9));
+                prodottiFiltrati.add(prodotto);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return prodottiFiltrati;
+    }
+
+    public static List<Prodotto> productFilteredByDisponibility(int quantita){
+        List<Prodotto> prodottiFiltrati = new ArrayList<>();
+        String query=null;
+        try(Connection connection=connectionPool.getConnection()){
+            if(quantita>0) {
+                query="SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Product.quantita>=? AND Category.categoryID=Product.categoryID ORDER BY Product.productID";
+
+            } else if (quantita==0) {
+                query="SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Product.quantita=? AND Category.categoryID=Product.categoryID ORDER BY Product.productID";
+            }
+
+            PreparedStatement preparedStatement= connection.prepareStatement(query);
+            preparedStatement.setInt(1,quantita);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Prodotto prodotto = new Prodotto();
+                prodotto.setProductID(resultSet.getInt(1));
+                prodotto.setNome(resultSet.getString(2));
+                prodotto.setDescrizione(resultSet.getString(3));
+                prodotto.setBinaryImage(resultSet.getBytes(4));
+                prodotto.setLarghezza(resultSet.getDouble(5));
+                prodotto.setLunghezza(resultSet.getDouble(6));
+                prodotto.setQuantita(resultSet.getInt(7));
+                prodotto.setPrezzo(resultSet.getDouble(8));
+                prodotto.setCategoryId(resultSet.getInt(9));
+                prodottiFiltrati.add(prodotto);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return prodottiFiltrati;
+    }
+
+    public static byte[] getImmagine(int id){
+        byte[] photoCode = new byte[0];
+        try(Connection connection=connectionPool.getConnection()){
+            PreparedStatement preparedStatement= connection.prepareStatement("SELECT binaryImage FROM Product WHERE Product.productID=?");
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            while (resultSet.next()){
+                photoCode= resultSet.getBytes(1);
+            }
+        } catch (SQLException e ){
+            throw new RuntimeException(e);
+        }
+        return photoCode;
     }
 }

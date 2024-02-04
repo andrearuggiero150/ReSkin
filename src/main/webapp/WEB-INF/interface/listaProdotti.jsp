@@ -1,9 +1,13 @@
 <%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.Base64" %>
+<%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Category" %>
+
 <html>
 <head>
-    <%ArrayList<Prodotto> listaProdoto = (ArrayList<Prodotto>) request.getAttribute("listaProdotti");%>
+    <%ArrayList<Prodotto> listaProdotti = (ArrayList<Prodotto>) request.getAttribute("listaProdotti");%>
+    <%ArrayList<Category> listaCategorie = (ArrayList<Category>) request.getAttribute("listaCategorie");%>
     <title>ReSkin -Catalogo prodotti</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,42 +17,35 @@
 <body>
 <jsp:include page="headBar.jsp"/>
 <div>
-    <div class="dropdown bg-dark d-flex justify-content-center" style="padding: 20px">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Disponibilità
-        </button>
-        <ul class="dropdown-menu">
-            <li>
-                <button class="dropdown-item" type="button">Disponibile</button>
-            </li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li>
-                <button class="dropdown-item" type="button">Non disponibile</button>
-            </li>
-        </ul>
-        <button class="btn btn-secondary dropdown-toggle mx-5" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-            Categoria
-        </button>
-        <ul class="dropdown-menu">
-            <li>
-                <button class="dropdown-item" type="button">Esempio categoria</button>
-            </li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li>
-                <button class="dropdown-item" type="button">Esempio categoria</button>
-            </li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li>
-                <button class="dropdown-item" type="button">Esempio categoria</button>
-            </li>
-        </ul>
+    <div class="bg-dark d-flex justify-content-center" style="padding: 20px">
+
+        <form method="post" action="listaProdottiServlet" class="mx-5" id="cambiaDisponibilitàForm">
+            <select class="form-select" id="Disponibilità" name="Disponibilità" onchange="submitFormDisponibilita()">
+                <option value="" disabled selected style="display:none;">Disponibilità</option>
+                <option value="Disponibile" >Disponibile</option>
+                <option value="Non disponibile">Non disponibile</option>
+            </select>
+        </form>
+
+        <form method="post" action="listaProdottiServlet" class="mx-5" id="cambiaCategoriaForm">
+            <select class="form-select" id="Categoria" name="Categoria" onchange="submitFormCategoria()">
+                <option value="" disabled selected style="display:none;">Categoria</option>
+                <% for (Category categoria : listaCategorie) { %>
+                <option value="<%= categoria.getCategoryID() %>" data-nome="<%= categoria.getNome() %>">
+                    <%=categoria.getNome()%>
+                </option>
+                <% } %>
+            </select>
+        </form>
+
+        <div>
+            <button type="button" class="btn btn-primary bg-white mx-5" style="border-color: #212121;" >
+                <a style="text-decoration: none; color: #212121; border-color: #212121;" href="listaProdottiServlet">Reset filtri</a>
+            </button>
+
+        </div>
+
+
     </div>
 </div>
 
@@ -60,19 +57,22 @@
 
 
 <div class=" row row-cols-1 row-cols-md-4 g-0">
-    <%for (Prodotto prodotto : listaProdoto) {%>
-    <%int id=prodotto.getProductID();%>
+    <%
+        for (Prodotto prodotto : listaProdotti) {
+    %>
+    <%int id = prodotto.getProductID();%>
     <div class="col g-0" onclick="">
         <div class="card h-80 w-75 border-white bg-dark mx-auto my-5 g-0">
             <div class="card-header border-white">
                 <h5 class="card-title text-white"><%=prodotto.getNome()%>
                 </h5>
             </div>
-            <div class="card-body align-content-center">
+            <div class="card-body mx-auto">
                 <div class="flex flex-column flex-fill">
-                    <img src="..."
-                         class="card-img-top" style="height: 180px; width: 180px" alt="IMMAGINE PRODOTTO">
+                    <img src="data:image/jpeg;base64,<%= Base64.getEncoder().encodeToString(prodotto.getBinaryImage()) %>" class="card-img-top img-fluid" alt="IMMAGINE PRODOTTO">
                 </div>
+            </div>
+            <div class="mx-auto mb-1">
                 <p class="card-text text-white"><%=prodotto.getDescrizione()%>
                 </p>
                 <p class="card-text text-white">€<%=prodotto.getPrezzo()%>
@@ -84,7 +84,7 @@
                 <%} else {%>
                 <small class="text-white">Non disponibile</small>
                 <% } %>
-                <button class="btn btn-primary bg-white" style="border-color: #212121;">
+                <button class="btn btn-primary bg-white" style="border-color: #212121;" >
                     <a style="text-decoration: none; color: #212121; border-color: #212121" href="prodottoServlet?id=<%=id%>">Vai al prodotto</a>
                 </button>
             </div>
@@ -100,6 +100,19 @@
             loadLog(<%= request.getSession().getAttribute("loginStatus") %>);
         }, 100);
     });
+
+
+    function submitFormCategoria() {
+        var select = document.getElementById("Categoria");
+        select.options[0].style.display = "none";
+        document.getElementById("cambiaCategoriaForm").submit();
+    }
+
+    function submitFormDisponibilita() {
+        var select = document.getElementById("Disponibilità");
+        select.options[0].style.display = "none";
+        document.getElementById("cambiaDisponibilitàForm").submit();
+    }
 </script>
 </body>
 

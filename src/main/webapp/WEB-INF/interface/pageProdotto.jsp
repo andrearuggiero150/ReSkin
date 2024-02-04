@@ -1,5 +1,6 @@
 <%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.Base64" %>
 <html>
 <head>
     <% Prodotto prodotto = (Prodotto) request.getAttribute("Prodotto");%>
@@ -16,21 +17,23 @@
 <body>
 <jsp:include page="headBar.jsp"/>
 <div class="container-fluid">
-    <div class="card" style="width: auto;">
+    <div class="card mt-5" style="width: auto;">
         <div class="card-body">
             <div class="card mb-3" style="width: auto; margin: 0 auto;">
                 <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="${pageContext.request.contextPath}/resources/Prodotto%20di%20prova.jpg"
-                             class="img-fluid rounded-start" alt="...">
+                    <div class="col-md-4 mx-auto">
+                        <div>
+                            <img src="data:image/jpeg;base64,<%= Base64.getEncoder().encodeToString(prodotto.getBinaryImage()) %>"
+                                 class="card-img-top img-fluid" alt="IMMAGINE PRODOTTO">
+                        </div>
                     </div>
-                    <div class="col-md-8 mt-2">
+                    <div class="col-md-8 mt-3">
                         <h1 class="card-title fw-bold fw-italic"><%=prodotto.getNome()%>
                         </h1>
-                        <div class="card-body" style="margin-top: 90px">
-                            <p class="card-text">LUNGHEZZA: <%=prodotto.getLunghezza()%>
+                        <div class="card-body" style="margin-top: 150px">
+                            <p class="card-text">LUNGHEZZA: <%=prodotto.getLunghezza()%> cm
                             </p>
-                            <p class="card-text">LARGHEZZA: <%=prodotto.getLarghezza()%>
+                            <p class="card-text">LARGHEZZA: <%=prodotto.getLarghezza()%> cm
                             </p>
                             <%if (prodotto.getQuantita() > 0) {%>
                             <p class="card-text" style="color: green">Prodotto disponibile</p>
@@ -43,9 +46,7 @@
                                 <p class="card-text mx-2 mb-0 my-2 fs-4" id="quantitaScelta"><%=quantitaIniziale%></p>
                                 <button type="button" class="btn btn-dark btn-lg" id="pulsanteIncrementa">+</button>
                             </div>
-
-
-                            <button type="button" class="btn btn-dark btn-lg">
+                           <button type="button" class="btn btn-dark btn-lg">
                                 <a href="#" style="text-decoration: none; color: white">
                                     Aggiungi al carrello
                                 </a>

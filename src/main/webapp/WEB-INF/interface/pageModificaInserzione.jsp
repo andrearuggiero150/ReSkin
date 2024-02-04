@@ -212,8 +212,6 @@
         setTimeout(function () {
             let codiceErrore = <%=request.getAttribute("codiceErrore")%>
 
-            console.log("Codice errore: " +codiceErrore)
-
 
             if (codiceErrore == 1) {
                 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample1)
@@ -261,7 +259,7 @@
             <%=request.getAttribute("esitoOperazione")%>
             if (esitoOperazione === -1) {
             }
-            if (esitoOperazione === 0) {
+            if (esitoOperazione === 0 || esitoOperazione===2) {
                 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample0)
                 toastBootstrap.show()
             }

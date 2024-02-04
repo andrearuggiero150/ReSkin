@@ -25,6 +25,8 @@ public class eliminaProdottoServlet extends HttpServlet {
         }
 
         int idProdotto=Integer.parseInt(req.getParameter("idProdotto"));
+        System.out.println("ID Prodotto: "+idProdotto);
+
         int risultatoOperazione= gestisciInserzioniDAO.eliminaProdotto(idProdotto);
 
         if(risultatoOperazione==1){
@@ -40,6 +42,8 @@ public class eliminaProdottoServlet extends HttpServlet {
             RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");
             dispatcher.forward(req,resp);
         }
+
+
 
     }
 

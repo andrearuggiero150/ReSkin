@@ -1,5 +1,7 @@
 <%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Base64" %>
+<%--
   Created by IntelliJ IDEA.
   User: giovi
   Date: 20/01/2024
@@ -24,7 +26,7 @@
         <h1 class='text-2xl font-bold text-gray-900 sm:text-3xl'>
             Scopri i nostri prodotti
         </h1>
-        <form class="mx-4" action="aggiungiNuovaInserzioneServlet" method="post">
+        <form class="mx-4" action="redirectNuovaInserzioneServlet" method="post">
             <button class="btn btn-secondary" type="submit">Aggiungi nuova inserzione</button>
         </form>
     </div>
@@ -43,18 +45,21 @@
             </div>
             <div class="card-body mx-auto">
                 <div class="flex flex-column flex-fill">
-                    <img src="..." class="card-img-top" style="height: 180px; width: 180px" alt="IMMAGINE PRODOTTO">
+                    <img src="data:image/jpeg;base64,<%= Base64.getEncoder().encodeToString(prodotto.getBinaryImage()) %>" class="card-img-top img-fluid"  alt="IMMAGINE PRODOTTO">
                 </div>
             </div>
-            <div class="card-footer border-white d-flex justify-content-center align-items-center">
-                <form class="mx-4" id="eliminaForm" action="eliminaProdottoServlet" method="post">
-                    <input type="hidden" value="<%=id%>" name="idProdotto">
-                    <button class="btn btn-danger" type="button" onclick="mostraConferma()">Elimina</button>
-                </form>
-                <form class="mx-4" action="modificaInserzioneServlet" method="post">
-                    <input hidden="hidden" value="<%=id%>" name="idProdotto">
-                    <button class="btn btn-success" type="submit">Modifica</button>
-                </form>
+            <div class="card-footer border-white">
+                <div class="d-flex justify-content-center align-items-center mt-2">
+                    <form class="mx-4" id="eliminaForm<%=id%>" action="eliminaProdottoServlet" method="post">
+                        <input type="hidden" value="<%=id%>" name="idProdotto">
+                        <button class="btn btn-danger" type="button" onclick="mostraConferma(<%=id%>)">Elimina</button>
+                    </form>
+
+                    <form class="mx-4" action="modificaInserzioneServlet" method="post">
+                        <input hidden="hidden" value="<%=id%>" name="idProdotto">
+                        <button class="btn btn-success" type="submit">Modifica</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -116,13 +121,18 @@
 
 <script>
 
-    function mostraConferma() {
-        var toastEliminaProdoto = new bootstrap.Toast(document.getElementById('toastConferma'));
-        toastEliminaProdoto.show();
+    function mostraConferma(idProdotto) {
+        var toastEliminaProdotto = new bootstrap.Toast(document.getElementById('toastConferma'));
+        // Passa l'id del prodotto alla funzione di confermaEliminazione
+        document.getElementById('toastConferma').setAttribute('data-idProdotto', idProdotto);
+        toastEliminaProdotto.show();
     }
 
     function confermaEliminazione() {
-        document.getElementById('eliminaForm').submit();
+        // Ottieni l'id del prodotto dal data attributo
+        var idProdotto = document.getElementById('toastConferma').getAttribute('data-idProdotto');
+        // Modifica l'ID del form dinamicamente prima di inviarlo
+        document.getElementById('eliminaForm' + idProdotto).submit();
     }
 
     document.addEventListener("DOMContentLoaded", function () {

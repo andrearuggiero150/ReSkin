@@ -5,19 +5,19 @@ import java.sql.Blob;
 public class Prodotto {
     private String nome;
     private String descrizione;
-    private Blob binaryImage;
+    private byte[] binaryImage;
     private double larghezza;
     private double lunghezza;
     private int quantita;
     private double prezzo;
+    private String colore;
     private int categoryId;
     private int productID;
 
-    public Prodotto(){
+    public Prodotto() {
     }
 
-    public Prodotto(int productID, String nome, String descrizione, Blob binaryImage, double larghezza, double lunghezza, int quantita, double prezzo, int categoryId) {
-        this.productID = productID;
+    public Prodotto(String nome, String descrizione, byte[] binaryImage, double larghezza, double lunghezza, int quantita, double prezzo, String colore, int categoryId, int productID) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.binaryImage = binaryImage;
@@ -25,7 +25,9 @@ public class Prodotto {
         this.lunghezza = lunghezza;
         this.quantita = quantita;
         this.prezzo = prezzo;
+        this.colore = colore;
         this.categoryId = categoryId;
+        this.productID = productID;
     }
 
     public int getProductID() {
@@ -52,11 +54,11 @@ public class Prodotto {
         this.descrizione = descrizione;
     }
 
-    public Blob getBinaryImage() {
+    public byte[] getBinaryImage() {
         return binaryImage;
     }
 
-    public void setBinaryImage(Blob binaryImage) {
+    public void setBinaryImage(byte[] binaryImage) {
         this.binaryImage = binaryImage;
     }
 
@@ -100,4 +102,11 @@ public class Prodotto {
         this.categoryId = categoryId;
     }
 
+    public String getColore() {
+        return colore;
+    }
+
+    public void setColore(String colore) {
+        this.colore = colore;
+    }
 }

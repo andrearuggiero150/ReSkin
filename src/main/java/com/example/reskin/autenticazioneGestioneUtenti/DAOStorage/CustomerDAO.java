@@ -8,36 +8,43 @@ import com.example.reskin.connectionPool;
 import java.sql.*;
 
 public class CustomerDAO {
-    public static int loginUtente(String email, String password) throws SQLException {
-        String passwordHash = Customer.cryptPassword(password);
-        Connection connection = connectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT email, passwordHash, isAdmin FROM Customer WHERE email=? AND passwordhash=?");
-        preparedStatement.setString(1, email);
-        preparedStatement.setString(2, passwordHash);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if (!resultSet.next()) {
-            return 0;
-        } else if (resultSet.getBoolean(3)) {
-            return 2;
+    public static int loginUtente(String email, String password) {
+        try {
+            String passwordHash = Customer.cryptPassword(password);
+            Connection connection = connectionPool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT email, passwordHash, isAdmin FROM Customer WHERE email=? AND passwordhash=?");
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, passwordHash);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next()) {
+                return 0;
+            } else if (resultSet.getBoolean(3)) {
+                return 2;
+            }
+            return 1;
+        } catch (SQLException e) {
+            return -1;
         }
-        return 1;
     }
 
-    public static Customer returnCustomerData(String email) throws SQLException {
-        Customer customer = null;
-        Connection connection = connectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Customer WHERE email=?");
-        preparedStatement.setString(1, email);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            if(resultSet.getBoolean(7)) {
-                Admin a = new Admin(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(6), resultSet.getString(5));
+    public static Customer returnCustomerData(String email) {
+        try {
+            Customer customer = null;
+            Connection connection = connectionPool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Customer WHERE email=?");
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                if (resultSet.getBoolean(7)) {
+                    customer = new Admin(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(6), resultSet.getString(5));
+                } else {
+                    customer = new Cliente(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(6), resultSet.getString(5), resultSet.getString(4));
+                }
             }
-            else {
-                customer = new Cliente(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(6), resultSet.getString(5), resultSet.getString(4));
-            }
+            return customer;
+        } catch (SQLException e) {
+            return null;
         }
-        return customer;
     }
 
     public static int registerCliente(Cliente cliente) {

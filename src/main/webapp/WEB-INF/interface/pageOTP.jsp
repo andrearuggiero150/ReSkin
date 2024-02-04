@@ -44,7 +44,7 @@
     <div id="liveToast-2" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                OTP inserito non valido! Ritenta l'inserimento con quello corretto che visioni sul Software Esterno
+                OTP inserito non corretto! Ritenta l'inserimento con quello corretto che visioni sul Software Esterno
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>

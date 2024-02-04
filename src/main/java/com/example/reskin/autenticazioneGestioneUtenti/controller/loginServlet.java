@@ -34,19 +34,38 @@ public class loginServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
         else {
-            try {
                 int i = CustomerDAO.loginUtente(req.getParameter("email"), req.getParameter("password"));
                 if(i == 1) {
                     req.setAttribute("loginSuccess", 1);
                     req.getSession().setAttribute("loginStatus", 1);
-                    req.getSession().setAttribute("customer", CustomerDAO.returnCustomerData(req.getParameter("email")));
+                    Customer c = CustomerDAO.returnCustomerData(req.getParameter("email"));
+                    if(c == null) {
+                        req.setAttribute("loginSuccess", -1);
+                        req.getSession().setAttribute("loginStatus", 0);
+                        RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
+                        dispatcher.forward(req, resp);
+                    }
+                    req.getSession().setAttribute("customer", c);
                     RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
                     dispatcher.forward(req, resp);
                 }
                 else if(i == 2) {
                     req.setAttribute("loginSuccess", 2);
                     req.getSession().setAttribute("loginStatus", 2);
-                    req.getSession().setAttribute("customer", CustomerDAO.returnCustomerData(req.getParameter("email")));
+                    Customer c = CustomerDAO.returnCustomerData(req.getParameter("email"));
+                    if(c == null) {
+                        req.setAttribute("loginSuccess", -1);
+                        req.getSession().setAttribute("loginStatus", 0);
+                        RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
+                        dispatcher.forward(req, resp);
+                    }
+                    req.getSession().setAttribute("customer", c);
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
+                    dispatcher.forward(req, resp);
+                }
+                else if(i == -1) {
+                    req.setAttribute("loginSuccess", -1);
+                    req.getSession().setAttribute("loginStatus", 0);
                     RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
                     dispatcher.forward(req, resp);
                 }
@@ -56,12 +75,6 @@ public class loginServlet extends HttpServlet {
                     RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
                     dispatcher.forward(req, resp);
                 }
-            } catch (SQLException e) {
-                req.setAttribute("loginSuccess", -1);
-                req.getSession().setAttribute("loginStatus", 0);
-                RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
-                dispatcher.forward(req, resp);
-            }
         }
     }
 }

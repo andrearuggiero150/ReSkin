@@ -2,6 +2,7 @@ package com.example.reskin.autenticazioneGestioneUtenti.controller;
 
 import com.example.reskin.autenticazioneGestioneUtenti.DAOStorage.CustomerDAO;
 import com.example.reskin.autenticazioneGestioneUtenti.EntityStorage.Customer;
+import com.example.reskin.connPool.connectionPoolReal;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/loginServlet")
 public class loginServlet extends HttpServlet {
@@ -34,7 +34,7 @@ public class loginServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
         else {
-                int i = CustomerDAO.loginUtente(req.getParameter("email"), req.getParameter("password"));
+                int i = CustomerDAO.loginUtente(req.getParameter("email"), req.getParameter("password"), new connectionPoolReal());
                 if(i == 1) {
                     req.setAttribute("loginSuccess", 1);
                     req.getSession().setAttribute("loginStatus", 1);

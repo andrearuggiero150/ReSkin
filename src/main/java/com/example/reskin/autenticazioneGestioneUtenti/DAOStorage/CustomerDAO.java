@@ -3,16 +3,19 @@ package com.example.reskin.autenticazioneGestioneUtenti.DAOStorage;
 import com.example.reskin.autenticazioneGestioneUtenti.EntityStorage.Admin;
 import com.example.reskin.autenticazioneGestioneUtenti.EntityStorage.Cliente;
 import com.example.reskin.autenticazioneGestioneUtenti.EntityStorage.Customer;
+import com.example.reskin.connPool.connectionPoolAbstraction;
+import com.example.reskin.connPool.connectionPoolMock;
+import com.example.reskin.connPool.connectionImplementor;
 import com.example.reskin.connectionPool;
 
 import java.sql.*;
 
 public class CustomerDAO {
-    public static int loginUtente(String email, String password) {
+    public static int loginUtente(String email, String password, connectionPoolAbstraction cpa) {
         try {
             String passwordHash = Customer.cryptPassword(password);
-            Connection connection = connectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT email, passwordHash, isAdmin FROM Customer WHERE email=? AND passwordhash=?");
+            Connection c = cpa.setConnection();
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT email, passwordHash, isAdmin FROM Customer WHERE email=? AND passwordhash=?");
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, passwordHash);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -27,7 +30,7 @@ public class CustomerDAO {
         }
     }
 
-    public static Customer returnCustomerData(String email) {
+    public static Customer returnCustomerData(String email, connectionPoolAbstraction cpa) {
         try {
             Customer customer = null;
             Connection connection = connectionPool.getConnection();
@@ -47,7 +50,7 @@ public class CustomerDAO {
         }
     }
 
-    public static int registerCliente(Cliente cliente) {
+    public static int registerCliente(Cliente cliente, connectionPoolAbstraction cpa) {
         try (Connection connection = connectionPool.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Customer (nome, cognome,PIVA, passwordhash, email, isAdmin) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, cliente.getNome());
@@ -66,7 +69,7 @@ public class CustomerDAO {
         }
         return 1;
     }
-    public static int registerAdmin(Admin admin) {
+    public static int registerAdmin(Admin admin, connectionPoolAbstraction cpa) {
         try (Connection connection = connectionPool.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Customer (nome, cognome, passwordhash, email, isAdmin) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, admin.getNome());

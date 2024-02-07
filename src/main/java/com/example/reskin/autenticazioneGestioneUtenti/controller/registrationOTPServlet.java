@@ -2,6 +2,7 @@ package com.example.reskin.autenticazioneGestioneUtenti.controller;
 
 import com.example.reskin.autenticazioneGestioneUtenti.DAOStorage.CustomerDAO;
 import com.example.reskin.autenticazioneGestioneUtenti.EntityStorage.Admin;
+import com.example.reskin.connPool.connectionPoolReal;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -72,7 +73,7 @@ public class registrationOTPServlet extends HttpServlet {
                     a.setCognome(req.getParameter("cognome"));
                     a.setEmail(req.getParameter("email"));
                     a.setPassword(req.getParameter("password"));
-                    int i = CustomerDAO.registerAdmin(a);
+                    int i = CustomerDAO.registerAdmin(a, new connectionPoolReal());
                     if (i == 1) {
                         req.setAttribute("registerSuccess", 1);
                         RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");

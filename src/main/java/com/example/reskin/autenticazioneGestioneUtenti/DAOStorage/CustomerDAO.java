@@ -33,14 +33,14 @@ public class CustomerDAO {
     public static Customer returnCustomerData(String email, connectionPoolAbstraction cpa) {
         try {
             Customer customer = null;
-            Connection connection = connectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Customer WHERE email=?");
+            Connection c = cpa.setConnection();
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT * FROM Customer WHERE email=?");
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 if (resultSet.getBoolean(7)) {
                     customer = new Admin(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(6), resultSet.getString(5));
-                } else {
+                } else if(!resultSet.getBoolean(7)){
                     customer = new Cliente(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(6), resultSet.getString(5), resultSet.getString(4));
                 }
             }
@@ -51,40 +51,34 @@ public class CustomerDAO {
     }
 
     public static int registerCliente(Cliente cliente, connectionPoolAbstraction cpa) {
-        try (Connection connection = connectionPool.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Customer (nome, cognome,PIVA, passwordhash, email, isAdmin) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+        try (Connection c = cpa.setConnection()) {
+            PreparedStatement preparedStatement = c.prepareStatement("INSERT INTO Customer (nome, cognome,PIVA, passwordhash, email, isAdmin) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, cliente.getNome());
             preparedStatement.setString(2, cliente.getCognome());
             preparedStatement.setString(3, cliente.getPiva());
             preparedStatement.setString(4, Customer.cryptPassword(cliente.getPassword()));
             preparedStatement.setString(5, cliente.getEmail());
             preparedStatement.setBoolean(6, false);
-            if (preparedStatement.executeUpdate() != 1) {
-                return 0;
-            }
+            return preparedStatement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
             return 2;
         } catch (SQLException e) {
             return 0;
         }
-        return 1;
     }
     public static int registerAdmin(Admin admin, connectionPoolAbstraction cpa) {
-        try (Connection connection = connectionPool.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Customer (nome, cognome, passwordhash, email, isAdmin) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+        try (Connection c = cpa.setConnection()) {
+            PreparedStatement preparedStatement = c.prepareStatement("INSERT INTO Customer (nome, cognome, passwordhash, email, isAdmin) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, admin.getNome());
             preparedStatement.setString(2, admin.getCognome());
             preparedStatement.setString(3, Customer.cryptPassword(admin.getPassword()));
             preparedStatement.setString(4, admin.getEmail());
             preparedStatement.setBoolean(5, true);
-            if (preparedStatement.executeUpdate() != 1) {
-                return 0;
-            }
+            return preparedStatement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
             return 2;
         } catch (SQLException e) {
             return 0;
         }
-        return 1;
     }
 }

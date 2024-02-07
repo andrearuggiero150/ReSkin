@@ -38,7 +38,7 @@ public class loginServlet extends HttpServlet {
                 if(i == 1) {
                     req.setAttribute("loginSuccess", 1);
                     req.getSession().setAttribute("loginStatus", 1);
-                    Customer c = CustomerDAO.returnCustomerData(req.getParameter("email"));
+                    Customer c = CustomerDAO.returnCustomerData(req.getParameter("email"), new connectionPoolReal());
                     if(c == null) {
                         req.setAttribute("loginSuccess", -1);
                         req.getSession().setAttribute("loginStatus", 0);
@@ -52,7 +52,7 @@ public class loginServlet extends HttpServlet {
                 else if(i == 2) {
                     req.setAttribute("loginSuccess", 2);
                     req.getSession().setAttribute("loginStatus", 2);
-                    Customer c = CustomerDAO.returnCustomerData(req.getParameter("email"));
+                    Customer c = CustomerDAO.returnCustomerData(req.getParameter("email"), new connectionPoolReal());
                     if(c == null) {
                         req.setAttribute("loginSuccess", -1);
                         req.getSession().setAttribute("loginStatus", 0);

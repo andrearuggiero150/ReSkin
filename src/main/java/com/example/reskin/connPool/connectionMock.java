@@ -12,7 +12,7 @@ public class connectionMock implements connectionImplementor {
     public Connection getConnection() throws SQLException {
         DataSource datasource;
         PoolProperties p = new PoolProperties();
-        p.setUrl("jdbc:mysql://localhost:3306/ReSkin?serverTimezone=" + TimeZone.getDefault().getID());
+        p.setUrl("jdbc:mysql://localhost:5555/ReSkin?serverTimezone=" + TimeZone.getDefault().getID());
         p.setDriverClassName("com.mysql.cj.jdbc.Driver");
         p.setUsername("root");
         p.setPassword("mock");

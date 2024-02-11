@@ -1,8 +1,7 @@
 package com.example.reskin.gestioneNotifiche.DAOStorage;
 
 import com.example.reskin.connectionPool;
-import com.example.reskin.gestioneNotifiche.EntityStorage.POP;
-import org.apache.tomcat.jdbc.pool.ConnectionPool;
+import com.example.reskin.Entity.POP;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,8 +1,7 @@
 package com.example.reskin.autenticazioneGestioneUtenti.DAOStorage;
 
-import com.example.reskin.autenticazioneGestioneUtenti.EntityStorage.Admin;
-import com.example.reskin.autenticazioneGestioneUtenti.EntityStorage.Cliente;
-import com.example.reskin.autenticazioneGestioneUtenti.EntityStorage.Customer;
+import com.example.reskin.Entity.Admin;
+import com.example.reskin.Entity.Cliente;
 import com.example.reskin.connPool.connectionPoolMock;
 import com.example.reskin.connPool.connectionPoolReal;
 import com.example.reskin.connectionPool;

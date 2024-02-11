@@ -1,8 +1,6 @@
-package com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage;
+package com.example.reskin.Entity;
 
-import java.sql.Blob;
-
-public class Prodotto {
+public class Product {
     private String nome;
     private String descrizione;
     private byte[] binaryImage;
@@ -14,10 +12,10 @@ public class Prodotto {
     private int categoryId;
     private int productID;
 
-    public Prodotto() {
+    public Product() {
     }
 
-    public Prodotto(String nome, String descrizione, byte[] binaryImage, double larghezza, double lunghezza, int quantita, double prezzo, String colore, int categoryId, int productID) {
+    public Product(String nome, String descrizione, byte[] binaryImage, double larghezza, double lunghezza, int quantita, double prezzo, String colore, int categoryId, int productID) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.binaryImage = binaryImage;

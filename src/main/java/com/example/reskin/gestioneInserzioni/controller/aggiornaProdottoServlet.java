@@ -1,8 +1,8 @@
 package com.example.reskin.gestioneInserzioni.controller;
 
+import com.example.reskin.Entity.Product;
 import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
-import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Category;
-import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto;
+import com.example.reskin.Entity.Category;
 import com.example.reskin.gestioneInserzioni.DAOStorage.gestisciInserzioniDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -41,7 +41,7 @@ public class aggiornaProdottoServlet extends HttpServlet {
         int codiceErrore;
         int idProdotto = Integer.parseInt(req.getParameter("idProdotto"));
 
-        Prodotto prodottoNonAggiornato = searchBarDAO.prodottoFromID(idProdotto);
+        Product prodottoNonAggiornato = searchBarDAO.prodottoFromID(idProdotto);
 
 
         if (req.getParameter("Titolo").length() < 5 || req.getParameter("Titolo").length() > 30) {
@@ -149,7 +149,7 @@ public class aggiornaProdottoServlet extends HttpServlet {
 
         else {
             System.out.println("Sono nell'else");
-            Prodotto prodottoAggiornato = new Prodotto();
+            Product prodottoAggiornato = new Product();
             prodottoAggiornato.setProductID(idProdotto);
             prodottoAggiornato.setNome(req.getParameter("Titolo"));
             prodottoAggiornato.setLunghezza(Double.parseDouble(req.getParameter("Lunghezza")));
@@ -164,7 +164,7 @@ public class aggiornaProdottoServlet extends HttpServlet {
 
 
             if (eseguiAggiornamento == 1) {
-                List<Prodotto> listaInserzioni = searchBarDAO.allProdotti();
+                List<Product> listaInserzioni = searchBarDAO.allProdotti();
                 req.setAttribute("listaProdotti", listaInserzioni);
                 req.setAttribute("esitoOperazione", eseguiAggiornamento);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");

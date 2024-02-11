@@ -1,4 +1,4 @@
-package com.example.reskin.gestioneNotifiche.EntityStorage;
+package com.example.reskin.Entity;
 
 import java.time.LocalDateTime;
 import java.util.Date;

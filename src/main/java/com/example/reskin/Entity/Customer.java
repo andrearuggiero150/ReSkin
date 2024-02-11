@@ -1,4 +1,4 @@
-package com.example.reskin.autenticazioneGestioneUtenti.EntityStorage;
+package com.example.reskin.Entity;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;

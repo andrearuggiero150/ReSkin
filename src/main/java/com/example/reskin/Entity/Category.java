@@ -1,4 +1,4 @@
-package com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage;
+package com.example.reskin.Entity;
 
 public class Category {
 

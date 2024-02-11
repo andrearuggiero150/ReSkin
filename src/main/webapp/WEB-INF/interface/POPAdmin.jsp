@@ -1,4 +1,4 @@
-<%@ page import="com.example.reskin.gestioneNotifiche.EntityStorage.POP" %>
+<%@ page import="com.example.reskin.Entity.POP" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

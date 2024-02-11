@@ -1,8 +1,8 @@
 package com.example.reskin.ricercaVisualizzazioneProdotto.controller;
 
+import com.example.reskin.Entity.Product;
 import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
-import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Category;
-import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto;
+import com.example.reskin.Entity.Category;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,7 +20,7 @@ public class listaProdottiServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<Prodotto> listaProdotti = new ArrayList<>();
+        List<Product> listaProdotti = new ArrayList<>();
         List<Category> listaCategorie = searchBarDAO.allCategory();
         String categoriaSelezionata = req.getParameter("Categoria");
         String disponibilitaSelezionata = req.getParameter("Disponibilità");

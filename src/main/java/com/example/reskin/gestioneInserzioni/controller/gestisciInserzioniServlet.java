@@ -1,9 +1,7 @@
 package com.example.reskin.gestioneInserzioni.controller;
 
-import com.example.reskin.gestioneNotifiche.DAOStorage.POPDAO;
-import com.example.reskin.gestioneNotifiche.EntityStorage.POP;
 import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
-import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto;
+import com.example.reskin.Entity.Product;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/gestisciInserzioniServlet")
@@ -26,7 +23,7 @@ public class gestisciInserzioniServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
         else {
-            List<Prodotto> listaInserzioni;
+            List<Product> listaInserzioni;
             listaInserzioni= searchBarDAO.allProdotti();
             req.setAttribute("listaProdotti", listaInserzioni);
             RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");

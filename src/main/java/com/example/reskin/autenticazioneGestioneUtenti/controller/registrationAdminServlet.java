@@ -1,6 +1,5 @@
 package com.example.reskin.autenticazioneGestioneUtenti.controller;
 
-import com.example.reskin.autenticazioneGestioneUtenti.EntityStorage.Admin;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

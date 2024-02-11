@@ -1,7 +1,8 @@
-<%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto" %>
+<%@ page import="com.example.reskin.Entity.Product" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Category" %>
+<%@ page import="com.example.reskin.Entity.Category" %>
 <%@ page import="org.json.JSONArray" %>
+<%@ page import="com.example.reskin.Entity.Product" %>
 <%--
   Created by IntelliJ IDEA.
   User: giovi
@@ -12,7 +13,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <% Prodotto prodottoDaModificare = (Prodotto) request.getAttribute("prodottoDaModificare");%>
+    <% Product prodottoDaModificare = (Product) request.getAttribute("prodottoDaModificare");%>
     <%String nomeCategoria = (String) request.getAttribute("nomeCategoria");%>
     <%ArrayList<Category> listaCategorie = (ArrayList<Category>) request.getAttribute("listaCategorie");%>
     <title>ReSkin - Modifica inserzione</title>

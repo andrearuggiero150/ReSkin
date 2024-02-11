@@ -1,6 +1,7 @@
-<%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto" %>
+<%@ page import="com.example.reskin.Entity.Product" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Base64" %>
+<%@ page import="com.example.reskin.Entity.Product" %>
 <%--
   Created by IntelliJ IDEA.
   User: giovi
@@ -11,7 +12,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%ArrayList<Prodotto> listaProdoto = (ArrayList<Prodotto>) request.getAttribute("listaProdotti");%>
+    <%ArrayList<Product> listaProdoto = (ArrayList<Product>) request.getAttribute("listaProdotti");%>
     <title>ReSkin -Catalogo prodotti</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +36,7 @@
 
 
 <div class="row row-cols-1 row-cols-md-4 g-0">
-    <%for (Prodotto prodotto : listaProdoto) {%>
+    <%for (Product prodotto : listaProdoto) {%>
     <%int id = prodotto.getProductID();%>
     <div class="col g-0" onclick="">
         <div class="card h-80 w-75 border-white bg-dark mx-auto my-5 g-0">

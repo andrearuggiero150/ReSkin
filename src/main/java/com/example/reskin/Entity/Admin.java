@@ -1,4 +1,4 @@
-package com.example.reskin.autenticazioneGestioneUtenti.EntityStorage;
+package com.example.reskin.Entity;
 /**
  * Classe che modella l'entità Admin, specializzazione di Customer
  * @author andrearuggiero

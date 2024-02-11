@@ -1,8 +1,8 @@
 package com.example.reskin.gestioneInserzioni.controller;
 
+import com.example.reskin.Entity.Product;
 import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
-import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Category;
-import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto;
+import com.example.reskin.Entity.Category;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/modificaInserzioneServlet")
@@ -25,7 +24,7 @@ public class modificaInserzioneServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
         else {
-            Prodotto prodottoDaModificare;
+            Product prodottoDaModificare;
             int id=Integer.parseInt(req.getParameter("idProdotto"));
             System.out.println("ID Prodotto: "+id);
             prodottoDaModificare= searchBarDAO.prodottoFromID(id);

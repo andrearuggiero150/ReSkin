@@ -1,7 +1,7 @@
 package com.example.reskin.autenticazioneGestioneUtenti.controller;
 
 import com.example.reskin.autenticazioneGestioneUtenti.DAOStorage.CustomerDAO;
-import com.example.reskin.autenticazioneGestioneUtenti.EntityStorage.Cliente;
+import com.example.reskin.Entity.Cliente;
 import com.example.reskin.connPool.connectionPoolReal;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

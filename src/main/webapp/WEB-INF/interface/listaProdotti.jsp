@@ -1,12 +1,13 @@
-<%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto" %>
+<%@ page import="com.example.reskin.Entity.Product" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.Base64" %>
-<%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Category" %>
+<%@ page import="com.example.reskin.Entity.Category" %>
+<%@ page import="com.example.reskin.Entity.Product" %>
 
 <html>
 <head>
-    <%ArrayList<Prodotto> listaProdotti = (ArrayList<Prodotto>) request.getAttribute("listaProdotti");%>
+    <%ArrayList<Product> listaProdotti = (ArrayList<Product>) request.getAttribute("listaProdotti");%>
     <%ArrayList<Category> listaCategorie = (ArrayList<Category>) request.getAttribute("listaCategorie");%>
     <title>ReSkin -Catalogo prodotti</title>
     <link rel="stylesheet" href="css/style.css">
@@ -58,7 +59,7 @@
 
 <div class=" row row-cols-1 row-cols-md-4 g-0">
     <%
-        for (Prodotto prodotto : listaProdotti) {
+        for (Product prodotto : listaProdotti) {
     %>
     <%int id = prodotto.getProductID();%>
     <div class="col g-0" onclick="">

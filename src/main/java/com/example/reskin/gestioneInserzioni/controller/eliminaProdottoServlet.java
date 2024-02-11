@@ -2,7 +2,7 @@ package com.example.reskin.gestioneInserzioni.controller;
 
 import com.example.reskin.gestioneInserzioni.DAOStorage.gestisciInserzioniDAO;
 import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
-import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto;
+import com.example.reskin.Entity.Product;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,13 +30,13 @@ public class eliminaProdottoServlet extends HttpServlet {
         int risultatoOperazione= gestisciInserzioniDAO.eliminaProdotto(idProdotto);
 
         if(risultatoOperazione==1){
-            List<Prodotto> listaInserzioni= searchBarDAO.allProdotti();
+            List<Product> listaInserzioni= searchBarDAO.allProdotti();
             req.setAttribute("listaProdotti", listaInserzioni);
             req.setAttribute("risultatoOperazione", risultatoOperazione);
             RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");
             dispatcher.forward(req,resp);
         } else if (risultatoOperazione == 0) {
-            List<Prodotto> listaInserzioni= searchBarDAO.allProdotti();
+            List<Product> listaInserzioni= searchBarDAO.allProdotti();
             req.setAttribute("risultatoOperazione", risultatoOperazione);
             req.setAttribute("listaProdotti", listaInserzioni);
             RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");

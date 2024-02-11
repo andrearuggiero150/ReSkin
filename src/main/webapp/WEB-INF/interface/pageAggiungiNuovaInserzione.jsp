@@ -1,5 +1,5 @@
-<%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto" %>
-<%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Category" %>
+<%@ page import="com.example.reskin.Entity.Product" %>
+<%@ page import="com.example.reskin.Entity.Category" %>
 <%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: giovi

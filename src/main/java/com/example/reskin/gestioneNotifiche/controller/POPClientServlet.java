@@ -1,8 +1,8 @@
 package com.example.reskin.gestioneNotifiche.controller;
 
-import com.example.reskin.autenticazioneGestioneUtenti.EntityStorage.Customer;
+import com.example.reskin.Entity.Customer;
 import com.example.reskin.gestioneNotifiche.DAOStorage.POPDAO;
-import com.example.reskin.gestioneNotifiche.EntityStorage.POP;
+import com.example.reskin.Entity.POP;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

@@ -1,8 +1,8 @@
 package com.example.reskin.gestioneInserzioni.controller;
+import com.example.reskin.Entity.Product;
 import com.example.reskin.gestioneInserzioni.DAOStorage.gestisciInserzioniDAO;
 import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
-import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Category;
-import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto;
+import com.example.reskin.Entity.Category;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -11,13 +11,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import org.apache.tomcat.jdbc.pool.ConnectionPool;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 @MultipartConfig
@@ -154,7 +150,7 @@ public class aggiungiNuovaInserzioneServlet extends HttpServlet {
             byte[] data = new byte[inputStream.available()];
             inputStream.read(data);
 
-            Prodotto nuovoProdotto=new Prodotto();
+            Product nuovoProdotto=new Product();
             nuovoProdotto.setNome(req.getParameter("Titolo"));
             nuovoProdotto.setDescrizione(req.getParameter("Descrizione"));
             nuovoProdotto.setBinaryImage(data);
@@ -169,7 +165,7 @@ public class aggiungiNuovaInserzioneServlet extends HttpServlet {
 
 
             if (aggiungiNuovoProdotto == 1) {
-                List<Prodotto> listaInserzioni = searchBarDAO.allProdotti();
+                List<Product> listaInserzioni = searchBarDAO.allProdotti();
                 req.setAttribute("listaProdotti", listaInserzioni);
                 req.setAttribute("esitoOperazione", aggiungiNuovoProdotto);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");

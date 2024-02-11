@@ -1,9 +1,10 @@
-<%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto" %>
+<%@ page import="com.example.reskin.Entity.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.Base64" %>
+<%@ page import="com.example.reskin.Entity.Product" %>
 <html>
 <head>
-    <% Prodotto prodotto = (Prodotto) request.getAttribute("Prodotto");%>
+    <% Product prodotto = (Product) request.getAttribute("Prodotto");%>
     <% int quantitaProdotto=prodotto.getQuantita();%>
     <% int quantitaIniziale=0;%>
 

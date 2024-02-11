@@ -1,8 +1,8 @@
 package com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage;
 
+import com.example.reskin.Entity.Product;
 import com.example.reskin.connectionPool;
-import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Category;
-import com.example.reskin.ricercaVisualizzazioneProdotto.EntityStorage.Prodotto;
+import com.example.reskin.Entity.Category;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,8 +46,8 @@ public class searchBarDAO {
 
     }
 
-    public static Prodotto prodottoFromID(int id) {
-        Prodotto prodotto = new Prodotto();
+    public static Product prodottoFromID(int id) {
+        Product prodotto = new Product();
         try (Connection connection = connectionPool.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE productID=? and Product.categoryID = Category.categoryID");
             preparedStatement.setInt(1, id);
@@ -69,13 +69,13 @@ public class searchBarDAO {
         return prodotto;
     }
 
-    public static List<Prodotto> allProdotti() {
-        List<Prodotto> prodotti = new ArrayList<>();
+    public static List<Product> allProdotti() {
+        List<Product> prodotti = new ArrayList<>();
         try (Connection connection = connectionPool.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Category.categoryID=Product.categoryID ORDER BY Product.productID");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Prodotto prodotto = new Prodotto();
+                Product prodotto = new Product();
                 prodotto.setProductID(resultSet.getInt(1));
                 prodotto.setNome(resultSet.getString(2));
                 prodotto.setDescrizione(resultSet.getString(3));
@@ -128,14 +128,14 @@ public class searchBarDAO {
         return nomeCategoria;
     }
 
-    public static List<Prodotto> productFilteredByCategory(int idCategoria){
-        List<Prodotto> prodottiFiltrati = new ArrayList<>();
+    public static List<Product> productFilteredByCategory(int idCategoria){
+        List<Product> prodottiFiltrati = new ArrayList<>();
         try(Connection connection=connectionPool.getConnection()){
             PreparedStatement preparedStatement=connection.prepareStatement("SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Product.categoryID=? AND Category.categoryID=Product.categoryID ORDER BY Product.productID");
             preparedStatement.setInt(1,idCategoria);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Prodotto prodotto = new Prodotto();
+                Product prodotto = new Product();
                 prodotto.setProductID(resultSet.getInt(1));
                 prodotto.setNome(resultSet.getString(2));
                 prodotto.setDescrizione(resultSet.getString(3));
@@ -153,8 +153,8 @@ public class searchBarDAO {
         return prodottiFiltrati;
     }
 
-    public static List<Prodotto> productFilteredByDisponibility(int quantita){
-        List<Prodotto> prodottiFiltrati = new ArrayList<>();
+    public static List<Product> productFilteredByDisponibility(int quantita){
+        List<Product> prodottiFiltrati = new ArrayList<>();
         String query=null;
         try(Connection connection=connectionPool.getConnection()){
             if(quantita>0) {
@@ -168,7 +168,7 @@ public class searchBarDAO {
             preparedStatement.setInt(1,quantita);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Prodotto prodotto = new Prodotto();
+                Product prodotto = new Product();
                 prodotto.setProductID(resultSet.getInt(1));
                 prodotto.setNome(resultSet.getString(2));
                 prodotto.setDescrizione(resultSet.getString(3));

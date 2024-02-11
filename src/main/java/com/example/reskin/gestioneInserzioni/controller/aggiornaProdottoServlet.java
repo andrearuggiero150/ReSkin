@@ -1,9 +1,11 @@
 package com.example.reskin.gestioneInserzioni.controller;
 
 import com.example.reskin.Entity.Product;
-import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
+import com.example.reskin.connPool.connectionPoolMock;
+import com.example.reskin.connPool.connectionPoolReal;
+import com.example.reskin.gestioneInserzioni.DAOStorage.GIDAO;
+import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.RVPDAO;
 import com.example.reskin.Entity.Category;
-import com.example.reskin.gestioneInserzioni.DAOStorage.gestisciInserzioniDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -35,18 +37,18 @@ public class aggiornaProdottoServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
 
-        List<Category> listaCategorie = searchBarDAO.allCategory();
+        List<Category> listaCategorie = RVPDAO.allCategory(new connectionPoolReal());
 
 
         int codiceErrore;
         int idProdotto = Integer.parseInt(req.getParameter("idProdotto"));
 
-        Product prodottoNonAggiornato = searchBarDAO.prodottoFromID(idProdotto);
+        Product prodottoNonAggiornato = RVPDAO.productFromID(idProdotto, new connectionPoolReal());
 
 
         if (req.getParameter("Titolo").length() < 5 || req.getParameter("Titolo").length() > 30) {
             codiceErrore = 1;
-            String nomeCategoria = searchBarDAO.getCategoryName(prodottoNonAggiornato.getCategoryId());
+            String nomeCategoria = RVPDAO.getCategoryName(prodottoNonAggiornato.getCategoryId(), new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("prodottoDaModificare", prodottoNonAggiornato);
             req.setAttribute("nomeCategoria", nomeCategoria);
@@ -59,7 +61,7 @@ public class aggiornaProdottoServlet extends HttpServlet {
 
         if (req.getParameter("Descrizione").length() < 20 || req.getParameter("Descrizione").length() > 150) {
             codiceErrore = 2;
-            String nomeCategoria = searchBarDAO.getCategoryName(prodottoNonAggiornato.getCategoryId());
+            String nomeCategoria = RVPDAO.getCategoryName(prodottoNonAggiornato.getCategoryId(), new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("prodottoDaModificare", prodottoNonAggiornato);
             req.setAttribute("nomeCategoria", nomeCategoria);
@@ -73,7 +75,7 @@ public class aggiornaProdottoServlet extends HttpServlet {
 
         if (req.getParameter("Lunghezza").isEmpty() || Double.parseDouble(req.getParameter("Lunghezza")) < 1) {
             codiceErrore = 3;
-            String nomeCategoria = searchBarDAO.getCategoryName(prodottoNonAggiornato.getCategoryId());
+            String nomeCategoria = RVPDAO.getCategoryName(prodottoNonAggiornato.getCategoryId(), new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("prodottoDaModificare", prodottoNonAggiornato);
             req.setAttribute("nomeCategoria", nomeCategoria);
@@ -87,7 +89,7 @@ public class aggiornaProdottoServlet extends HttpServlet {
 
         if (req.getParameter("Larghezza").isEmpty() || Double.parseDouble(req.getParameter("Larghezza")) < 1) {
             codiceErrore = 4;
-            String nomeCategoria = searchBarDAO.getCategoryName(prodottoNonAggiornato.getCategoryId());
+            String nomeCategoria = RVPDAO.getCategoryName(prodottoNonAggiornato.getCategoryId(), new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("prodottoDaModificare", prodottoNonAggiornato);
             req.setAttribute("nomeCategoria", nomeCategoria);
@@ -101,7 +103,7 @@ public class aggiornaProdottoServlet extends HttpServlet {
 
         if (req.getParameter("Quantità").isEmpty() || Integer.parseInt(req.getParameter("Quantità")) < 1) {
             codiceErrore = 5;
-            String nomeCategoria = searchBarDAO.getCategoryName(prodottoNonAggiornato.getCategoryId());
+            String nomeCategoria = RVPDAO.getCategoryName(prodottoNonAggiornato.getCategoryId(), new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("prodottoDaModificare", prodottoNonAggiornato);
             req.setAttribute("nomeCategoria", nomeCategoria);
@@ -115,7 +117,7 @@ public class aggiornaProdottoServlet extends HttpServlet {
 
         if (req.getParameter("Prezzo").isEmpty() || Double.parseDouble(req.getParameter("Prezzo")) < 1) {
             codiceErrore = 6;
-            String nomeCategoria = searchBarDAO.getCategoryName(prodottoNonAggiornato.getCategoryId());
+            String nomeCategoria = RVPDAO.getCategoryName(prodottoNonAggiornato.getCategoryId(), new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("prodottoDaModificare", prodottoNonAggiornato);
             req.setAttribute("nomeCategoria", nomeCategoria);
@@ -138,7 +140,7 @@ public class aggiornaProdottoServlet extends HttpServlet {
 
         if(req.getParameter("Categoria").isEmpty() || !nomePresente ){
             codiceErrore=7;
-            String nomeCategoria=searchBarDAO.getCategoryName(prodottoNonAggiornato.getCategoryId());
+            String nomeCategoria= RVPDAO.getCategoryName(prodottoNonAggiornato.getCategoryId(), new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("prodottoDaModificare", prodottoNonAggiornato);
             req.setAttribute("nomeCategoria", nomeCategoria);
@@ -158,13 +160,13 @@ public class aggiornaProdottoServlet extends HttpServlet {
             prodottoAggiornato.setPrezzo(Double.parseDouble(req.getParameter("Prezzo")));
             prodottoAggiornato.setQuantita(Integer.parseInt(req.getParameter("Quantità")));
             prodottoAggiornato.setDescrizione(req.getParameter("Descrizione"));
-            int eseguiAggiornamento = gestisciInserzioniDAO.aggiornaInformazioniProdotto(prodottoAggiornato);
+            int eseguiAggiornamento = GIDAO.updateProductInformation(prodottoAggiornato, new connectionPoolReal());
             System.out.println("Esecuzione query aggiornamento: " + eseguiAggiornamento);
-            String nomeCategoria = searchBarDAO.getCategoryName(prodottoAggiornato.getCategoryId());
+            String nomeCategoria = RVPDAO.getCategoryName(prodottoAggiornato.getCategoryId(), new connectionPoolReal());
 
 
             if (eseguiAggiornamento == 1) {
-                List<Product> listaInserzioni = searchBarDAO.allProdotti();
+                List<Product> listaInserzioni = RVPDAO.allProduct(new connectionPoolReal());
                 req.setAttribute("listaProdotti", listaInserzioni);
                 req.setAttribute("esitoOperazione", eseguiAggiornamento);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");

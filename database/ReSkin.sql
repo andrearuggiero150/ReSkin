@@ -70,3 +70,8 @@ insert into Customer values
     (1,'admin','admin',null,'a52082800b5bb7562a9a81e3be3db2a1b0570507','admin@admin.com',true),
     /* Mariorossi1$ */
     (2,'Mario','Rossi','85968563851','37ce8c30b594bfff67a39267b01a88b555e15644','mariorossi@gmail.com',false);
+
+insert into Category values
+    (1,'Stoffa','Stoffa di alto livello'),
+    (2,'Pelle','Pelle ecosostenibile'),
+    (3,'Lana','Lana di grande qualità');

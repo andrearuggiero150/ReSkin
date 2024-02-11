@@ -1,5 +1,6 @@
 package com.example.reskin.gestioneInserzioni.controller;
-import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
+import com.example.reskin.connPool.connectionPoolReal;
+import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.RVPDAO;
 import com.example.reskin.Entity.Category;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -21,7 +22,7 @@ public class redirectNuovaInserzioneServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
         else {
-            List<Category> listaCategorie=searchBarDAO.allCategory();
+            List<Category> listaCategorie= RVPDAO.allCategory(new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/pageAggiungiNuovaInserzione.jsp");
             dispatcher.forward(req,resp);

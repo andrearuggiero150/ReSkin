@@ -1,14 +1,15 @@
 package com.example.reskin.gestioneInserzioni.DAOStorage;
 
-import com.example.reskin.connectionPool;
+
 import com.example.reskin.Entity.Product;
+import com.example.reskin.connPool.connectionPoolAbstraction;
 
 import java.sql.*;
 
-public class gestisciInserzioniDAO {
+public class GIDAO {
 
-    public static int aggiornaInformazioniProdotto(Product prodotto){
-       try(Connection connection= connectionPool.getConnection()){
+    public static int updateProductInformation(Product prodotto, connectionPoolAbstraction cpa){
+       try(Connection connection= cpa.setConnection()){
            PreparedStatement preparedStatement=connection.prepareStatement("UPDATE Product SET Product.nome=?, Product.lunghezza=?, Product.larghezza=?, Product.categoryID=?, Product.prezzo=?, Product.quantita=?, Product.descrizione=? WHERE Product.productID=?");
            preparedStatement.setInt(8,prodotto.getProductID());
            preparedStatement.setString(1,prodotto.getNome());
@@ -25,8 +26,8 @@ public class gestisciInserzioniDAO {
        }
     }
 
-    public static int eliminaProdotto(int idProdotto){
-        try(Connection connection=connectionPool.getConnection()){
+    public static int deleteProduct(int idProdotto, connectionPoolAbstraction cpa){
+        try(Connection connection=cpa.setConnection()){
             PreparedStatement preparedStatement= connection.prepareStatement("DELETE FROM Product WHERE ProductID=?");
             preparedStatement.setInt(1,idProdotto);
             preparedStatement.executeUpdate();
@@ -36,8 +37,8 @@ public class gestisciInserzioniDAO {
         }
     }
 
-    public static int aggiungiProdotto(Product nuovoProdotto){
-        try(Connection connection=connectionPool.getConnection()){
+    public static int addProduct(Product nuovoProdotto, connectionPoolAbstraction cpa){
+        try(Connection connection=cpa.setConnection()){
             PreparedStatement preparedStatement= connection.prepareStatement("INSERT INTO Product (nome,descrizione,binaryImage,larghezza,lunghezza,quantita,prezzo,categoryID,color) VALUES (?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, nuovoProdotto.getNome());
             preparedStatement.setString(2,nuovoProdotto.getDescrizione());
@@ -61,35 +62,4 @@ public class gestisciInserzioniDAO {
         }
         return 1;
     }
-
-    public static int inserisciImmagine (String nomeFoto){
-        try(Connection connection=connectionPool.getConnection()){
-            PreparedStatement preparedStatement= connection.prepareStatement("INSERT INTO Image (imageFileName) VALUES (?)");
-            preparedStatement.setString(1,nomeFoto);
-            preparedStatement.executeUpdate();
-            return 1;
-        } catch (SQLException e ){
-            return 0;
-        }
-
-    }
-
-    public static String getImmagine (int id){
-        String file=null;
-        try(Connection connection=connectionPool.getConnection()){
-            PreparedStatement preparedStatement= connection.prepareStatement("SELECT imageFileName FROM Image WHERE imageId=?");
-            preparedStatement.setInt(1,id);
-            ResultSet resultSet= preparedStatement.executeQuery();
-            while (resultSet.next()){
-                file= resultSet.getString(1);
-
-            }
-        } catch (SQLException e ){
-            e.printStackTrace();
-        }
-        return file;
-
-
-    }
-
 }

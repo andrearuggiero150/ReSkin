@@ -1,6 +1,7 @@
 package com.example.reskin.gestioneInserzioni.controller;
 
-import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
+import com.example.reskin.connPool.connectionPoolReal;
+import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.RVPDAO;
 import com.example.reskin.Entity.Product;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -24,7 +25,7 @@ public class gestisciInserzioniServlet extends HttpServlet {
         }
         else {
             List<Product> listaInserzioni;
-            listaInserzioni= searchBarDAO.allProdotti();
+            listaInserzioni= RVPDAO.allProduct(new connectionPoolReal());
             req.setAttribute("listaProdotti", listaInserzioni);
             RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");
             dispatcher.forward(req, resp);

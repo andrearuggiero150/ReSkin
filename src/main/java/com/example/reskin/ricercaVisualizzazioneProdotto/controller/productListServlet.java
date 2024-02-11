@@ -1,7 +1,9 @@
 package com.example.reskin.ricercaVisualizzazioneProdotto.controller;
 
 import com.example.reskin.Entity.Product;
-import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
+import com.example.reskin.connPool.connectionPoolMock;
+import com.example.reskin.connPool.connectionPoolReal;
+import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.RVPDAO;
 import com.example.reskin.Entity.Category;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -15,23 +17,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/listaProdottiServlet")
-public class listaProdottiServlet extends HttpServlet {
+public class productListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         List<Product> listaProdotti = new ArrayList<>();
-        List<Category> listaCategorie = searchBarDAO.allCategory();
+        List<Category> listaCategorie = RVPDAO.allCategory(new connectionPoolReal());
         String categoriaSelezionata = req.getParameter("Categoria");
         String disponibilitaSelezionata = req.getParameter("Disponibilità");
         System.out.println("Disponibilità selezionata: "+disponibilitaSelezionata);
 
 
         if (req.getParameter("nomeProdotto") != null) {
-            List<Integer> lista = searchBarDAO.eseguiRicerca(req.getParameter("nomeProdotto"));
+            List<Integer> lista = RVPDAO.getSearch(req.getParameter("nomeProdotto"), new connectionPoolReal());
 
             for (Integer integer : lista) {
-                listaProdotti.add(searchBarDAO.prodottoFromID(integer));
+                listaProdotti.add(RVPDAO.productFromID(integer, new connectionPoolReal()));
             }
 
             req.setAttribute("listaCategorie", listaCategorie);
@@ -41,21 +43,21 @@ public class listaProdottiServlet extends HttpServlet {
 
         } else if (categoriaSelezionata != null && !categoriaSelezionata.isEmpty()) {
             int idCategoria = Integer.parseInt(categoriaSelezionata);
-            listaProdotti = searchBarDAO.productFilteredByCategory(idCategoria);
+            listaProdotti = RVPDAO.productFilteredByCategory(idCategoria, new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("listaProdotti", listaProdotti);
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaProdotti.jsp");
             dispatcher.forward(req, resp);
 
         }else if (disponibilitaSelezionata != null && disponibilitaSelezionata.equals("Non disponibile")) {
-            listaProdotti = searchBarDAO.productFilteredByDisponibility(0);
+            listaProdotti = RVPDAO.productFilteredByDisponibility(0, new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("listaProdotti", listaProdotti);
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaProdotti.jsp");
             dispatcher.forward(req, resp);
 
         } else if (disponibilitaSelezionata != null && disponibilitaSelezionata.equals("Disponibile")) {
-            listaProdotti = searchBarDAO.productFilteredByDisponibility(1);
+            listaProdotti = RVPDAO.productFilteredByDisponibility(1, new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("listaProdotti", listaProdotti);
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaProdotti.jsp");
@@ -63,7 +65,7 @@ public class listaProdottiServlet extends HttpServlet {
         }
 
         else {
-            listaProdotti = searchBarDAO.allProdotti();
+            listaProdotti = RVPDAO.allProduct(new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("listaProdotti", listaProdotti);
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaProdotti.jsp");

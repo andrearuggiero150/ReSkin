@@ -1,6 +1,7 @@
 package com.example.reskin.ricercaVisualizzazioneProdotto.controller;
 
-import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
+import com.example.reskin.connPool.connectionPoolReal;
+import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.RVPDAO;
 import com.google.gson.JsonArray;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -26,7 +27,7 @@ public class searchBarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String nomeBarraDiRicerca=req.getParameter("nomeGioco");
         System.out.println("Nome alla servlet: " +nomeBarraDiRicerca);
-        List<String> listaNomi= searchBarDAO.ricercaProdottoDropdown(nomeBarraDiRicerca);
+        List<String> listaNomi= RVPDAO.searchDropdownProduct(nomeBarraDiRicerca, new connectionPoolReal());
         JsonArray nomiJson=new JsonArray();
         for (String name : listaNomi) {
             System.out.println("Nome JSON: " +name);

@@ -1,7 +1,7 @@
 package com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage;
 
 import com.example.reskin.Entity.Product;
-import com.example.reskin.connectionPool;
+import com.example.reskin.connPool.connectionPoolAbstraction;
 import com.example.reskin.Entity.Category;
 
 import java.sql.Connection;
@@ -11,11 +11,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class searchBarDAO {
-    public static List<String> ricercaProdottoDropdown(String nomeProdotto) {
+public class RVPDAO {
+    public static List<String> searchDropdownProduct(String nomeProdotto, connectionPoolAbstraction cpa) {
         List<String> listaNomi = new ArrayList<>();
         try {
-            Connection connection = connectionPool.getConnection();
+            Connection connection = cpa.setConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT DISTINCT nome FROM Product WHERE nome LIKE ?");
             preparedStatement.setString(1, "%" + nomeProdotto + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -29,10 +29,10 @@ public class searchBarDAO {
         return listaNomi;
     }
 
-    public static List<Integer> eseguiRicerca(String nomeProdotto) {
+    public static List<Integer> getSearch(String nomeProdotto, connectionPoolAbstraction cpa) {
         List<Integer> listaID = new ArrayList<>();
         try {
-            Connection connection = connectionPool.getConnection();
+            Connection connection = cpa.setConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT productID FROM Product WHERE nome LIKE ?");
             preparedStatement.setString(1, "%" + nomeProdotto + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -46,9 +46,9 @@ public class searchBarDAO {
 
     }
 
-    public static Product prodottoFromID(int id) {
+    public static Product productFromID(int id, connectionPoolAbstraction cpa) {
         Product prodotto = new Product();
-        try (Connection connection = connectionPool.getConnection()) {
+        try (Connection connection = cpa.setConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE productID=? and Product.categoryID = Category.categoryID");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -69,9 +69,9 @@ public class searchBarDAO {
         return prodotto;
     }
 
-    public static List<Product> allProdotti() {
+    public static List<Product> allProduct(connectionPoolAbstraction cpa) {
         List<Product> prodotti = new ArrayList<>();
-        try (Connection connection = connectionPool.getConnection()) {
+        try (Connection connection = cpa.setConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Category.categoryID=Product.categoryID ORDER BY Product.productID");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -93,9 +93,9 @@ public class searchBarDAO {
         return prodotti;
     }
 
-    public static List<Category> allCategory() {
+    public static List<Category> allCategory(connectionPoolAbstraction cpa) {
         List<Category> categorie = new ArrayList<>();
-        try (Connection connection = connectionPool.getConnection()) {
+        try (Connection connection = cpa.setConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT Category.categoryID, Category.nome, Category.descrizione FROM Category ORDER BY Category.categoryID");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -112,9 +112,9 @@ public class searchBarDAO {
     }
 
 
-    public static String getCategoryName(int id){
+    public static String getCategoryName(int id, connectionPoolAbstraction cpa){
         String nomeCategoria = null;
-        try(Connection connection=connectionPool.getConnection()){
+        try(Connection connection=cpa.setConnection()){
             PreparedStatement preparedStatement= connection.prepareStatement("SELECT nome FROM Category WHERE Category.categoryID=?");
             preparedStatement.setInt(1,id);
             ResultSet resultSet=preparedStatement.executeQuery();
@@ -128,9 +128,9 @@ public class searchBarDAO {
         return nomeCategoria;
     }
 
-    public static List<Product> productFilteredByCategory(int idCategoria){
+    public static List<Product> productFilteredByCategory(int idCategoria, connectionPoolAbstraction cpa){
         List<Product> prodottiFiltrati = new ArrayList<>();
-        try(Connection connection=connectionPool.getConnection()){
+        try(Connection connection=cpa.setConnection()){
             PreparedStatement preparedStatement=connection.prepareStatement("SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Product.categoryID=? AND Category.categoryID=Product.categoryID ORDER BY Product.productID");
             preparedStatement.setInt(1,idCategoria);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -153,10 +153,10 @@ public class searchBarDAO {
         return prodottiFiltrati;
     }
 
-    public static List<Product> productFilteredByDisponibility(int quantita){
+    public static List<Product> productFilteredByDisponibility(int quantita, connectionPoolAbstraction cpa){
         List<Product> prodottiFiltrati = new ArrayList<>();
         String query=null;
-        try(Connection connection=connectionPool.getConnection()){
+        try(Connection connection=cpa.setConnection()){
             if(quantita>0) {
                 query="SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Product.quantita>=? AND Category.categoryID=Product.categoryID ORDER BY Product.productID";
 
@@ -184,20 +184,5 @@ public class searchBarDAO {
             throw new RuntimeException(e);
         }
         return prodottiFiltrati;
-    }
-
-    public static byte[] getImmagine(int id){
-        byte[] photoCode = new byte[0];
-        try(Connection connection=connectionPool.getConnection()){
-            PreparedStatement preparedStatement= connection.prepareStatement("SELECT binaryImage FROM Product WHERE Product.productID=?");
-            preparedStatement.setInt(1,id);
-            ResultSet resultSet=preparedStatement.executeQuery();
-            while (resultSet.next()){
-                photoCode= resultSet.getBytes(1);
-            }
-        } catch (SQLException e ){
-            throw new RuntimeException(e);
-        }
-        return photoCode;
     }
 }

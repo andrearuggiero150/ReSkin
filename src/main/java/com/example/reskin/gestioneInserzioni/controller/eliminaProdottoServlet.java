@@ -1,7 +1,8 @@
 package com.example.reskin.gestioneInserzioni.controller;
 
-import com.example.reskin.gestioneInserzioni.DAOStorage.gestisciInserzioniDAO;
-import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
+import com.example.reskin.connPool.connectionPoolReal;
+import com.example.reskin.gestioneInserzioni.DAOStorage.GIDAO;
+import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.RVPDAO;
 import com.example.reskin.Entity.Product;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -27,16 +28,16 @@ public class eliminaProdottoServlet extends HttpServlet {
         int idProdotto=Integer.parseInt(req.getParameter("idProdotto"));
         System.out.println("ID Prodotto: "+idProdotto);
 
-        int risultatoOperazione= gestisciInserzioniDAO.eliminaProdotto(idProdotto);
+        int risultatoOperazione= GIDAO.deleteProduct(idProdotto, new connectionPoolReal());
 
         if(risultatoOperazione==1){
-            List<Product> listaInserzioni= searchBarDAO.allProdotti();
+            List<Product> listaInserzioni= RVPDAO.allProduct(new connectionPoolReal());
             req.setAttribute("listaProdotti", listaInserzioni);
             req.setAttribute("risultatoOperazione", risultatoOperazione);
             RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");
             dispatcher.forward(req,resp);
         } else if (risultatoOperazione == 0) {
-            List<Product> listaInserzioni= searchBarDAO.allProdotti();
+            List<Product> listaInserzioni= RVPDAO.allProduct(new connectionPoolReal());
             req.setAttribute("risultatoOperazione", risultatoOperazione);
             req.setAttribute("listaProdotti", listaInserzioni);
             RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");

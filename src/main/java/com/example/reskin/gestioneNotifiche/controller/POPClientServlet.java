@@ -1,7 +1,8 @@
 package com.example.reskin.gestioneNotifiche.controller;
 
 import com.example.reskin.Entity.Customer;
-import com.example.reskin.gestioneNotifiche.DAOStorage.POPDAO;
+import com.example.reskin.connPool.connectionPoolReal;
+import com.example.reskin.gestioneNotifiche.DAOStorage.GNDAO;
 import com.example.reskin.Entity.POP;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -25,7 +26,7 @@ public class POPClientServlet extends HttpServlet {
         }
         else {
             Customer c = (Customer)req.getSession().getAttribute("customer");
-            List<POP> listaPOP = POPDAO.clientPOP(c.getId());
+            List<POP> listaPOP = GNDAO.clientPOP(c.getId(), new connectionPoolReal());
             req.setAttribute("listaPOP", listaPOP);
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/POPClient.jsp");
             dispatcher.forward(req, resp);

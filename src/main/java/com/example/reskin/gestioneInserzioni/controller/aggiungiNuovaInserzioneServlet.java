@@ -1,7 +1,9 @@
 package com.example.reskin.gestioneInserzioni.controller;
 import com.example.reskin.Entity.Product;
-import com.example.reskin.gestioneInserzioni.DAOStorage.gestisciInserzioniDAO;
-import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
+import com.example.reskin.connPool.connectionPoolMock;
+import com.example.reskin.connPool.connectionPoolReal;
+import com.example.reskin.gestioneInserzioni.DAOStorage.GIDAO;
+import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.RVPDAO;
 import com.example.reskin.Entity.Category;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -38,7 +40,7 @@ public class aggiungiNuovaInserzioneServlet extends HttpServlet {
         }
 
 
-        List<Category> listaCategorie = searchBarDAO.allCategory();
+        List<Category> listaCategorie = RVPDAO.allCategory(new connectionPoolReal());
 
 
         int codiceErrore;
@@ -161,11 +163,11 @@ public class aggiungiNuovaInserzioneServlet extends HttpServlet {
             nuovoProdotto.setCategoryId(Integer.parseInt(req.getParameter("Categoria")));
             nuovoProdotto.setColore(req.getParameter("Colore"));
 
-            int aggiungiNuovoProdotto=gestisciInserzioniDAO.aggiungiProdotto(nuovoProdotto);
+            int aggiungiNuovoProdotto= GIDAO.addProduct(nuovoProdotto, new connectionPoolReal());
 
 
             if (aggiungiNuovoProdotto == 1) {
-                List<Product> listaInserzioni = searchBarDAO.allProdotti();
+                List<Product> listaInserzioni = RVPDAO.allProduct(new connectionPoolReal());
                 req.setAttribute("listaProdotti", listaInserzioni);
                 req.setAttribute("esitoOperazione", aggiungiNuovoProdotto);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");

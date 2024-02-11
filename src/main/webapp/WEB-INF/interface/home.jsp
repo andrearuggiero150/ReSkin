@@ -149,27 +149,6 @@
         })
     })
 
-    document.addEventListener("DOMContentLoaded", function () {
-        setTimeout(function () {
-            const myEl = document.getElementById('cartBtn');
-            myEl.addEventListener('click', function () {
-                var loginStatus = <%= session.getAttribute("loginStatus") %>;
-
-                if (loginStatus == 0) {
-                    const toastTrigger = document.getElementById('cartBtn')
-                    const toastLiveExample = document.getElementById('liveToast-notLogged')
-
-                    if (toastTrigger) {
-                        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-                        toastTrigger.addEventListener('click', () => {
-                            toastBootstrap.show()
-                        })
-                    }
-                }
-            }, 100);
-        });
-    });
-
     const toastnotlog = document.getElementById('liveToast-notLogged')
     const toastnotlogAd = document.getElementById('liveToast-notLoggedAdmin')
     document.addEventListener("DOMContentLoaded", function () {

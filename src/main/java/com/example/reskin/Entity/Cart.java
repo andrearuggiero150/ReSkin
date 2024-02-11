@@ -47,5 +47,23 @@ public class Cart {
         this.customerId = customerId;
     }
 
+    public void addCarrello(CartObject o) {
+        carrello.add(o);
+    }
 
+    public void removeCarrello(CartObject o) {
+        carrello.remove(o);
+    }
+
+    public CartObject getProdottoCarrello(int i) {
+        return carrello.get(i);
+    }
+
+    public boolean isCarrelloEmpty() {
+        return carrello.isEmpty();
+    }
+
+    public int sizeCarrello() {
+        return carrello.size();
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.reskin.ricercaVisualizzazioneProdotto.controller;
 
-import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
+import com.example.reskin.connPool.connectionPoolReal;
+import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.RVPDAO;
 import com.example.reskin.Entity.Product;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -12,10 +13,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/prodottoServlet")
-public class prodottoServlet extends HttpServlet {
+public class productServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Product prodotto= searchBarDAO.prodottoFromID(Integer.parseInt(req.getParameter("id")));
+        Product prodotto= RVPDAO.productFromID(Integer.parseInt(req.getParameter("id")), new connectionPoolReal());
         req.setAttribute("Prodotto", prodotto);
         RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/pageProdotto.jsp");
         dispatcher.forward(req, resp);

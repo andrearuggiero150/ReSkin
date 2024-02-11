@@ -7,7 +7,7 @@ import com.example.reskin.connPool.connectionPoolAbstraction;
 
 import java.sql.*;
 
-public class CustomerDAO {
+public class AGUDAO {
     public static int loginUtente(String email, String password, connectionPoolAbstraction cpa) {
         try {
             String passwordHash = Customer.cryptPassword(password);

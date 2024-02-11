@@ -4,7 +4,6 @@ import com.example.reskin.Entity.Admin;
 import com.example.reskin.Entity.Cliente;
 import com.example.reskin.connPool.connectionPoolMock;
 import com.example.reskin.connPool.connectionPoolReal;
-import com.example.reskin.connectionPool;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
@@ -13,35 +12,35 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CustomerDAOTest {
+class AGUDAOTest {
 
     @Test
     void loginUtente() {
-        assertEquals(-1, CustomerDAO.loginUtente("ciao", "ciao", new connectionPoolMock()));
-        assertEquals(0, CustomerDAO.loginUtente("ciao@ciao.com", "Ciao000$", new connectionPoolReal()));
-        assertEquals(1, CustomerDAO.loginUtente("mariorossi@gmail.com", "Mariorossi1$", new connectionPoolReal()));
-        assertEquals(2, CustomerDAO.loginUtente("admin@admin.com", "Admin111@", new connectionPoolReal()));
+        assertEquals(-1, AGUDAO.loginUtente("ciao", "ciao", new connectionPoolMock()));
+        assertEquals(0, AGUDAO.loginUtente("ciao@ciao.com", "Ciao000$", new connectionPoolReal()));
+        assertEquals(1, AGUDAO.loginUtente("mariorossi@gmail.com", "Mariorossi1$", new connectionPoolReal()));
+        assertEquals(2, AGUDAO.loginUtente("admin@admin.com", "Admin111@", new connectionPoolReal()));
     }
 
     @Test
     void returnCustomerData() {
-        assertNull(CustomerDAO.returnCustomerData("ciao", new connectionPoolMock()));
-        assertInstanceOf(Cliente.class, CustomerDAO.returnCustomerData("mariorossi@gmail.com", new connectionPoolReal()));
-        assertInstanceOf(Admin.class, CustomerDAO.returnCustomerData("admin@admin.com", new connectionPoolReal()));
-        assertNull(CustomerDAO.returnCustomerData("ciao@ciao.com", new connectionPoolReal()));
+        assertNull(AGUDAO.returnCustomerData("ciao", new connectionPoolMock()));
+        assertInstanceOf(Cliente.class, AGUDAO.returnCustomerData("mariorossi@gmail.com", new connectionPoolReal()));
+        assertInstanceOf(Admin.class, AGUDAO.returnCustomerData("admin@admin.com", new connectionPoolReal()));
+        assertNull(AGUDAO.returnCustomerData("ciao@ciao.com", new connectionPoolReal()));
     }
 
     @Test
     void registerCliente() {
         Cliente c1 = new Cliente(1, "Antonio", "Rossi", "mariorossi@gmail.com", "ciao", "12312312311");
-        assertEquals(2, CustomerDAO.registerCliente(c1, new connectionPoolReal()));
+        assertEquals(2, AGUDAO.registerCliente(c1, new connectionPoolReal()));
         Cliente c2 = new Cliente(1, "Antonio", "Rossi", "marionuovo@gmail.com", "ciao", "85968563851");
-        assertEquals(2, CustomerDAO.registerCliente(c2, new connectionPoolReal()));
+        assertEquals(2, AGUDAO.registerCliente(c2, new connectionPoolReal()));
         Cliente c3 = new Cliente(1, "Antonio", "Rossi", "admin@admin.com", "ciao", "85968563851");
-        assertEquals(2, CustomerDAO.registerCliente(c3, new connectionPoolReal()));
-        assertEquals(0, CustomerDAO.registerCliente(c3, new connectionPoolMock()));
+        assertEquals(2, AGUDAO.registerCliente(c3, new connectionPoolReal()));
+        assertEquals(0, AGUDAO.registerCliente(c3, new connectionPoolMock()));
         Cliente c4 = new Cliente(1, "Antonio", "Rossi", "clientenuovo@admin.com", "ciao", "12311122233");
-        assertEquals(1, CustomerDAO.registerCliente(c4, new connectionPoolReal()));
+        assertEquals(1, AGUDAO.registerCliente(c4, new connectionPoolReal()));
         try(Connection connection= new connectionPoolReal().setConnection()){
             PreparedStatement preparedStatement= connection.prepareStatement("DELETE FROM Customer WHERE email=?");
             preparedStatement.setString(1,"clientenuovo@admin.com");
@@ -54,12 +53,12 @@ class CustomerDAOTest {
     @Test
     void registerAdmin() {
         Admin a1 = new Admin(1, "Antonio", "Rossi", "mariorossi@gmail.com", "ciao");
-        assertEquals(2, CustomerDAO.registerAdmin(a1, new connectionPoolReal()));
+        assertEquals(2, AGUDAO.registerAdmin(a1, new connectionPoolReal()));
         Admin a2 = new Admin(1, "Antonio", "Rossi", "admin@admin.com", "ciao");
-        assertEquals(2, CustomerDAO.registerAdmin(a2, new connectionPoolReal()));
-        assertEquals(0, CustomerDAO.registerAdmin(a2, new connectionPoolMock()));
+        assertEquals(2, AGUDAO.registerAdmin(a2, new connectionPoolReal()));
+        assertEquals(0, AGUDAO.registerAdmin(a2, new connectionPoolMock()));
         Admin a3 = new Admin(1, "Antonio", "Rossi", "adminnuovo@admin.com", "ciao");
-        assertEquals(1, CustomerDAO.registerAdmin(a3, new connectionPoolReal()));
+        assertEquals(1, AGUDAO.registerAdmin(a3, new connectionPoolReal()));
         try(Connection connection= new connectionPoolReal().setConnection()){
             PreparedStatement preparedStatement= connection.prepareStatement("DELETE FROM Customer WHERE email=?");
             preparedStatement.setString(1,"adminnuovo@admin.com");

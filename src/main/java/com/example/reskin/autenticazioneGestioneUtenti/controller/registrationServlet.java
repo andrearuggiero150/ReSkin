@@ -1,6 +1,6 @@
 package com.example.reskin.autenticazioneGestioneUtenti.controller;
 
-import com.example.reskin.autenticazioneGestioneUtenti.DAOStorage.CustomerDAO;
+import com.example.reskin.autenticazioneGestioneUtenti.DAOStorage.AGUDAO;
 import com.example.reskin.Entity.Cliente;
 import com.example.reskin.connPool.connectionPoolReal;
 import jakarta.servlet.RequestDispatcher;
@@ -54,7 +54,7 @@ public class registrationServlet extends HttpServlet {
             c.setPiva(req.getParameter("PIVA"));
             c.setEmail(req.getParameter("email"));
             c.setPassword(req.getParameter("password"));
-            int i = CustomerDAO.registerCliente(c, new connectionPoolReal());
+            int i = AGUDAO.registerCliente(c, new connectionPoolReal());
             if(i == 1) {
                 req.setAttribute("registerSuccess", 1);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");

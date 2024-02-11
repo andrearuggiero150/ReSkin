@@ -97,6 +97,16 @@
         </div>
     </div>
 </form>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast-notLogged" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Funzione riservata ai Clienti! Registrati ora o effettua il Login.
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
 
 <script>
     $(document).ready(function () {
@@ -150,6 +160,27 @@
             setTimeout(function () {
                 listaRisultati.hide();
             }, 200);
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+            const myEl = document.getElementById('cartBtn');
+            myEl.addEventListener('click', function () {
+                var loginStatus = <%= session.getAttribute("loginStatus") %>;
+
+                if (loginStatus != 1) {
+                    const toastTrigger = document.getElementById('cartBtn')
+                    const toastLiveExample = document.getElementById('liveToast-notLogged')
+
+                    if (toastTrigger) {
+                        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+                        toastTrigger.addEventListener('click', () => {
+                            toastBootstrap.show()
+                        })
+                    }
+                }
+            }, 100);
         });
     });
 </script>

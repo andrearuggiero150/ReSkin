@@ -1,6 +1,6 @@
 package com.example.reskin.autenticazioneGestioneUtenti.controller;
 
-import com.example.reskin.autenticazioneGestioneUtenti.DAOStorage.CustomerDAO;
+import com.example.reskin.autenticazioneGestioneUtenti.DAOStorage.AGUDAO;
 import com.example.reskin.Entity.Customer;
 import com.example.reskin.connPool.connectionPoolReal;
 import jakarta.servlet.RequestDispatcher;
@@ -34,11 +34,11 @@ public class loginServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
         else {
-                int i = CustomerDAO.loginUtente(req.getParameter("email"), req.getParameter("password"), new connectionPoolReal());
+                int i = AGUDAO.loginUtente(req.getParameter("email"), req.getParameter("password"), new connectionPoolReal());
                 if(i == 1) {
                     req.setAttribute("loginSuccess", 1);
                     req.getSession().setAttribute("loginStatus", 1);
-                    Customer c = CustomerDAO.returnCustomerData(req.getParameter("email"), new connectionPoolReal());
+                    Customer c = AGUDAO.returnCustomerData(req.getParameter("email"), new connectionPoolReal());
                     if(c == null) {
                         req.setAttribute("loginSuccess", -1);
                         req.getSession().setAttribute("loginStatus", 0);
@@ -52,7 +52,7 @@ public class loginServlet extends HttpServlet {
                 else if(i == 2) {
                     req.setAttribute("loginSuccess", 2);
                     req.getSession().setAttribute("loginStatus", 2);
-                    Customer c = CustomerDAO.returnCustomerData(req.getParameter("email"), new connectionPoolReal());
+                    Customer c = AGUDAO.returnCustomerData(req.getParameter("email"), new connectionPoolReal());
                     if(c == null) {
                         req.setAttribute("loginSuccess", -1);
                         req.getSession().setAttribute("loginStatus", 0);

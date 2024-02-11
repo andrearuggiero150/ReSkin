@@ -1,7 +1,9 @@
 package com.example.reskin.gestioneInserzioni.controller;
 
 import com.example.reskin.Entity.Product;
-import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.searchBarDAO;
+import com.example.reskin.connPool.connectionPoolMock;
+import com.example.reskin.connPool.connectionPoolReal;
+import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.RVPDAO;
 import com.example.reskin.Entity.Category;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -27,9 +29,9 @@ public class modificaInserzioneServlet extends HttpServlet {
             Product prodottoDaModificare;
             int id=Integer.parseInt(req.getParameter("idProdotto"));
             System.out.println("ID Prodotto: "+id);
-            prodottoDaModificare= searchBarDAO.prodottoFromID(id);
-            String nomeCategoria=searchBarDAO.getCategoryName(prodottoDaModificare.getCategoryId());
-            List<Category> listaCategorie=searchBarDAO.allCategory();
+            prodottoDaModificare= RVPDAO.productFromID(id, new connectionPoolReal());
+            String nomeCategoria= RVPDAO.getCategoryName(prodottoDaModificare.getCategoryId(), new connectionPoolReal());
+            List<Category> listaCategorie= RVPDAO.allCategory(new connectionPoolReal());
             req.setAttribute("prodottoDaModificare", prodottoDaModificare);
             req.setAttribute("nomeCategoria", nomeCategoria);
             req.setAttribute("listaCategorie", listaCategorie);

@@ -1,7 +1,7 @@
 package com.example.reskin.gestioneNotifiche.DAOStorage;
 
-import com.example.reskin.connectionPool;
 import com.example.reskin.Entity.POP;
+import com.example.reskin.connPool.connectionPoolAbstraction;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,10 +12,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class POPDAO {
-    public static List<POP> clientPOP(int clientID) {
+public class GNDAO {
+    public static List<POP> clientPOP(int clientID, connectionPoolAbstraction cpa) {
         List<POP> popList = new ArrayList<>();
-        try (Connection connection = connectionPool.getConnection()) {
+        try (Connection connection = cpa.setConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM POP WHERE customerID = ?");
             preparedStatement.setInt(1, clientID);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -32,9 +32,9 @@ public class POPDAO {
         return popList;
     }
 
-    public static List<POP> adminPOP() {
+    public static List<POP> adminPOP(connectionPoolAbstraction cpa) {
         List<POP> popList = new ArrayList<>();
-        try (Connection connection = connectionPool.getConnection()) {
+        try (Connection connection = cpa.setConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT POP.POPID, POP.testo, POP.dataInvio, POP.customerID, Customer.email FROM POP, Customer WHERE Customer.customerID = POP.customerID");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

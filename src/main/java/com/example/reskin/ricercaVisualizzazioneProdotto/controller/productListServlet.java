@@ -1,7 +1,6 @@
 package com.example.reskin.ricercaVisualizzazioneProdotto.controller;
 
 import com.example.reskin.Entity.Product;
-import com.example.reskin.connPool.connectionPoolMock;
 import com.example.reskin.connPool.connectionPoolReal;
 import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.RVPDAO;
 import com.example.reskin.Entity.Category;

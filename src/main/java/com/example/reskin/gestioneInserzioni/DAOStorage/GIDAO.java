@@ -49,15 +49,13 @@ public class GIDAO {
             preparedStatement.setDouble(7,nuovoProdotto.getPrezzo());
             preparedStatement.setInt(8,nuovoProdotto.getCategoryId());
             preparedStatement.setString(9,nuovoProdotto.getColore());
-
             if (preparedStatement.executeUpdate() != 1) {
                 return 0;
             }
         } catch (SQLIntegrityConstraintViolationException e) {
-            e.printStackTrace();
             return 2;
+
         } catch (SQLException e) {
-            e.printStackTrace();
             return 0;
         }
         return 1;

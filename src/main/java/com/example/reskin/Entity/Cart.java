@@ -9,6 +9,7 @@ public class Cart {
     private int customerId;
 
     public Cart() {
+        carrello = new ArrayList<>();
     }
 
     public Cart(int id, int customerId) {

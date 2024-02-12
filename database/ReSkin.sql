@@ -12,7 +12,7 @@ create table Product (
 productID int primary key auto_increment,
 nome varchar(30) not null,
 descrizione varchar(100),
-binaryImage blob not null,
+binaryImage longblob not null,
 larghezza double not null,
 lunghezza double not null,
 quantita int not null,

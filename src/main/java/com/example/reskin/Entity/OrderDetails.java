@@ -2,16 +2,26 @@ package com.example.reskin.Entity;
 
 public class OrderDetails {
     private int id;
-    private Product prodotto;
+    private int prodottoID;
     private int quantita;
+
+    private int orderID;
 
     public OrderDetails() {
     }
 
-    public OrderDetails(int id, Product prodotto, int quantita) {
+    public OrderDetails(int id, int prodotto, int quantita) {
         this.id = id;
-        this.prodotto = prodotto;
+        this.prodottoID = prodotto;
         this.quantita = quantita;
+    }
+
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
     }
 
     public int getId() {
@@ -22,12 +32,12 @@ public class OrderDetails {
         this.id = id;
     }
 
-    public Product getProdotto() {
-        return prodotto;
+    public int getProdottoID() {
+        return prodottoID;
     }
 
-    public void setProdotto(Product prodotto) {
-        this.prodotto = prodotto;
+    public void setProdottoID(int prodottoID) {
+        this.prodottoID = prodottoID;
     }
 
     public int getQuantita() {

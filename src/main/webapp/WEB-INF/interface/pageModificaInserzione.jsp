@@ -32,7 +32,7 @@
 <div class="container">
     <div class="login-form mx-auto text-center registerForm">
         <img src="resources/logo.png" alt="Logo" style="width:360px; height: 80px;">
-        <form class="row g-3" method="post" action="aggiornaProdottoServlet" id="idForm">
+        <form class="row g-3" method="post" action="updateProductServlet" id="idForm">
             <input type="hidden" value="<%=prodottoDaModificare.getProductID()%>" name="idProdotto">
             <div class="col-md-6">
                 <label for="Titolo" class="form-label">Titolo</label>
@@ -57,8 +57,10 @@
                 <label for="Categoria" class="form-label">Categoria</label>
                 <select class="form-select" id="Categoria" name="Categoria">
                     <% for (Category categoria : listaCategorie) { %>
-                    <option value="<%= categoria.getCategoryID() %>" data-nome="<%= categoria.getNome() %>" <% if (categoria.getNome().equals(nomeCategoria)) { %>
-                            selected <% } %>><%=categoria.getNome()%>
+                    <option contenteditable="true" id="<%=categoria.getCategoryID()%>" value="<%= categoria.getCategoryID() %>" data-nome="<%= categoria.getNome() %>" <% if (categoria.getNome().equals(nomeCategoria)) { %>
+                            selected <% } %>
+                    >
+                        <%=categoria.getNome()%>
                     </option>
                     <% } %>
                 </select>
@@ -86,7 +88,7 @@
             </div>
 
             <div class="col-12">
-                <a href="gestisciInserzioniServlet">
+                <a href="manageProductServlet">
                     <button class="btn btn-outline-danger" type="button">Torna alla lista delle inserzioni</button>
                 </a>
                 <button class="btn btn-success" type="submit" onclick="updateCategoriaNome()">Invia</button>
@@ -179,6 +181,17 @@
 </div>
 
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast8" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                La categoria inserita non è più disponibile
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="liveToast0" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
@@ -207,6 +220,8 @@
     const toastLiveExample5 = document.getElementById('liveToast5')
     const toastLiveExample6 = document.getElementById('liveToast6')
     const toastLiveExample7 = document.getElementById('liveToast7')
+    const toastLiveExample8 = document.getElementById('liveToast8')
+
 
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -246,6 +261,11 @@
 
             if (codiceErrore == 7) {
                 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample7)
+                toastBootstrap.show()
+            }
+
+            if (codiceErrore == 8) {
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample8)
                 toastBootstrap.show()
             }
         })

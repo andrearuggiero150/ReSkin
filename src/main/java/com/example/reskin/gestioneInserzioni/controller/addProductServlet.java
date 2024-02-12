@@ -1,6 +1,5 @@
 package com.example.reskin.gestioneInserzioni.controller;
 import com.example.reskin.Entity.Product;
-import com.example.reskin.connPool.connectionPoolMock;
 import com.example.reskin.connPool.connectionPoolReal;
 import com.example.reskin.gestioneInserzioni.DAOStorage.GIDAO;
 import com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.RVPDAO;
@@ -19,8 +18,8 @@ import java.io.InputStream;
 import java.util.List;
 
 @MultipartConfig
-@WebServlet("/aggiungiNuovaInserzioneServlet")
-public class aggiungiNuovaInserzioneServlet extends HttpServlet {
+@WebServlet("/addProductServlet")
+public class addProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("loginStatus") == null || (int) req.getSession().getAttribute("loginStatus") != 2) {
@@ -28,6 +27,11 @@ public class aggiungiNuovaInserzioneServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
             dispatcher.forward(req, resp);
         }
+
+        List<Category> listaCategorie= RVPDAO.allCategory(new connectionPoolReal());
+        req.setAttribute("listaCategorie", listaCategorie);
+        RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/pageAggiungiNuovaInserzione.jsp");
+        dispatcher.forward(req,resp);
     }
 
     @Override

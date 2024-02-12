@@ -41,8 +41,8 @@
                         <div class="dropdown-menu dropdown-menu-lg-end dropdown-menu-start" id="loggedAdminDropdown"
                              style="width: 300px">
                             <a class="dropdown-item" href="POPAdminServlet">Scrivi POP</a>
-                            <a class="dropdown-item" href="#">Visualizza Ordini </a>
-                            <a class="dropdown-item" href="gestisciInserzioniServlet">Visualizza Inserzioni </a>
+                            <a class="dropdown-item" href="viewOrderServlet">Visualizza Ordini </a>
+                            <a class="dropdown-item" href="manageProductServlet">Visualizza Inserzioni </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/logoutServlet">LogOut</a>
                         </div>
@@ -50,7 +50,7 @@
                         <div class="dropdown-menu dropdown-menu-lg-end dropdown-menu-start" id="loggedDropdown"
                              style="width: 300px">
                             <a class="dropdown-item" href="POPClientServlet">Visualizza POP</a>
-                            <a class="dropdown-item" href="#">Visualizza Ordini</a>
+                            <a class="dropdown-item" href="viewOrderServlet">Visualizza Ordini</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/logoutServlet">LogOut</a>
                         </div>

@@ -19,7 +19,6 @@
 <jsp:include page="headBar.jsp"/>
 <div>
     <div class="bg-dark d-flex justify-content-center" style="padding: 20px">
-
         <form method="post" action="listaProdottiServlet" class="mx-5" id="cambiaDisponibilitàForm">
             <select class="form-select" id="Disponibilità" name="Disponibilità" onchange="submitFormDisponibilita()">
                 <option value="" disabled selected style="display:none;">Disponibilità</option>
@@ -43,10 +42,7 @@
             <button type="button" class="btn btn-primary bg-white mx-5" style="border-color: #212121;" >
                 <a style="text-decoration: none; color: #212121; border-color: #212121;" href="listaProdottiServlet">Reset filtri</a>
             </button>
-
         </div>
-
-
     </div>
 </div>
 

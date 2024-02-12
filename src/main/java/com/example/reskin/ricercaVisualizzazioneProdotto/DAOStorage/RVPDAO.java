@@ -24,7 +24,7 @@ public class RVPDAO {
                 listaNomi.add(nome);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return null;
         }
         return listaNomi;
     }
@@ -40,7 +40,7 @@ public class RVPDAO {
                 listaID.add(resultSet.getInt(1));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return null;
         }
         return listaID;
 
@@ -64,7 +64,7 @@ public class RVPDAO {
                 prodotto.setCategoryId(resultSet.getInt(8));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return null;
         }
         return prodotto;
     }
@@ -88,7 +88,7 @@ public class RVPDAO {
                 prodotti.add(prodotto);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return null;
         }
         return prodotti;
     }
@@ -106,33 +106,33 @@ public class RVPDAO {
                 categorie.add(categoria);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return null;
         }
         return categorie;
     }
 
 
-    public static String getCategoryName(int id, connectionPoolAbstraction cpa){
+    public static String getCategoryName(int id, connectionPoolAbstraction cpa) {
         String nomeCategoria = null;
-        try(Connection connection=cpa.setConnection()){
-            PreparedStatement preparedStatement= connection.prepareStatement("SELECT nome FROM Category WHERE Category.categoryID=?");
-            preparedStatement.setInt(1,id);
-            ResultSet resultSet=preparedStatement.executeQuery();
-            while (resultSet.next()){
-                nomeCategoria=resultSet.getString(1);
+        try (Connection connection = cpa.setConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT nome FROM Category WHERE Category.categoryID=?");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                nomeCategoria = resultSet.getString(1);
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
 
-            throw new RuntimeException(e);
+            return null;
         }
         return nomeCategoria;
     }
 
-    public static List<Product> productFilteredByCategory(int idCategoria, connectionPoolAbstraction cpa){
+    public static List<Product> productFilteredByCategory(int idCategoria, connectionPoolAbstraction cpa) {
         List<Product> prodottiFiltrati = new ArrayList<>();
-        try(Connection connection=cpa.setConnection()){
-            PreparedStatement preparedStatement=connection.prepareStatement("SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Product.categoryID=? AND Category.categoryID=Product.categoryID ORDER BY Product.productID");
-            preparedStatement.setInt(1,idCategoria);
+        try (Connection connection = cpa.setConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Product.categoryID=? AND Category.categoryID=Product.categoryID ORDER BY Product.productID");
+            preparedStatement.setInt(1, idCategoria);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Product prodotto = new Product();
@@ -148,24 +148,24 @@ public class RVPDAO {
                 prodottiFiltrati.add(prodotto);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return null;
         }
         return prodottiFiltrati;
     }
 
-    public static List<Product> productFilteredByDisponibility(int quantita, connectionPoolAbstraction cpa){
+    public static List<Product> productFilteredByDisponibility(int quantita, connectionPoolAbstraction cpa) {
         List<Product> prodottiFiltrati = new ArrayList<>();
-        String query=null;
-        try(Connection connection=cpa.setConnection()){
-            if(quantita>0) {
-                query="SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Product.quantita>=? AND Category.categoryID=Product.categoryID ORDER BY Product.productID";
+        String query = null;
+        try (Connection connection = cpa.setConnection()) {
+            if (quantita > 0) {
+                query = "SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Product.quantita>=? AND Category.categoryID=Product.categoryID ORDER BY Product.productID";
 
-            } else if (quantita==0) {
-                query="SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Product.quantita=? AND Category.categoryID=Product.categoryID ORDER BY Product.productID";
+            } else if (quantita == 0) {
+                query = "SELECT Product.productID, Product.nome, Product.descrizione, Product.binaryImage,Product.larghezza, Product.lunghezza, Product.quantita, Product.prezzo, Product.categoryID  FROM Product, Category WHERE Product.quantita=? AND Category.categoryID=Product.categoryID ORDER BY Product.productID";
             }
 
-            PreparedStatement preparedStatement= connection.prepareStatement(query);
-            preparedStatement.setInt(1,quantita);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, quantita);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Product prodotto = new Product();
@@ -181,7 +181,7 @@ public class RVPDAO {
                 prodottiFiltrati.add(prodotto);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return null;
         }
         return prodottiFiltrati;
     }

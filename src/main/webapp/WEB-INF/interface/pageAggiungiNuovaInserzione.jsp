@@ -25,7 +25,7 @@
 </div>
 <div class="container">
     <div class="mx-auto text-center mt-5">
-        <form class="row g-3" method="post" action="aggiungiNuovaInserzioneServlet" enctype="multipart/form-data" id="idForm">
+        <form class="row g-3" method="post" action="addProductServlet" enctype="multipart/form-data" id="idForm">
             <div class="col-md-4">
                 <label for="Titolo" class="form-label">Titolo</label>
                 <input type="text" class="form-control" id="Titolo" name="Titolo" placeholder="Titolo">
@@ -82,9 +82,7 @@
             </div>
 
             <div class="col-12 mt-5">
-                <a href="gestisciInserzioniServlet">
-                    <button class="btn btn-outline-danger" type="button">Torna alla lista delle inserzioni</button>
-                </a>
+                <a href="manageProductServlet"><button class="btn btn-outline-danger" type="button">Torna alla lista delle inserzioni</button></a>
                 <button class="btn btn-success mx-5" type="submit">Invia</button>
             </div>
         </form>

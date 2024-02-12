@@ -27,7 +27,7 @@
         <h1 class='text-2xl font-bold text-gray-900 sm:text-3xl'>
             Scopri i nostri prodotti
         </h1>
-        <form class="mx-4" action="redirectNuovaInserzioneServlet" method="post">
+        <form class="mx-4" action="addProductServlet" method="get">
             <button class="btn btn-secondary" type="submit">Aggiungi nuova inserzione</button>
         </form>
     </div>
@@ -51,12 +51,12 @@
             </div>
             <div class="card-footer border-white">
                 <div class="d-flex justify-content-center align-items-center mt-2">
-                    <form class="mx-4" id="eliminaForm<%=id%>" action="eliminaProdottoServlet" method="post">
+                    <form class="mx-4" id="eliminaForm<%=id%>" action="deleteProductServlet" method="post">
                         <input type="hidden" value="<%=id%>" name="idProdotto">
                         <button class="btn btn-danger" type="button" onclick="mostraConferma(<%=id%>)">Elimina</button>
                     </form>
 
-                    <form class="mx-4" action="modificaInserzioneServlet" method="post">
+                    <form class="mx-4" action="updateProductServlet" method="get">
                         <input hidden="hidden" value="<%=id%>" name="idProdotto">
                         <button class="btn btn-success" type="submit">Modifica</button>
                     </form>
@@ -124,15 +124,12 @@
 
     function mostraConferma(idProdotto) {
         var toastEliminaProdotto = new bootstrap.Toast(document.getElementById('toastConferma'));
-        // Passa l'id del prodotto alla funzione di confermaEliminazione
         document.getElementById('toastConferma').setAttribute('data-idProdotto', idProdotto);
         toastEliminaProdotto.show();
     }
 
     function confermaEliminazione() {
-        // Ottieni l'id del prodotto dal data attributo
         var idProdotto = document.getElementById('toastConferma').getAttribute('data-idProdotto');
-        // Modifica l'ID del form dinamicamente prima di inviarlo
         document.getElementById('eliminaForm' + idProdotto).submit();
     }
 

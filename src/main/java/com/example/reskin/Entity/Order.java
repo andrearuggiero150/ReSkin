@@ -1,25 +1,26 @@
 package com.example.reskin.Entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Order {
     private int id;
     private List<OrderDetails> listaProdotti;
     private int customerId;
-    private LocalDateTime data;
+    private Date data;
     private String via;
     private String citta;
     private String stato;
     private String provincia;
     private String CAP;
     private String status;
+    private Double totale;
 
     public Order() {
     }
 
-    public Order(int id, int customerId, LocalDateTime data, String via, String citta, String stato, String provincia, String CAP, String status) {
+    public Order(int id, int customerId, Date data, String via, String citta, String stato, String provincia, String CAP, String status) {
         this.id = id;
         listaProdotti = new ArrayList<>();
         this.customerId = customerId;
@@ -32,7 +33,15 @@ public class Order {
         this.status = status;
     }
 
-    public Order(int id, List<OrderDetails> listaProdotti, int customerId, LocalDateTime data, String via, String citta, String stato, String provincia, String CAP, String status) {
+    public Double getTotale() {
+        return totale;
+    }
+
+    public void setTotale(Double totale) {
+        this.totale = totale;
+    }
+
+    public Order(int id, List<OrderDetails> listaProdotti, int customerId, Date data, String via, String citta, String stato, String provincia, String CAP, String status) {
         this.id = id;
         this.listaProdotti = listaProdotti;
         this.customerId = customerId;
@@ -69,11 +78,11 @@ public class Order {
         this.customerId = customerId;
     }
 
-    public LocalDateTime getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(LocalDateTime data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

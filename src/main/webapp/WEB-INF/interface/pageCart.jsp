@@ -56,7 +56,7 @@
                 </div>
                 <div class="col text-end">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Apri Popup
+                        Inserisci indirizzo
                     </button>
                 </div>
             </div>
@@ -68,7 +68,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Inserisci Indirizzo</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Indirizzo</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -107,7 +107,7 @@
                             <div class="col-64">
                                 <p>Totale: <%=t%>
                                 </p>
-                                <button class="btn btn-success" type="submit">Invia</button>
+                                <button class="btn btn-success" type="submit">Checkout</button>
                             </div>
                         </form>
                     </div>

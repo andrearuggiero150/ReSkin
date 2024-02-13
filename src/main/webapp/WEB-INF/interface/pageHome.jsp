@@ -100,8 +100,8 @@
                         Nel corso dell&apos;ultimo decennio, nonostante gli sforzi considerevoli compiuti da agenzie
                         e governi per promuovere una vera e propria transizione ecologica attraverso ampi programmi di sviluppo,
                         diversi settori continuano a lottare per adottare le pratiche comuni necessarie per lo smaltimento adeguato dei rifiuti.
-                        Uno dei settori più inquinanti che ha scalato posizioni, raggiungendo il secondo posto nella graduatoria tra quelli più dannosi per l&apos;ambiente
-                        è senz&apos;altro quello della moda, in particolare il segmento noto come fast fashion
+                        Uno dei settori pi&ugrave; inquinanti che ha scalato posizioni, raggiungendo il secondo posto nella graduatoria tra quelli pi&ugrave; dannosi per l&apos;ambiente
+                        &egrave; senz&apos;altro quello della moda, in particolare il segmento noto come fast fashion
                         che si concentra sulla produzione in massa di capi d&apos;abbigliamento. Diversi report hanno evidenziato la presenza di metano e petrolio
                         tra altre sostanze chimiche, in materiali ampiamente utilizzati dalle grandi aziende, come cotone, seta e fibre sintetiche.
                     </span>
@@ -112,13 +112,13 @@
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading fw-normal lh-1">
-                Secoli di inquinamento
+                Una nuova proposta
                 <span class="text-body-secondary">
                         <br>
                         L&apos;azienda INDITEX propone quindi un sistema innovativo chiamato INDITEX ReSkin.
                         L&apos;obiettivo principale di questo sistema &egrave; creare un canale di comunicazione che consenta a piccoli artigiani
                         e innovative start-up italiane di acquistare a prezzi vantaggiosi il materiale di produzione in eccesso.
-                        L’azienda potrà dunque mettere in vendita sottoprodotti (ovvero uno scarto di lavorazione derivante da processi industriali,
+                        L&apos;azienda potr&agrave; dunque mettere in vendita sottoprodotti (ovvero uno scarto di lavorazione derivante da processi industriali,
                         il quale viene riutilizzato in un altro processo produttivo come materia prima non vergine) derivanti dalla produzione di capi per
                         i suoi principali brand di Fast Fashion.
                     </span>

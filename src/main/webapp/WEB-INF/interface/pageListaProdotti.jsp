@@ -19,7 +19,7 @@
 <jsp:include page="headBar.jsp"/>
 <div>
     <div class="bg-dark d-flex justify-content-center" style="padding: 20px">
-        <form method="post" action="listaProdottiServlet" class="mx-5" id="cambiaDisponibilitàForm">
+        <form method="post" action="productListServlet" class="mx-5" id="cambiaDisponibilitàForm">
             <select class="form-select" id="Disponibilità" name="Disponibilità" onchange="submitFormDisponibilita()">
                 <option value="" disabled selected style="display:none;">Disponibilità</option>
                 <option value="Disponibile" >Disponibile</option>
@@ -27,7 +27,7 @@
             </select>
         </form>
 
-        <form method="post" action="listaProdottiServlet" class="mx-5" id="cambiaCategoriaForm">
+        <form method="post" action="productListServlet" class="mx-5" id="cambiaCategoriaForm">
             <select class="form-select" id="Categoria" name="Categoria" onchange="submitFormCategoria()">
                 <option value="" disabled selected style="display:none;">Categoria</option>
                 <% for (Category categoria : listaCategorie) { %>
@@ -40,7 +40,7 @@
 
         <div>
             <button type="button" class="btn btn-primary bg-white mx-5" style="border-color: #212121;" >
-                <a style="text-decoration: none; color: #212121; border-color: #212121;" href="listaProdottiServlet">Reset filtri</a>
+                <a style="text-decoration: none; color: #212121; border-color: #212121;" href="productListServlet">Reset filtri</a>
             </button>
         </div>
     </div>

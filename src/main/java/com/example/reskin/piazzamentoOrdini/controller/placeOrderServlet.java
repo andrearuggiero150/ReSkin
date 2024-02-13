@@ -25,6 +25,10 @@ public class placeOrderServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("viewCartServlet");
             dispatcher.forward(req, resp);
         }
+        if(req.getSession().getAttribute("loginStatus") == null) {
+            RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
+            dispatcher.forward(req, resp);
+        }
         else {
             Customer c = (Customer) req.getSession().getAttribute("customer");
             double totale = (double) req.getSession().getAttribute("totale");

@@ -91,6 +91,16 @@
     </div>
 </div>
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast-notallowed0" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Funzione riservata agli utenti registrati! Registrati ora o effettua il Login.
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="liveToastreg" class="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
@@ -110,7 +120,6 @@
     </div>
 </div>
 </div>
-
 
 <script>
     const toastLiveExample0 = document.getElementById('liveToast0')
@@ -151,6 +160,7 @@
 
     const toastnotlog = document.getElementById('liveToast-notLogged')
     const toastnotlogAd = document.getElementById('liveToast-notLoggedAdmin')
+    const toastnotlogAdlow = document.getElementById('liveToast-notallowed0')
     document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function () {
             let notAllowed = <%= request.getAttribute("notAllowed") %>;
@@ -160,6 +170,10 @@
             }
             if (notAllowed == 2) {
                 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastnotlogAd)
+                toastBootstrap.show()
+            }
+            if (notAllowed == 0) {
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastnotlogAdlow)
                 toastBootstrap.show()
             }
         })
@@ -186,6 +200,7 @@
             }
         })
     })
+
 </script>
 </body>
 </html>

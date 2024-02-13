@@ -26,7 +26,10 @@ public class productListServlet extends HttpServlet {
         String categoriaSelezionata = req.getParameter("Categoria");
         String disponibilitaSelezionata = req.getParameter("Disponibilità");
         System.out.println("Disponibilità selezionata: "+disponibilitaSelezionata);
-
+        if(req.getSession().getAttribute("loginStatus") == null) {
+            RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
+            dispatcher.forward(req, resp);
+        }
 
         if (req.getParameter("nomeProdotto") != null) {
             List<Integer> lista = RVPDAO.getSearch(req.getParameter("nomeProdotto"), new connectionPoolReal());

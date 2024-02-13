@@ -22,6 +22,7 @@
         <div class="d-flex w-100 justify-content-between">
             <p class="mb-1"><%=listaPOP.get(i).getTesto()%></p>
         </div>
+        <small>Inviato da: Admin</small>
         <p class="text-end"><small><%=temp[0]%> <%=temp[1]%></small></p>
     </div>
     <%}}%>

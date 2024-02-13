@@ -23,8 +23,8 @@ public class viewOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if(req.getSession().getAttribute("loginStatus") == null) {
-            req.setAttribute("notAllowed", 1);
+        if(req.getSession().getAttribute("loginStatus") == null || (int) req.getSession().getAttribute("loginStatus") == 0) {
+            req.setAttribute("notAllowed", 0);
             RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
             dispatcher.forward(req, resp);
         }

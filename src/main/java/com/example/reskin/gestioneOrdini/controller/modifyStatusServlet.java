@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/modifyStatusServlet")
@@ -28,26 +29,49 @@ public class modifyStatusServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
 
-        String statusOrdine=req.getParameter("Status");
+        String statusOrdine=req.getParameter("StatusNome");
+        System.out.println("Status scelto: " +statusOrdine);
         int idOrdine=Integer.parseInt(req.getParameter("idOrdine"));
 
-        if(!statusOrdine.equals("Completo") || !statusOrdine.equals("In transito") || !statusOrdine.equals("Pagato") || !statusOrdine.equals("Da pagare") ){
+        List<String> listaStatus=new ArrayList<>();
+        listaStatus.add("Completo");
+        listaStatus.add("In transito");
+        listaStatus.add("Pagato");
+        listaStatus.add("Da pagare");
+        boolean nomePresente=false;
+
+        for(String nomi: listaStatus){
+            System.out.println("Nome nella lista: "+nomi);
+            if(nomi.equals(statusOrdine)){
+                nomePresente=true;
+                break;
+            }
+        }
+
+        System.out.println("Stato nomePresente: " +nomePresente);
+
+
+        if(statusOrdine.isEmpty() || !nomePresente){
+            System.out.println("Stato nomePresente in caso di erroe: " +nomePresente);
             req.setAttribute("esitoModifica", 0);
             List<Order> orderList= GODAO.retriveOrder(new connectionPoolReal());
             req.setAttribute("listaOrdini", orderList);
             RequestDispatcher dispatcher= req.getRequestDispatcher("WEB-INF/interface/pageVisualizzaOrdiniAdmin.jsp");
             dispatcher.forward(req,resp);
+            return;
         }
 
         int updateStatus= GODAO.modifyOrderStatus(idOrdine,statusOrdine, new connectionPoolReal());
 
-        if(updateStatus==1){
+        if(updateStatus==1 && nomePresente){
+            System.out.println("Stato nomePresente in if=1: " +nomePresente);
             req.setAttribute("esitoModifica", updateStatus);
             List<Order> orderList= GODAO.retriveOrder(new connectionPoolReal());
             req.setAttribute("listaOrdini", orderList);
             RequestDispatcher dispatcher= req.getRequestDispatcher("WEB-INF/interface/pageVisualizzaOrdiniAdmin.jsp");
             dispatcher.forward(req,resp);
-        } else if (updateStatus == 0) {
+        } else if (updateStatus == 0 || !nomePresente) {
+            System.out.println("Stato nomePresente in if=0: " +nomePresente);
             req.setAttribute("esitoModifica", updateStatus);
             List<Order> orderList= GODAO.retriveOrder(new connectionPoolReal());
             req.setAttribute("listaOrdini", orderList);

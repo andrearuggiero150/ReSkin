@@ -71,18 +71,23 @@
                     <%=order.getStatus()%>
                 </td>
 
-                <td class="text-center">
-                    <form method="post" action="${pageContext.request.contextPath}/modifyStatusServlet" class="mx-5" id="cambiaStatusForm<%=order.getId()%>">
-                        <input type="hidden" name="idOrdine" id="idOrdine<%=order.getId()%>" value="<%=order.getId()%>">
-                        <select class="form-select" id="Status<%=order.getId()%>" name="Status" onchange="submitFormStatus(<%=order.getId()%>)">
-                        <option value="" disabled selected style="display:none;">Modifica status</option>
-                            <option value="Completo">Completo</option>
-                            <option value="In transito">In transito</option>
-                            <option value="Pagato">Pagato</option>
-                            <option value="Da pagare">Da pagare</option>
-                        </select>
+                <td>
+                    <form method="post" action="modifyStatusServlet" id="cambiaStatusForm<%=order.getId()%>">
+                        <div class="d-flex align-items-center">
+                            <input type="hidden" name="idOrdine" id="idOrdine<%=order.getId()%>" value="<%=order.getId()%>">
+                            <select class="form-select me-2" id="Status<%=order.getId()%>" name="Status">
+                                <option value="" disabled selected style="display:none;">Modifica status</option>
+                                <option value="Completo">Completo</option>
+                                <option value="In transito">In transito</option>
+                                <option value="Pagato">Pagato</option>
+                                <option value="Da pagare">Da pagare</option>
+                            </select>
+                            <input type="hidden" id="StatusNome" name="StatusNome" value="">
+                            <button class="btn btn-success" type="submit" onclick="submitFormStatus(<%=order.getId()%>)">Modifica</button>
+                        </div>
                     </form>
                 </td>
+
             </tr>
             <%}%>
             </tbody>
@@ -115,10 +120,13 @@
 
 <script>
     function submitFormStatus(ordine) {
-        var select = document.getElementById("Status" + ordine);
-        select.options[0].style.display = "none";
+        var statusSelect = document.getElementById("Status" +ordine);
+        var statusNomeInput = document.getElementById("StatusNome");
+        var selectedCategoriaNome = statusSelect.options[statusSelect.selectedIndex].text;
+        statusNomeInput.value = selectedCategoriaNome;
         document.getElementById("cambiaStatusForm" + ordine).submit();
     }
+
 
     const toastLiveExample0 = document.getElementById('liveToast0')
     const toastLiveExample1 = document.getElementById('liveToast1')

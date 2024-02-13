@@ -32,7 +32,6 @@ public class placeOrderServlet extends HttpServlet {
         else {
             Customer c = (Customer) req.getSession().getAttribute("customer");
             double totale = (double) req.getSession().getAttribute("totale");
-            System.out.println(totale);
             int i = PODAO.placeOrder(c.getId(), totale, req.getParameter("via"), req.getParameter("CAP"), req.getParameter("citta"), req.getParameter("provincia"), req.getParameter("stato"), new connectionPoolReal());
             req.setAttribute("checkOutSuccess", i);
             RequestDispatcher dispatcher = req.getRequestDispatcher("viewCartServlet");

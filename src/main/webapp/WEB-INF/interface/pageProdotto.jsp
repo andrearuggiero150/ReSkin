@@ -13,7 +13,7 @@
 </head>
 <body>
 <jsp:include page="headBar.jsp"/>
-<div class="container-fluid">
+<div class="container-fluid mb-5">
     <div class="card mt-5" style="width: auto;">
         <div class="card-body">
             <div class="card mb-3" style="width: auto; margin: 0 auto;">
@@ -25,14 +25,14 @@
                         </div>
                     </div>
                     <div class="col-md-8 mt-3">
-                        <h1 class="card-title fw-bold fw-italic"><%=prodotto.getNome()%>
+                        <h1 class="card-title fw-bold fw-italic p-3"><%=prodotto.getNome()%>
                         </h1>
                         <div class="card-body" style="margin-top: 150px">
                             <p class="card-text">Lunghezza: <%=prodotto.getLunghezza()%> cm
                             </p>
                             <p class="card-text">Larghezza: <%=prodotto.getLarghezza()%> cm
                             </p>
-                            <p class="card-text">Prezzo: <%=prodotto.getPrezzo()%> $
+                            <p class="card-text">Prezzo: $<%=prodotto.getPrezzo()%>
                             </p>
                             <%if (prodotto.getQuantita() > 0) {%>
                             <p class="card-text" style="color: green">Prodotto disponibile</p>
@@ -57,6 +57,7 @@
             </div>
         </div>
         <div class="card-footer">
+            <h2>Descrizione</h2>
             <small class="text-body-secondary"><%=prodotto.getDescrizione()%></small>
         </div>
     </div>

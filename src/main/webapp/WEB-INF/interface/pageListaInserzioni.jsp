@@ -28,7 +28,7 @@
 
 
 
-<div class="row row-cols-1 row-cols-md-4 g-0">
+<div class="row row-cols-1 row-cols-lg-3 g-0">
     <%for (Product prodotto : listaProdoto) {%>
     <%int id = prodotto.getProductID();%>
     <div class="col g-0" onclick="">

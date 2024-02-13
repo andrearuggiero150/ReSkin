@@ -53,7 +53,7 @@
 </div>
 
 
-<div class=" row row-cols-1 row-cols-md-4 g-0">
+<div class=" row row-cols-1 row-cols-lg-3 g-0">
     <%
         for (Product prodotto : listaProdotti) {
     %>
@@ -70,9 +70,11 @@
                 </div>
             </div>
             <div class="mx-auto mb-1">
-                <p class="card-text text-white"><%=prodotto.getDescrizione()%>
+                <p class="card-text text-white">Lunghezza: <%=prodotto.getLunghezza()%>
                 </p>
-                <p class="card-text text-white">€<%=prodotto.getPrezzo()%>
+                <p class="card-text text-white">Larghezza: <%=prodotto.getLarghezza()%>
+                </p>
+                <p class="card-text text-white">Prezzo: $<%=prodotto.getPrezzo()%>
                 </p>
             </div>
             <div class="card-footer border-white d-flex justify-content-between align-items-center">

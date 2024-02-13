@@ -26,7 +26,6 @@ public class deleteProductServlet extends HttpServlet {
         }
 
         int idProdotto=Integer.parseInt(req.getParameter("idProdotto"));
-        System.out.println("ID Prodotto: "+idProdotto);
 
         int risultatoOperazione= GIDAO.deleteProduct(idProdotto, new connectionPoolReal());
 

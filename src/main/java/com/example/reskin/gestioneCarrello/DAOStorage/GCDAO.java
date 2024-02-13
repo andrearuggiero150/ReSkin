@@ -32,7 +32,7 @@ public class GCDAO {
                 cart.addCarrello(o);
             }
         } catch (SQLException e) {
-            System.out.println("ciao");
+            return null;
         }
         if (cart.isCarrelloEmpty())
             return null;

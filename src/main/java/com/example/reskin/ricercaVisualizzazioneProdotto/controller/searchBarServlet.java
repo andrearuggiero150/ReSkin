@@ -26,11 +26,9 @@ public class searchBarServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String nomeBarraDiRicerca=req.getParameter("nomeGioco");
-        System.out.println("Nome alla servlet: " +nomeBarraDiRicerca);
         List<String> listaNomi= RVPDAO.searchDropdownProduct(nomeBarraDiRicerca, new connectionPoolReal());
         JsonArray nomiJson=new JsonArray();
         for (String name : listaNomi) {
-            System.out.println("Nome JSON: " +name);
             nomiJson.add(name);
         }
         resp.setContentType("application/json");

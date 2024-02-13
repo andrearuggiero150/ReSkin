@@ -28,7 +28,6 @@ public class updateProductServlet extends HttpServlet {
 
         Product prodottoDaModificare;
         int id=Integer.parseInt(req.getParameter("idProdotto"));
-        System.out.println("ID Prodotto: "+id);
         prodottoDaModificare= RVPDAO.productFromID(id, new connectionPoolReal());
         String nomeCategoria= RVPDAO.getCategoryName(prodottoDaModificare.getCategoryId(), new connectionPoolReal());
         List<Category> listaCategorie= RVPDAO.allCategory(new connectionPoolReal());
@@ -184,7 +183,6 @@ public class updateProductServlet extends HttpServlet {
         }
 
         else {
-            System.out.println("Sono nell'else");
             Product prodottoAggiornato = new Product();
             prodottoAggiornato.setProductID(idProdotto);
             prodottoAggiornato.setNome(req.getParameter("Titolo"));
@@ -195,7 +193,6 @@ public class updateProductServlet extends HttpServlet {
             prodottoAggiornato.setQuantita(Integer.parseInt(req.getParameter("Quantità")));
             prodottoAggiornato.setDescrizione(req.getParameter("Descrizione"));
             int eseguiAggiornamento = GIDAO.updateProductInformation(prodottoAggiornato, new connectionPoolReal());
-            System.out.println("Esecuzione query aggiornamento: " + eseguiAggiornamento);
             String nomeCategoria = RVPDAO.getCategoryName(prodottoAggiornato.getCategoryId(), new connectionPoolReal());
 
 

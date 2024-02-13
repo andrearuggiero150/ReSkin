@@ -23,7 +23,7 @@
             <%for (int i = 0; i < c.sizeCarrello(); i++) { %>
             <div class="card mb-3">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex flex-row align-items-center">
                             <div>
                                 <img src="data:image/jpeg;base64,<%=Base64.getEncoder().encodeToString(c.getProdottoCarrello(i).getProdotto().getBinaryImage()) %>"
@@ -31,21 +31,32 @@
                                      alt="IMMAGINE PRODOTTO">
                             </div>
                             <div class="ms-3">
-                                <h5 class="card-title">Nome
-                                    prodotto: <%=c.getProdottoCarrello(i).getProdotto().getNome()%>
-                                </h5>
-                                <p class="small mb-0">Descrizione
-                                    prodotto: <%=c.getProdottoCarrello(i).getProdotto().getDescrizione()%>
-                                </p>
-                                <p class="small mb-0">Quantita&apos;: <%= c.getProdottoCarrello(i).getQuantita() %>
-                                </p>
-                                <p class="small mb-0">Prezzo: $<%= c.getProdottoCarrello(i).getProdotto().getPrezzo() %>
-                                </p>
+                                <h5 class="card-title"><%=c.getProdottoCarrello(i).getProdotto().getNome()%></h5>
+                                <br>
+                                <p class="small mb-0">Quantita&apos;: <%= c.getProdottoCarrello(i).getQuantita() %></p>
+                                <p class="small mb-0">Prezzo: $<%= c.getProdottoCarrello(i).getProdotto().getPrezzo() %></p>
                             </div>
+                        </div>
+                        <div>
+                            <form action="${pageContext.request.contextPath}/removeCartServlet" method="get">
+                                <input type="hidden" name="cartObjectID" value="<%= c.getProdottoCarrello(i).getId() %>">
+                                <button type="submit" class="btn btn-danger">Elimina Prodotto</button>
+                            </form>
+                            <br>
+                            <form action="${pageContext.request.contextPath}/modifyCartServlet" method="get" class="form-inline">
+                                <input type="hidden" name="cartObjectID" value="<%= c.getProdottoCarrello(i).getId() %>">
+                                <select name="quantitaScelta" id="quantitaScelta" class="form-select mr-2">
+                                    <% for (int j = 1; j <= c.getProdottoCarrello(i).getQuantita(); j++) { %>
+                                    <option value="<%= j %>"><%= j %></option>
+                                    <% } %>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Modifica Quantità</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+
             <% double temp = c.getProdottoCarrello(i).getProdotto().getPrezzo() * c.getProdottoCarrello(i).getQuantita();
                 t += temp;
             } %>
@@ -55,9 +66,11 @@
                     <h1 class="fw-lighter">Totale: $<%=t%></h1>
                 </div>
                 <div class="col text-end">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Inserisci indirizzo
+                    <%if(c != null) {%>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Procedi al Checkout
                     </button>
+                    <%}%>
                 </div>
             </div>
 
@@ -73,7 +86,7 @@
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <div class="login-form mx-auto text-center registerForm">
+                    <div class="login-form mx-auto text-center addressForm">
                         <form class="row g-3" method="get"
                               action="${pageContext.request.contextPath}/placeOrderServlet">
                             <div class="col-md-64">
@@ -107,7 +120,7 @@
                             <div class="col-64">
                                 <p>Totale: <%=t%>
                                 </p>
-                                <button class="btn btn-success" type="submit">Checkout</button>
+                                <button class="btn btn-success" type="submit">Piazza ordine</button>
                             </div>
                         </form>
                     </div>

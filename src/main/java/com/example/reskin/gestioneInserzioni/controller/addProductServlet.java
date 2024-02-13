@@ -130,7 +130,6 @@ public class addProductServlet extends HttpServlet {
             dispatcher.forward(req,resp);
         }
 
-        System.out.println("Tipo file: " +req.getPart("CaricaFoto").getContentType());
 
         if(!req.getPart("CaricaFoto").getContentType().equals("image/jpeg")){
             codiceErrore = 8;

@@ -30,7 +30,6 @@ public class modifyStatusServlet extends HttpServlet {
         }
 
         String statusOrdine=req.getParameter("StatusNome");
-        System.out.println("Status scelto: " +statusOrdine);
         int idOrdine=Integer.parseInt(req.getParameter("idOrdine"));
 
         List<String> listaStatus=new ArrayList<>();
@@ -41,18 +40,15 @@ public class modifyStatusServlet extends HttpServlet {
         boolean nomePresente=false;
 
         for(String nomi: listaStatus){
-            System.out.println("Nome nella lista: "+nomi);
             if(nomi.equals(statusOrdine)){
                 nomePresente=true;
                 break;
             }
         }
 
-        System.out.println("Stato nomePresente: " +nomePresente);
 
 
         if(statusOrdine.isEmpty() || !nomePresente){
-            System.out.println("Stato nomePresente in caso di erroe: " +nomePresente);
             req.setAttribute("esitoModifica", 0);
             List<Order> orderList= GODAO.retriveOrder(new connectionPoolReal());
             req.setAttribute("listaOrdini", orderList);
@@ -64,14 +60,12 @@ public class modifyStatusServlet extends HttpServlet {
         int updateStatus= GODAO.modifyOrderStatus(idOrdine,statusOrdine, new connectionPoolReal());
 
         if(updateStatus==1 && nomePresente){
-            System.out.println("Stato nomePresente in if=1: " +nomePresente);
             req.setAttribute("esitoModifica", updateStatus);
             List<Order> orderList= GODAO.retriveOrder(new connectionPoolReal());
             req.setAttribute("listaOrdini", orderList);
             RequestDispatcher dispatcher= req.getRequestDispatcher("WEB-INF/interface/pageVisualizzaOrdiniAdmin.jsp");
             dispatcher.forward(req,resp);
         } else if (updateStatus == 0 || !nomePresente) {
-            System.out.println("Stato nomePresente in if=0: " +nomePresente);
             req.setAttribute("esitoModifica", updateStatus);
             List<Order> orderList= GODAO.retriveOrder(new connectionPoolReal());
             req.setAttribute("listaOrdini", orderList);

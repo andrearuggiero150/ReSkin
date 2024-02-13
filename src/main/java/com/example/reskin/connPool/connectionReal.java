@@ -15,7 +15,7 @@ public class connectionReal implements connectionImplementor {
         p.setUrl("jdbc:mysql://localhost:3306/ReSkin?serverTimezone=" + TimeZone.getDefault().getID());
         p.setDriverClassName("com.mysql.cj.jdbc.Driver");
         p.setUsername("root");
-        p.setPassword("PlQaOkWs01.");
+        p.setPassword("andrea11");
         p.setMaxActive(100);
         p.setInitialSize(10);
         p.setMinIdle(10);

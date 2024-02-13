@@ -28,9 +28,11 @@
                         <h1 class="card-title fw-bold fw-italic"><%=prodotto.getNome()%>
                         </h1>
                         <div class="card-body" style="margin-top: 150px">
-                            <p class="card-text">LUNGHEZZA: <%=prodotto.getLunghezza()%> cm
+                            <p class="card-text">Lunghezza: <%=prodotto.getLunghezza()%> cm
                             </p>
-                            <p class="card-text">LARGHEZZA: <%=prodotto.getLarghezza()%> cm
+                            <p class="card-text">Larghezza: <%=prodotto.getLarghezza()%> cm
+                            </p>
+                            <p class="card-text">Prezzo: <%=prodotto.getPrezzo()%> $
                             </p>
                             <%if (prodotto.getQuantita() > 0) {%>
                             <p class="card-text" style="color: green">Prodotto disponibile</p>

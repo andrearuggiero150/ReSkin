@@ -3,13 +3,7 @@
 <%@ page import="com.example.reskin.Entity.OrderDetails" %>
 <%@ page import="com.example.reskin.Entity.Product" %>
 <%@ page import="com.example.reskin.ricercaVisualizzazioneProdotto.DAOStorage.RVPDAO" %>
-<%@ page import="com.example.reskin.connPool.connectionPoolReal" %><%--
-  Created by IntelliJ IDEA.
-  User: giovi
-  Date: 09/02/2024
-  Time: 12:20
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.reskin.connPool.connectionPoolReal" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

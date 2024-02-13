@@ -1,12 +1,6 @@
 <%@ page import="com.example.reskin.Entity.Product" %>
 <%@ page import="com.example.reskin.Entity.Category" %>
-<%@ page import="java.util.ArrayList" %><%--
-  Created by IntelliJ IDEA.
-  User: giovi
-  Date: 26/01/2024
-  Time: 18:40
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

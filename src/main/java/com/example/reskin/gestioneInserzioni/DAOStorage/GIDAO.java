@@ -39,7 +39,7 @@ public class GIDAO {
 
     public static int addProduct(Product nuovoProdotto, connectionPoolAbstraction cpa){
         try(Connection connection=cpa.setConnection()){
-            PreparedStatement preparedStatement= connection.prepareStatement("INSERT INTO Product (nome,descrizione,binaryImage,larghezza,lunghezza,quantita,prezzo,categoryID,color) VALUES (?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement= connection.prepareStatement("INSERT INTO Product (nome,descrizione,binaryImage,larghezza,lunghezza,quantita,prezzo,categoryID,colore) VALUES (?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, nuovoProdotto.getNome());
             preparedStatement.setString(2,nuovoProdotto.getDescrizione());
             preparedStatement.setBytes(3, nuovoProdotto.getBinaryImage());

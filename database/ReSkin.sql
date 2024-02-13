@@ -15,10 +15,11 @@ descrizione varchar(100),
 binaryImage longblob not null,
 larghezza double not null,
 lunghezza double not null,
+colore varchar(30) not null,
 quantita int not null,
 prezzo double not null,
 categoryID int not null,
-foreign key (categoryID) references Category(categoryID) on update CASCADE);
+foreign key (categoryID) references Category(categoryID));
 
 create table Customer (
 customerID int primary key auto_increment,
@@ -40,30 +41,30 @@ provincia varchar(30) not null,
 cap char(5) not null,
 stato varchar(30) not null,
 customerID int not null, 
-foreign key (customerID) references Customer(customerID) on update CASCADE);
+foreign key (customerID) references Customer(customerID));
 
 create table OrderDetails (
 orderDetailsID int primary key auto_increment,
 quantita int not null,
 productID int not null,
 orderID int not null,
-foreign key (orderID) references OrderPlace(orderID) on delete CASCADE on update CASCADE,
-foreign key (productID) references Product(productID) on update CASCADE);
+foreign key (orderID) references OrderPlace(orderID),
+foreign key (productID) references Product(productID));
 
 create table Cart (
 cartID int primary key auto_increment,
 productID int not null,
 customerID int not null,
 quantita int not null,
-foreign key (customerID) references Customer(customerID) on delete CASCADE on update CASCADE,
-foreign key (productID) references Product(productID) on delete CASCADE on update CASCADE);
+foreign key (customerID) references Customer(customerID),
+foreign key (productID) references Product(productID));
 
 create table POP (
 POPID int primary key auto_increment,
 testo varchar(150),
 dataInvio DATETIME not null,
 customerID int not null,
-foreign key (customerID) references Customer(customerID) on delete CASCADE on update CASCADE);
+foreign key (customerID) references Customer(customerID));
 
 insert into Customer values
     /* Admin111@ */

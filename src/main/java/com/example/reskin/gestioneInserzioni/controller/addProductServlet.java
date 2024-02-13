@@ -27,7 +27,6 @@ public class addProductServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
             dispatcher.forward(req, resp);
         }
-
         List<Category> listaCategorie= RVPDAO.allCategory(new connectionPoolReal());
         req.setAttribute("listaCategorie", listaCategorie);
         RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/pageAggiungiNuovaInserzione.jsp");

@@ -12,6 +12,7 @@
 <body>
 <jsp:include page="headBar.jsp"/>
 <% Cart c = (Cart) request.getAttribute("carrello"); %>
+<% double t=0; %>
 <% if (c==null) { %>
     <p>Carrello vuoto</p>
    <% } else {%>
@@ -46,8 +47,56 @@
         </div>
     </div>
 </div>
-<% } %>
+<% double temp = c.getProdottoCarrello(i).getProdotto().getPrezzo() * c.getProdottoCarrello(i).getQuantita();
+t += temp;} %>
 <%}%>
+<p>Totale: <%=t%></p>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Apri Popup
+</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Inserisci Indirizzo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="login-form mx-auto text-center registerForm">
+                        <form class="row g-3" method="get" action="${pageContext.request.contextPath}/placeOrderServlet">
+                            <div class="col-md-64">
+                                <label for="via" class="form-label">Via</label>
+                                <input type="text" class="form-control" id="via" name="via" placeholder="Via Rossi" required>
+                            </div>
+                            <div class="col-md-64">
+                                <label for="citta" class="form-label">Citta</label>
+                                <input type="text" class="form-control" id="citta" name="citta" placeholder="Forino" required>
+                            </div>
+                            <div class="col-md-64">
+                                <label for="provincia" class="form-label">Provincia</label>
+                                <input type="text" class="form-control" id="provincia" name="provincia" required placeholder="Avellino">
+                            </div>
+                            <div class="col-md-64">
+                                <label for="stato" class="form-label">Stato</label>
+                                <input type="text" class="form-control" id="stato" name="stato" placeholder="Italia" required>
+                            </div>
+                            <div class="col-md-64">
+                                <label for="CAP" class="form-label">CAP</label>
+                                <input type="text" class="form-control" id="CAP" name="CAP" placeholder="83200" required>
+                            </div>
+                            <div class="col-64">
+                                <p>Totale: <%=t%></p>
+                                <button class="btn btn-success" type="submit">Invia</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%session.setAttribute("totale", t);%>
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="liveToast-primo" class="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
@@ -98,6 +147,26 @@
         </div>
     </div>
 </div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast-checkbuono" class="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Ordine creato, puoi visualizzarlo nella sezione ordini.
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast-checkmale" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Fatal error: Riprova!
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
 <script>
     const toastLiveExample0 = document.getElementById('liveToast-primo')
     const toastLiveExample1 = document.getElementById('liveToast-secondo')
@@ -129,6 +198,21 @@
             }
         })
     })
+
+    const toastLiveExample5 = document.getElementById('liveToast-checkbuono')
+    const toastLiveExample6 = document.getElementById('liveToast-checkmale')
+    document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+            let check = <%= request.getAttribute("checkOutSuccess") %>;
+            if (check == 0) {
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample6)
+                toastBootstrap.show()
+            }
+            if (check == 1) {
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample5)
+                toastBootstrap.show()
+            }
+        })})
 </script>
 </body>
 </html>

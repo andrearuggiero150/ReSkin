@@ -9,13 +9,10 @@
         <div class="collapse navbar-collapse" id="navigationBar">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link " href="#">Home</a>
+                    <a class="nav-link " href="${pageContext.request.contextPath}/index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">Catalogo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="#">AboutUs</a>
+                    <a class="nav-link " href="${pageContext.request.contextPath}/listaProdottiServlet">Catalogo</a>
                 </li>
             </ul>
             <div>

@@ -23,51 +23,63 @@
         <table class=" table table-dark table-hover">
             <thead>
             <tr>
-                <th scope="col">Nr.Ordine</th>
-                <th scope="col">Contenuto ordine</th>
-                <th scope="col">Prezzo totale ordine</th>
-                <th scope="col">Stato attuale</th>
-                <th scope="col">Modifica stato</th>
+                <th scope="col" class="text-center">Nr.Ordine</th>
+                <th scope="col" class="text-center">ID Acquirente</th>
+                <th scope="col" class="text-center">Contenuto ordine</th>
+                <th scope="col" class="text-center">Quantità</th>
+                <th scope="col" class="text-center">Prezzo totale ordine</th>
+                <th scope="col" class="text-center">Stato attuale</th>
+                <th scope="col" class="text-center">Modifica stato</th>
             </tr>
             </thead>
             <tbody class="table-group-divider">
             <%
                 for (Order order : orderList) {
-                    int ordine = order.getId();
             %>
             <tr>
-                <td>
-                    <%=ordine%>
+                <td class="text-center ">
+                    <%=order.getId()%>
                 </td>
 
-                <td>
+                <td class="text-center ">
+                    <%=order.getCustomerId()%>
+                </td>
+
+                <td class="text-center">
                     <%
                         List<OrderDetails> orderDetailsList = order.getListaProdotti();
                         for (OrderDetails details : orderDetailsList) {
                             Product product = RVPDAO.productFromID(details.getProdottoID(), new connectionPoolReal());
                     %>
-                    <%=product.getNome()%> <br>
+                    <%=product.getNome()%><br>
                     <%}%>
                 </td>
 
-                <td>
-                    <%=order.getTotale()%>
+                <td class="text-center">
+                    <%
+                        for (OrderDetails details : orderDetailsList) {
+                    %>
+                   <%=details.getQuantita()%> <br>
+                    <%}%>
                 </td>
 
-                <td>
+                <td class="text-center">
+                    €<%=order.getTotale()%>
+                </td>
+
+                <td class="text-center">
                     <%=order.getStatus()%>
                 </td>
 
-                <td>
-                    <form method="post" action="modifyStatusServlet" class="mx-5" id="cambiaStatusForm<%=ordine%>">
-                        <input type="hidden" name="idOrdine" id="idOrdine<%=ordine%>" value="<%=ordine%>">
-                        <select class="form-select" id="Status<%=ordine%>" name="Status" onchange="submitFormStatus(<%=ordine%>)">
+                <td class="text-center">
+                    <form method="post" action="${pageContext.request.contextPath}/modifyStatusServlet" class="mx-5" id="cambiaStatusForm<%=order.getId()%>">
+                        <input type="hidden" name="idOrdine" id="idOrdine<%=order.getId()%>" value="<%=order.getId()%>">
+                        <select class="form-select" id="Status<%=order.getId()%>" name="Status" onchange="submitFormStatus(<%=order.getId()%>)">
                         <option value="" disabled selected style="display:none;">Modifica status</option>
                             <option value="Completo">Completo</option>
                             <option value="In transito">In transito</option>
                             <option value="Pagato">Pagato</option>
                             <option value="Da pagare">Da pagare</option>
-                            </option>
                         </select>
                     </form>
                 </td>
@@ -80,7 +92,7 @@
 
 
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast0" class="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="liveToast0" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
                 Errore nella modifica dello status

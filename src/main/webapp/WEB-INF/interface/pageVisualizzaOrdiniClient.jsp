@@ -19,13 +19,14 @@
 <jsp:include page="headBar.jsp"/>
 <div class="container-fluid mt-5">
     <div class="table-responsive d-flex">
-        <table class=" table table-dark table-hover">
+        <table class="table table-dark table-hover">
             <thead>
             <tr>
-                <th scope="col">Nr.Ordine</th>
-                <th scope="col">Contenuto ordine</th>
-                <th scope="col">Prezzo totale ordine</th>
-                <th scope="col">Stato attuale</th>
+                <th scope="col" class="text-center">Nr.Ordine</th>
+                <th scope="col" class="text-center">Contenuto ordine</th>
+                <th scope="col" class="text-center">Quantità</th>
+                <th scope="col" class="text-center">Prezzo totale ordine</th>
+                <th scope="col" class="text-center">Stato attuale</th>
             </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -34,11 +35,11 @@
                     int ordine = order.getId();
             %>
             <tr>
-                <td>
+                <td class="text-center">
                     <%=ordine%>
                 </td>
 
-                <td>
+                <td class="text-center">
                     <%
                         List<OrderDetails> orderDetailsList = order.getListaProdotti();
                         for (OrderDetails details : orderDetailsList) {
@@ -48,11 +49,19 @@
                     <%}%>
                 </td>
 
-                <td>
-                    <%=order.getTotale()%>
+                <td class="text-center">
+                    <%
+                        for (OrderDetails details : orderDetailsList) {
+                    %>
+                    <%=details.getQuantita()%> <br>
+                    <%}%>
                 </td>
 
-                <td>
+                <td class="text-center">
+                    €<%=order.getTotale()%>
+                </td>
+
+                <td class="text-center">
                     <%=order.getStatus()%>
                 </td>
             </tr>

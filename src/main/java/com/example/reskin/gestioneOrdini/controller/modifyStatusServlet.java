@@ -31,6 +31,14 @@ public class modifyStatusServlet extends HttpServlet {
         String statusOrdine=req.getParameter("Status");
         int idOrdine=Integer.parseInt(req.getParameter("idOrdine"));
 
+        if(!statusOrdine.equals("Completo") || !statusOrdine.equals("In transito") || !statusOrdine.equals("Pagato") || !statusOrdine.equals("Da pagare") ){
+            req.setAttribute("esitoModifica", 0);
+            List<Order> orderList= GODAO.retriveOrder(new connectionPoolReal());
+            req.setAttribute("listaOrdini", orderList);
+            RequestDispatcher dispatcher= req.getRequestDispatcher("WEB-INF/interface/pageVisualizzaOrdiniAdmin.jsp");
+            dispatcher.forward(req,resp);
+        }
+
         int updateStatus= GODAO.modifyOrderStatus(idOrdine,statusOrdine, new connectionPoolReal());
 
         if(updateStatus==1){

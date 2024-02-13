@@ -43,7 +43,10 @@ public class PODAO {
             ps2.setString(7, stato);
             ps2.setInt(8, customerID);
             ps2.setDouble(9, totale);
-            int codiceOrdine = ps2.executeUpdate();
+            ps2.executeUpdate();
+            ResultSet generetdKey = ps2.getGeneratedKeys();
+            generetdKey.next();
+            int codiceOrdine = generetdKey.getInt(1);
             while (resultSet.next()) {
                 PreparedStatement ps3 = connection.prepareStatement("INSERT INTO OrderDetails (quantita,productID,orderID) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
                 ps3.setInt(1, resultSet.getInt("quantita"));

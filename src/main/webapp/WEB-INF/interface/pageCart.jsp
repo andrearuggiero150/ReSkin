@@ -167,6 +167,16 @@ t += temp;} %>
         </div>
     </div>
 </div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast-checkpiu" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Sono stati rimossi prodotti nel tuo carrello non piu disponibili nella quantita selezionata.
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
 <script>
     const toastLiveExample0 = document.getElementById('liveToast-primo')
     const toastLiveExample1 = document.getElementById('liveToast-secondo')
@@ -201,6 +211,7 @@ t += temp;} %>
 
     const toastLiveExample5 = document.getElementById('liveToast-checkbuono')
     const toastLiveExample6 = document.getElementById('liveToast-checkmale')
+    const toastLiveExample7 = document.getElementById('liveToast-checkpiu')
     document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function () {
             let check = <%= request.getAttribute("checkOutSuccess") %>;
@@ -210,6 +221,10 @@ t += temp;} %>
             }
             if (check == 1) {
                 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample5)
+                toastBootstrap.show()
+            }
+            if (check == 2) {
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample7)
                 toastBootstrap.show()
             }
         })})

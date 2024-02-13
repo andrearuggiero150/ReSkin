@@ -8,6 +8,27 @@ import java.time.LocalDate;
 public class PODAO {
     public static int placeOrder(int customerID, double totale, String via, String CAP, String citta, String provincia, String stato, connectionPoolAbstraction cpa) {
         try (Connection connection = cpa.setConnection()) {
+
+            boolean flag = false;
+            PreparedStatement ps_1 = connection.prepareStatement("SELECT * FROM Cart WHERE customerID=?");
+            ps_1.setInt(1, customerID);
+            ResultSet resultSet3 = ps_1.executeQuery();
+            while (resultSet3.next()) {
+                PreparedStatement ps_2 = connection.prepareStatement("SELECT * FROM Product WHERE productID=?");
+                ps_2.setInt(1, resultSet3.getInt("productID"));
+                ResultSet resultSet4 = ps_2.executeQuery();
+                resultSet4.next();
+                int quantitaTemp = resultSet4.getInt("quantita");
+                if(quantitaTemp < resultSet3.getInt("quantita")) {
+                    PreparedStatement ps_3 = connection.prepareStatement("DELETE FROM Cart WHERE cartID=?");
+                    ps_3.setInt(1, resultSet3.getInt("cartID"));
+                    ps_3.executeUpdate();
+                    flag = true;
+                }
+            }
+            if(flag == true)
+                return 2;
+
             PreparedStatement ps1 = connection.prepareStatement("SELECT * FROM Cart WHERE customerID=?");
             ps1.setInt(1, customerID);
             ResultSet resultSet = ps1.executeQuery();
@@ -43,7 +64,7 @@ public class PODAO {
                 ps6.executeUpdate();
             }
         } catch (SQLException e) {
-            return 0;
+            e.printStackTrace();
         }
         return 1;
     }

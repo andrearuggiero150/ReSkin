@@ -34,22 +34,22 @@ public class registrationOTPServlet extends HttpServlet {
         }
         if(req.getParameter("email")==null || !req.getParameter("email").matches("^[a-zA-Z0-9.-]{1,29}[a-zA-Z0-9]@[a-zA-Z0-9.-]{1,29}[a-zA-Z0-9]\\.[a-zA-Z]{1,5}$")) {
             req.setAttribute("registerSuccess", -1);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageRegistrationAdmin.jsp");
             dispatcher.forward(req, resp);
         }
         if(req.getParameter("password")==null || !req.getParameter("password").matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,30}$")) {
             req.setAttribute("registerSuccess", -2);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageRegistrationAdmin.jsp");
             dispatcher.forward(req, resp);
         }
         if(req.getParameter("nome")==null || !req.getParameter("nome").matches("^.{2,30}$")) {
             req.setAttribute("registerSuccess", -3);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageRegistrationAdmin.jsp");
             dispatcher.forward(req, resp);
         }
         if(req.getParameter("cognome")==null || !req.getParameter("cognome").matches("^.{2,30}$")) {
             req.setAttribute("registerSuccess", -4);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageRegistrationAdmin.jsp");
             dispatcher.forward(req, resp);
         }
         else {
@@ -81,12 +81,12 @@ public class registrationOTPServlet extends HttpServlet {
                     }
                     if (i == 2) {
                         req.setAttribute("registerSuccess", 2);
-                        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
+                        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageRegistrationAdmin.jsp");
                         dispatcher.forward(req, resp);
                     }
                     if (i == 0) {
                         req.setAttribute("registerSuccess", 0);
-                        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
+                        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageRegistrationAdmin.jsp");
                         dispatcher.forward(req, resp);
                     }
                 }
@@ -102,11 +102,11 @@ public class registrationOTPServlet extends HttpServlet {
                 socket.close();
             } catch (ConnectException ce) {
                 req.setAttribute("registerSuccess", -5);
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageRegistrationAdmin.jsp");
                 dispatcher.forward(req, resp);
             } catch (ClassNotFoundException e) {
                 req.setAttribute("registerSuccess", 0);
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/registrationAdmin.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageRegistrationAdmin.jsp");
                 dispatcher.forward(req, resp);
             }
         }

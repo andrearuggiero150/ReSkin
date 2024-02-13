@@ -27,7 +27,7 @@ class AGUDAOTest {
         assertNull(AGUDAO.returnCustomerData("ciao", new connectionPoolMock()));
         assertInstanceOf(Cliente.class, AGUDAO.returnCustomerData("mariorossi@gmail.com", new connectionPoolReal()));
         assertInstanceOf(Admin.class, AGUDAO.returnCustomerData("admin@admin.com", new connectionPoolReal()));
-        assertNull(AGUDAO.returnCustomerData("ciao@ciao.com", new connectionPoolReal()));
+        assertNull(AGUDAO.returnCustomerData("ciao@gmail.com", new connectionPoolReal()));
     }
 
     @Test

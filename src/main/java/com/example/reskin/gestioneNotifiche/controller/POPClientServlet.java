@@ -28,7 +28,7 @@ public class POPClientServlet extends HttpServlet {
             Customer c = (Customer)req.getSession().getAttribute("customer");
             List<POP> listaPOP = GNDAO.clientPOP(c.getId(), new connectionPoolReal());
             req.setAttribute("listaPOP", listaPOP);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/POPClient.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pagePOPClient.jsp");
             dispatcher.forward(req, resp);
         }
     }

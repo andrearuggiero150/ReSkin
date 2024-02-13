@@ -27,7 +27,7 @@ public class manageProductServlet extends HttpServlet {
             List<Product> listaInserzioni;
             listaInserzioni= RVPDAO.allProduct(new connectionPoolReal());
             req.setAttribute("listaProdotti", listaInserzioni);
-            RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");
+            RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/pageListaInserzioni.jsp");
             dispatcher.forward(req, resp);
         }
     }

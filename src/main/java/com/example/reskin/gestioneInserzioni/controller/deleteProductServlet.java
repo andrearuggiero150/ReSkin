@@ -34,13 +34,13 @@ public class deleteProductServlet extends HttpServlet {
             List<Product> listaInserzioni= RVPDAO.allProduct(new connectionPoolReal());
             req.setAttribute("listaProdotti", listaInserzioni);
             req.setAttribute("risultatoOperazione", risultatoOperazione);
-            RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");
+            RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/pageListaInserzioni.jsp");
             dispatcher.forward(req,resp);
         } else if (risultatoOperazione == 0) {
             List<Product> listaInserzioni= RVPDAO.allProduct(new connectionPoolReal());
             req.setAttribute("risultatoOperazione", risultatoOperazione);
             req.setAttribute("listaProdotti", listaInserzioni);
-            RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");
+            RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/interface/pageListaInserzioni.jsp");
             dispatcher.forward(req,resp);
         }
 

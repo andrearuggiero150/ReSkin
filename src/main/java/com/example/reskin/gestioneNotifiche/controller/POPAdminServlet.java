@@ -25,7 +25,7 @@ public class POPAdminServlet extends HttpServlet {
         else {
             List<POP> listaPOP = GNDAO.adminPOP(new connectionPoolReal());
             req.setAttribute("listaPOP", listaPOP);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/POPAdmin.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pagePOPAdmin.jsp");
             dispatcher.forward(req, resp);
         }
     }

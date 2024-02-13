@@ -40,7 +40,7 @@ public class productListServlet extends HttpServlet {
 
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("listaProdotti", listaProdotti);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaProdotti.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageListaProdotti.jsp");
             dispatcher.forward(req, resp);
 
         } else if (categoriaSelezionata != null && !categoriaSelezionata.isEmpty()) {
@@ -48,21 +48,21 @@ public class productListServlet extends HttpServlet {
             listaProdotti = RVPDAO.productFilteredByCategory(idCategoria, new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("listaProdotti", listaProdotti);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaProdotti.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageListaProdotti.jsp");
             dispatcher.forward(req, resp);
 
         }else if (disponibilitaSelezionata != null && disponibilitaSelezionata.equals("Non disponibile")) {
             listaProdotti = RVPDAO.productFilteredByDisponibility(0, new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("listaProdotti", listaProdotti);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaProdotti.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageListaProdotti.jsp");
             dispatcher.forward(req, resp);
 
         } else if (disponibilitaSelezionata != null && disponibilitaSelezionata.equals("Disponibile")) {
             listaProdotti = RVPDAO.productFilteredByDisponibility(1, new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("listaProdotti", listaProdotti);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaProdotti.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageListaProdotti.jsp");
             dispatcher.forward(req, resp);
         }
 
@@ -70,7 +70,7 @@ public class productListServlet extends HttpServlet {
             listaProdotti = RVPDAO.allProduct(new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("listaProdotti", listaProdotti);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaProdotti.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageListaProdotti.jsp");
             dispatcher.forward(req, resp);
         }
 

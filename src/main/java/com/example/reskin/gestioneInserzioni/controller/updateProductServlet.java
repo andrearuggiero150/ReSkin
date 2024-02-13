@@ -203,7 +203,7 @@ public class updateProductServlet extends HttpServlet {
                 List<Product> listaInserzioni = RVPDAO.allProduct(new connectionPoolReal());
                 req.setAttribute("listaProdotti", listaInserzioni);
                 req.setAttribute("esitoOperazione", eseguiAggiornamento);
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/listaInserzioni.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageListaInserzioni.jsp");
                 dispatcher.forward(req, resp);
             } else if (eseguiAggiornamento == 0) {
                 req.setAttribute("esitoOperazione", eseguiAggiornamento);

@@ -17,7 +17,7 @@ public class index extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(req.getSession().getAttribute("loginStatus") == null)
             req.getSession().setAttribute("loginStatus", 0);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/home.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageHome.jsp");
         dispatcher.forward(req,resp);
     }
 

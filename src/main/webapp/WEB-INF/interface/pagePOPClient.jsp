@@ -13,7 +13,9 @@
 <jsp:include page="headBar.jsp"></jsp:include>
 <%List<POP> listaPOP = (List<POP>) request.getAttribute("listaPOP");%>
 <%if(listaPOP == null || listaPOP.isEmpty()) { %>
-    <p> Nessun POP per te </p>
+<h3 class='text-2xl font-bold text-gray-900 sm:text-3xl'>
+    Nessun POP ricevuto
+</h3>
             <%} else { %>
 <div class="list-group m-5">
     <%for(int i=0; i<listaPOP.size(); i++) {

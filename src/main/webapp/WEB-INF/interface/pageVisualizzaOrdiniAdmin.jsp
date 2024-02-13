@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>ReSkin -Lista ordini</title>
+    <title>ReSkin - Lista ordini</title>
     <%List<Order> orderList = (List<Order>) request.getAttribute("listaOrdini");%>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">

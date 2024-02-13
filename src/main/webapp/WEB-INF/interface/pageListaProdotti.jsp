@@ -9,7 +9,7 @@
 <head>
     <%ArrayList<Product> listaProdotti = (ArrayList<Product>) request.getAttribute("listaProdotti");%>
     <%ArrayList<Category> listaCategorie = (ArrayList<Category>) request.getAttribute("listaCategorie");%>
-    <title>ReSkin -Catalogo prodotti</title>
+    <title>ReSkin - Catalogo prodotti</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

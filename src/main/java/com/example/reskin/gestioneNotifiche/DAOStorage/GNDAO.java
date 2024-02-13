@@ -3,10 +3,7 @@ package com.example.reskin.gestioneNotifiche.DAOStorage;
 import com.example.reskin.Entity.POP;
 import com.example.reskin.connPool.connectionPoolAbstraction;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -49,4 +46,46 @@ public class GNDAO {
         }
         return popList;
     }
+
+    public static int sendIndividualPOP(String email, String testo, connectionPoolAbstraction cpa) {
+        try (Connection connection = cpa.setConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT customerID, isAdmin FROM Customer WHERE email=?");
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(!resultSet.next())
+                return 3;
+            if(resultSet.getBoolean("isAdmin"))
+                return 2;
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            PreparedStatement preparedStatement1= connection.prepareStatement("INSERT INTO POP (testo, dataInvio, customerID) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            preparedStatement1.setString(1, testo);
+            preparedStatement1.setTimestamp(2, timestamp);
+            preparedStatement1.setInt(3, resultSet.getInt("customerID"));
+            preparedStatement1.executeUpdate();
+        } catch (SQLException e) {
+            return 0;
+        }
+        return 1;
+    }
+
+    public static int sendBroadcastPOP(String testo, connectionPoolAbstraction cpa) {
+        try (Connection connection = cpa.setConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT customerID, isAdmin FROM Customer");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                if (!resultSet.getBoolean("isAdmin")) {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    PreparedStatement preparedStatement1 = connection.prepareStatement("INSERT INTO POP (testo, dataInvio, customerID) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                    preparedStatement1.setString(1, testo);
+                    preparedStatement1.setTimestamp(2, timestamp);
+                    preparedStatement1.setInt(3, resultSet.getInt("customerID"));
+                    preparedStatement1.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            return 0;
+        }
+        return 1;
+    }
+
 }

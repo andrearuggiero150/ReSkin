@@ -1,7 +1,7 @@
 {
   "id": "51f609e3-9f24-404b-be41-8a29b451b961",
   "version": "2.0",
-  "name": "TC_FGI",
+  "name": "TC_FGI.3",
   "url": "http://localhost:8080/ReSkin_war_exploded/index.html",
   "tests": [{
     "id": "389890a3-96f1-43dc-a16c-96973ca4adaa",
@@ -568,33 +568,30 @@
     "id": "0a4fa386-fd98-4b39-954a-fa885841fc3c",
     "name": "TC_FGI.3_7",
     "commands": [{
-      "id": "019aaa74-a6ff-432f-9d0e-873c664e2b2c",
+      "id": "dcb32fdb-f8cf-4d29-9cf2-61ac9156de2f",
       "comment": "",
       "command": "open",
       "target": "http://localhost:8080/ReSkin_war_exploded/index.html",
       "targets": [],
       "value": ""
     }, {
-      "id": "b6dc7273-d40f-40be-b5b2-1e96db8d083e",
+      "id": "aa2ae026-e908-484e-9bf5-bab74df745a1",
       "comment": "",
       "command": "setWindowSize",
-      "target": "1536x812",
+      "target": "1400x762",
       "targets": [],
       "value": ""
     }, {
-      "id": "0b2b5c72-7839-402e-82bb-932155684382",
+      "id": "b077723c-8f13-4999-8715-b0587e75b872",
       "comment": "",
       "command": "click",
-      "target": "css=.dropdown-toggle",
+      "target": "css=.bi-person-circle",
       "targets": [
-        ["css=.dropdown-toggle", "css:finder"],
-        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
-        ["xpath=//div[@id='navigationBar']/div/div/div/button", "xpath:idRelative"],
-        ["xpath=//div/div/div/div/div/button", "xpath:position"]
+        ["css=.bi-person-circle", "css:finder"]
       ],
       "value": ""
     }, {
-      "id": "f12801e4-e22c-4449-9d66-70bf743921dd",
+      "id": "a912b764-6e3d-456d-a272-9bc1b8821b91",
       "comment": "",
       "command": "click",
       "target": "linkText=Visualizza Inserzioni",
@@ -603,66 +600,25 @@
         ["css=.dropdown-item:nth-child(3)", "css:finder"],
         ["xpath=//a[contains(text(),'Visualizza Inserzioni')]", "xpath:link"],
         ["xpath=//div[@id='loggedAdminDropdown']/a[3]", "xpath:idRelative"],
-        ["xpath=//a[contains(@href, 'gestisciInserzioniServlet')]", "xpath:href"],
+        ["xpath=//a[contains(@href, 'manageProductServlet')]", "xpath:href"],
         ["xpath=//a[3]", "xpath:position"],
         ["xpath=//a[contains(.,'Visualizza Inserzioni')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
-      "id": "82a5608f-e3c1-47b6-b9ac-3a695b8565f2",
+      "id": "cd062b3b-f552-4c7b-837a-b9f8e8273c08",
       "comment": "",
       "command": "click",
-      "target": "css=.col:nth-child(4) .mx-4:nth-child(2) > .btn",
+      "target": "css=.col:nth-child(1) .mx-4:nth-child(2) > .btn",
       "targets": [
-        ["css=.col:nth-child(4) .mx-4:nth-child(2) > .btn", "css:finder"],
-        ["xpath=(//button[@type='submit'])[6]", "xpath:attributes"],
-        ["xpath=//div[4]/div/div[3]/div/form[2]/button", "xpath:position"]
+        ["css=.col:nth-child(1) .mx-4:nth-child(2) > .btn", "css:finder"],
+        ["xpath=(//button[@type='submit'])[4]", "xpath:attributes"],
+        ["xpath=//form[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Modifica')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
-      "id": "7dadc19a-9247-424e-a216-d61b4a1ae2ea",
-      "comment": "",
-      "command": "mouseDownAt",
-      "target": "id=Prezzo",
-      "targets": [
-        ["id=Prezzo", "id"],
-        ["name=Prezzo", "name"],
-        ["css=#Prezzo", "css:finder"],
-        ["xpath=//input[@id='Prezzo']", "xpath:attributes"],
-        ["xpath=//form[@id='idForm']/div[5]/input", "xpath:idRelative"],
-        ["xpath=//div[5]/input", "xpath:position"]
-      ],
-      "value": "-137.20001220703125,19.20001220703125"
-    }, {
-      "id": "b46b9be1-4dd6-4e49-b92d-a4c35ed54e85",
-      "comment": "",
-      "command": "mouseMoveAt",
-      "target": "id=Prezzo",
-      "targets": [
-        ["id=Prezzo", "id"],
-        ["name=Prezzo", "name"],
-        ["css=#Prezzo", "css:finder"],
-        ["xpath=//input[@id='Prezzo']", "xpath:attributes"],
-        ["xpath=//form[@id='idForm']/div[5]/input", "xpath:idRelative"],
-        ["xpath=//div[5]/input", "xpath:position"]
-      ],
-      "value": "-137.20001220703125,19.20001220703125"
-    }, {
-      "id": "4eb203ba-2271-4220-8295-fb74bee151a2",
-      "comment": "",
-      "command": "mouseUpAt",
-      "target": "id=Prezzo",
-      "targets": [
-        ["id=Prezzo", "id"],
-        ["name=Prezzo", "name"],
-        ["css=#Prezzo", "css:finder"],
-        ["xpath=//input[@id='Prezzo']", "xpath:attributes"],
-        ["xpath=//form[@id='idForm']/div[5]/input", "xpath:idRelative"],
-        ["xpath=//div[5]/input", "xpath:position"]
-      ],
-      "value": "-137.20001220703125,19.20001220703125"
-    }, {
-      "id": "b403d684-b8a9-4951-9b97-d7bb37240b6e",
+      "id": "0a576362-7d4e-4aca-8bfb-1a93bad4638a",
       "comment": "",
       "command": "click",
       "target": "id=Prezzo",
@@ -676,7 +632,7 @@
       ],
       "value": ""
     }, {
-      "id": "c0bf6a01-4909-449b-a264-e9a5445f35dc",
+      "id": "e48ba3e2-3f19-4917-beb1-550cd7fa8786",
       "comment": "",
       "command": "type",
       "target": "id=Prezzo",
@@ -690,20 +646,20 @@
       ],
       "value": "0"
     }, {
-      "id": "30beaca7-f1d8-48cb-9bd9-534b86c44a08",
+      "id": "7853268e-66c7-4bc0-85dd-dcaada415380",
       "comment": "",
       "command": "click",
       "target": "css=.btn-success",
       "targets": [
         ["css=.btn-success", "css:finder"],
-        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=(//button[@type='submit'])[3]", "xpath:attributes"],
         ["xpath=//form[@id='idForm']/div[8]/button", "xpath:idRelative"],
         ["xpath=//div[8]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Invia')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
-      "id": "cda5eea8-72dd-4785-aa9a-2d9d69efd69a",
+      "id": "0596b84b-702d-49eb-a7cd-e78ca6cfdb5f",
       "comment": "",
       "command": "click",
       "target": "css=#liveToast6 .btn-close",
@@ -711,7 +667,7 @@
         ["css=#liveToast6 .btn-close", "css:finder"],
         ["xpath=(//button[@type='button'])[10]", "xpath:attributes"],
         ["xpath=//div[@id='liveToast6']/div/button", "xpath:idRelative"],
-        ["xpath=//div[8]/div/div/button", "xpath:position"]
+        ["xpath=//div[9]/div/div/button", "xpath:position"]
       ],
       "value": ""
     }]
@@ -787,12 +743,12 @@
       "command": "select",
       "target": "id=Categoria",
       "targets": [],
-      "value": "label=Quarta categoria di prova"
+      "value": "label=Stoffa"
     }, {
       "id": "2bd88ad7-c77d-4a1b-b1e9-cd6f8c39b4c5",
       "comment": "",
       "command": "click",
-      "target": "id=4",
+      "target": "id=1",
       "targets": [
         ["id=4", "id"],
         ["css=#\\34", "css:finder"],

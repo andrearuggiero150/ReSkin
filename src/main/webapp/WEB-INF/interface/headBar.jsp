@@ -12,7 +12,7 @@
                     <a class="nav-link " href="${pageContext.request.contextPath}/index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="${pageContext.request.contextPath}/listaProdottiServlet">Catalogo</a>
+                    <a class="nav-link " href="${pageContext.request.contextPath}/productListServlet">Catalogo</a>
                 </li>
             </ul>
             <div>
@@ -81,7 +81,7 @@
 </nav>
 
 
-<form method="post" action="${pageContext.request.contextPath}/listaProdottiServlet" style="margin-bottom: 0;">
+<form method="post" action="${pageContext.request.contextPath}/productListServlet" style="margin-bottom: 0;">
     <div class="dropdown">
         <div class="input-group bg-dark" style="padding: 10px 50px;">
             <input id="search-bar" type="text" class="form-control" placeholder="Cerca..." name="nomeProdotto">

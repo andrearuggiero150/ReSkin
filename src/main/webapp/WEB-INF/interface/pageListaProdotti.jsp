@@ -82,7 +82,7 @@
                 <small class="text-white">Non disponibile</small>
                 <% } %>
                 <button class="btn btn-primary bg-white" style="border-color: #212121;" >
-                    <a style="text-decoration: none; color: #212121; border-color: #212121" href="prodottoServlet?id=<%=id%>">Vai al prodotto</a>
+                    <a style="text-decoration: none; color: #212121; border-color: #212121" href="productServlet?id=<%=id%>">Vai al prodotto</a>
                 </button>
             </div>
         </div>

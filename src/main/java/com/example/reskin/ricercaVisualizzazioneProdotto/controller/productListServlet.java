@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/listaProdottiServlet")
+@WebServlet("/productListServlet")
 public class productListServlet extends HttpServlet {
 
     @Override

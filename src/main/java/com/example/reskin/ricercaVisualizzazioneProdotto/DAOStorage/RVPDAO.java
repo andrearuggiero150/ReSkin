@@ -31,8 +31,7 @@ public class RVPDAO {
 
     public static List<Integer> getSearch(String nomeProdotto, connectionPoolAbstraction cpa) {
         List<Integer> listaID = new ArrayList<>();
-        try {
-            Connection connection = cpa.setConnection();
+        try (Connection connection = cpa.setConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT productID FROM Product WHERE nome LIKE ?");
             preparedStatement.setString(1, "%" + nomeProdotto + "%");
             ResultSet resultSet = preparedStatement.executeQuery();

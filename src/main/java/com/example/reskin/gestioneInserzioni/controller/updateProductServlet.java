@@ -111,7 +111,7 @@ public class updateProductServlet extends HttpServlet {
         }
 
 
-        if (req.getParameter("Quantità").isEmpty() || Integer.parseInt(req.getParameter("Quantità")) < 1) {
+        if (req.getParameter("Quantità").isEmpty() || Integer.parseInt(req.getParameter("Quantità")) < 0) {
             codiceErrore = 5;
             String nomeCategoria = RVPDAO.getCategoryName(prodottoNonAggiornato.getCategoryId(), new connectionPoolReal());
             req.setAttribute("listaCategorie", listaCategorie);

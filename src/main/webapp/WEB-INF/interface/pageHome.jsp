@@ -341,17 +341,35 @@
         })
     })
 
-    /*
     $(document).ready(function () {
-        $('.carousel-control-prev, .carousel-control-next').click(function () {
-            $('html, body').animate({
-                scrollTop: $("footer").offset().top
-            }, 1000);
+        let segnalePOP = <%= request.getAttribute("segnalePOP") %>;
+        if (segnalePOP == 1) {
+            $('#popupModal').modal('show');
+        }
+
+        $('#btnAccetta').click(function () {
+            $('#popupModal').modal('hide');
         });
     });
-
-     */
-
 </script>
+<div class="modal fade bd-example-modal-lg" id="popupModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Normativa Cookie e Tutela della privacy</h5>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">Il nostro sito utilizza i cookie e tratta i dati personali conformemente alla normativa europea sulla privacy.
+                    Utilizziamo solo i cookie essenziali per garantire la migliore esperienza possibile sul nostro sito web. Non utilizziamo cookie per effetuare alcun tipo di profilazione fittizia.
+                    Trattiamo i tuoi dati personali in modo sicuro e rispettiamo la tua privacy. Utilizziamo i dati personali solo per scopi legittimi, come fornire servizi personalizzati ed elaborare ordini.
+                    I tuoi dati personali non vengono condivisi con terze parti senza il tuo consenso esplicito, a meno che non sia richiesto dalla legge.
+                    Continuando a utilizzare questo sito, acconsenti all'utilizzo dei cookie e al trattamento dei tuoi dati personali. </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnAccetta" class="btn btn-success" data-dismiss="modal">Accetta</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

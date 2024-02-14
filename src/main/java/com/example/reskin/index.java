@@ -20,8 +20,10 @@ import java.util.List;
 public class index extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(req.getSession().getAttribute("loginStatus") == null)
+        if(req.getSession().getAttribute("loginStatus") == null) {
             req.getSession().setAttribute("loginStatus", 0);
+            req.setAttribute("segnalePOP", 1);
+        }
         List<Product> product= RVPDAO.allProduct(new connectionPoolReal());
         req.setAttribute("listaProdotti", product);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageHome.jsp");

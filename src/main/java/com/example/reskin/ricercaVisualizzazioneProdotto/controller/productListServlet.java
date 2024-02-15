@@ -32,7 +32,11 @@ public class productListServlet extends HttpServlet {
 
         if (req.getParameter("nomeProdotto") != null) {
             List<Integer> lista = RVPDAO.getSearch(req.getParameter("nomeProdotto"), new connectionPoolReal());
-
+            if(lista == null) {
+                req.setAttribute("loginSuccess", -1);
+                RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
+                dispatcher.forward(req, resp);
+            }
             for (Integer integer : lista) {
                 listaProdotti.add(RVPDAO.productFromID(integer, new connectionPoolReal()));
             }
@@ -67,12 +71,17 @@ public class productListServlet extends HttpServlet {
 
         else {
             listaProdotti = RVPDAO.allProduct(new connectionPoolReal());
+
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("listaProdotti", listaProdotti);
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/interface/pageListaProdotti.jsp");
             dispatcher.forward(req, resp);
         }
-
+        if(listaProdotti == null || listaCategorie == null) {
+            req.setAttribute("loginSuccess", -1);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
+            dispatcher.forward(req, resp);
+        }
     }
 
     @Override

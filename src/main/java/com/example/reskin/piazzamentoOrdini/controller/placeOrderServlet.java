@@ -31,7 +31,14 @@ public class placeOrderServlet extends HttpServlet {
         }
         else {
             Customer c = (Customer) req.getSession().getAttribute("customer");
-            double totale = (double) req.getSession().getAttribute("totale");
+            double totale = 0;
+            try {
+                 totale = (double) req.getSession().getAttribute("totale");
+            } catch (NullPointerException e) {
+                req.setAttribute("loginSuccess", -1);
+                RequestDispatcher dispatcher = req.getRequestDispatcher("index.html");
+                dispatcher.forward(req, resp);
+            }
             int i = PODAO.placeOrder(c.getId(), totale, req.getParameter("via"), req.getParameter("CAP"), req.getParameter("citta"), req.getParameter("provincia"), req.getParameter("stato"), new connectionPoolReal());
             req.setAttribute("checkOutSuccess", i);
             RequestDispatcher dispatcher = req.getRequestDispatcher("viewCartServlet");

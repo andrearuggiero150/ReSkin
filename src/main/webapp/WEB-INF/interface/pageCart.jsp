@@ -87,8 +87,7 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="login-form mx-auto text-center addressForm">
-                        <form class="row g-3" method="get"
-                              action="${pageContext.request.contextPath}/placeOrderServlet">
+                        <form class="row g-3" action="${pageContext.request.contextPath}/placeOrderServlet" method="get">
                             <div class="col-md-64">
                                 <label for="via" class="form-label">Via</label>
                                 <input type="text" class="form-control" id="via" name="via"

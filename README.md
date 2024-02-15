@@ -21,8 +21,8 @@ i suoi principali brand di Fast Fashion.
 ## Documentazione 
 
 - [Documentazione](./Documentation)
-- [Manuale di installazione](./Documentation/Manuali/INDITEXReSkin_MI_1.0)
-- [Manuale utente](./Documentation/Manuali/INDITEXReSkin_MU_1.0)
+- [Manuale di installazione](./Documentation/Manuali/INDITEXReSkin_MI_1.0.pdf)
+- [Manuale utente](./Documentation/Manuali/INDITEXReSkin_MU_1.0.pdf)
 
 ## Contribuire
 

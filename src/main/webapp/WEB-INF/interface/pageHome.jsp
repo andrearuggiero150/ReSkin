@@ -24,10 +24,6 @@
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
-        <div class="carousel-item active bg-dark">
-            <img src="${pageContext.request.contextPath}/resources/test4.jpg" class="d-block w-100"
-                 alt="Immagine illustrativa">
-        </div>
         <div class="carousel-item bg-dark">
             <div class="d-flex justify-content-between">
                 <img src="${pageContext.request.contextPath}/resources/test7.jpeg" class="d-block w-100"
@@ -38,18 +34,21 @@
                     <h1 class="text-light fw-bold">Scopri i nostri prodotti.</h1>
                     <p class="text-light fw-bold">Vasto assortimento.</p>
                     <p><a class="btn btn-lg btn-dark" href="${pageContext.request.contextPath}/productListServlet">Vai
-                        al prodotto</a></p>
+                        al catalogo</a></p>
                 </div>
             </div>
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item bg-dark">
+            <img src="${pageContext.request.contextPath}/resources/test4.jpg" class="d-block w-100" alt="Immagine illustrativa">
+        </div>
+        <div class="carousel-item active">
             <img src="${pageContext.request.contextPath}/resources/test9.jpg" class="d-block w-100"
                  alt="Immagine illustrativa">
             <div class="container">
                 <div class="carousel-caption text-start">
-                    <h1 class="text-light fw-bold">Scopri i nostri prodotti.</h1>
-                    <p class="text-light fw-bold">Vasto assortimento.</p>
-                    <p><a class="btn btn-lg btn-dark" href="">Vai al prodotto</a></p>
+                    <h1 class="text-light fw-bold">Scopri il nostro obiettivo.</h1>
+                    <p class="text-light fw-bold">Per un mondo che necessita un cambiamento.</p>
+                    <p><a class="btn btn-lg btn-dark" href="#targetSection">Scopri di pi&ugrave;</a></p>
                 </div>
             </div>
         </div>
@@ -72,7 +71,7 @@
             </svg>
             <h2 class="fw-normal">Instagram</h2>
             <p>Rimani aggiornato e scopri in anteprima i prossimi prodotti in vendita.</p>
-            <p><a class="btn btn-secondary" href="#">Seguici &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="https://www.instagram.com/zara/">Seguici &raquo;</a></p>
         </div>
         <div class="col-lg-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" fill="currentColor" class="bi bi-facebook"
@@ -81,7 +80,7 @@
             </svg>
             <h2 class="fw-normal">Facebook</h2>
             <p>Rimani aggiornato e scopri in anteprima i prossimi prodotti in vendita.</p>
-            <p><a class="btn btn-secondary" href="#">Seguici &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="https://m.facebook.com/profile.php?id=100064505211565">Seguici &raquo;</a></p>
         </div>
         <div class="col-lg-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" fill="currentColor" class="bi bi-twitter-x"
@@ -90,14 +89,15 @@
             </svg>
             <h2 class="fw-normal">X</h2>
             <p>Rimani aggiornato e scopri in anteprima i prossimi prodotti in vendita.</p>
-            <p><a class="btn btn-secondary" href="#">Seguici &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="https://twitter.com/ZARA">Seguici &raquo;</a></p>
         </div>
     </div>
     <hr class="featurette-divider">
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading fw-normal lh-1">
+            <h2 id="targetSection" class="featurette-heading fw-normal lh-1">
                 Secoli di inquinamento
+            </h2>
                 <h4 class="text-body-secondary">
                     <br>
                     Nel corso dell&apos;ultimo decennio, nonostante gli sforzi considerevoli compiuti da agenzie
@@ -113,7 +113,6 @@
                     tra altre sostanze chimiche, in materiali ampiamente utilizzati dalle grandi aziende, come cotone,
                     seta e fibre sintetiche.
                 </h4>
-            </h2>
         </div>
     </div>
     <hr class="featurette-divider">
@@ -349,6 +348,18 @@
 
         $('#btnAccetta').click(function () {
             $('#popupModal').modal('hide');
+        });
+    });
+
+    $(document).ready(function () {
+        $('a[href^="#"]').on('click', function (event) {
+            var target = $(this.getAttribute('href'));
+            if (target.length) {
+                event.preventDefault();
+                $('html, body').stop().animate({
+                    scrollTop: target.offset().top
+                }, 1000);
+            }
         });
     });
 </script>

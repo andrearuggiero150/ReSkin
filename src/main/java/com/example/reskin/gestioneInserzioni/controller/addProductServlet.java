@@ -45,6 +45,8 @@ public class addProductServlet extends HttpServlet {
 
         List<Category> listaCategorie = RVPDAO.allCategory(new connectionPoolReal());
 
+        System.out.println("SOno nel POST per aggiungere un nuovo prodotto");
+
 
         int codiceErrore;
 
@@ -91,7 +93,7 @@ public class addProductServlet extends HttpServlet {
         }
 
 
-        if (req.getParameter("Quantità").isEmpty() || Integer.parseInt(req.getParameter("Quantità")) < 1) {
+        if (req.getParameter("Quantità").isEmpty() || Integer.parseInt(req.getParameter("Quantità")) < 0) {
             codiceErrore = 5;
             req.setAttribute("listaCategorie", listaCategorie);
             req.setAttribute("codiceErrore", codiceErrore);
@@ -165,7 +167,12 @@ public class addProductServlet extends HttpServlet {
             nuovoProdotto.setCategoryId(Integer.parseInt(req.getParameter("Categoria")));
             nuovoProdotto.setColore(req.getParameter("Colore"));
 
+            System.out.println("Sono nel POST prima di eseguire la query");
+
             int aggiungiNuovoProdotto= GIDAO.addProduct(nuovoProdotto, new connectionPoolReal());
+
+            System.out.println("Sono nel POST dopo esecuzione della query. Risultato: " +aggiungiNuovoProdotto);
+
 
 
             if (aggiungiNuovoProdotto == 1) {

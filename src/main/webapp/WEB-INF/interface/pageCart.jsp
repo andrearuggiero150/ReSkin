@@ -50,7 +50,7 @@
                                     <option value="<%= j %>"><%= j %></option>
                                     <% } %>
                                 </select>
-                                <button type="submit" class="btn btn-primary">Modifica Quantità</button>
+                                <button type="submit" class="btn btn-primary">Modifica Quantit&agrave;</button>
                             </form>
                         </div>
                     </div>

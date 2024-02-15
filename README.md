@@ -37,9 +37,9 @@ Se desideri contribuire a questo progetto, segui queste linee guida:
 Assicurati di descrivere chiaramente le tue modifiche e di includere informazioni rilevanti o screenshot, se necessario.
 
 ## Built with
-
-[![My Skills](https://skillicons.dev/icons?i=java,html,css,js,jquery,bootstrap,msql&perline=7)](https://skillicons.dev)
-
+<a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=java,html,css,js,jquery,bootstrap,mysql,github" />
+  </a>
 
 
 

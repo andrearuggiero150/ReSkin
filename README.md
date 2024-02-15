@@ -1,6 +1,6 @@
 ![ReSkin](./src/main/webapp/resources/logo.png)
 
-L&apos;azienda INDITEX propone quindi un sistema innovativo chiamato INDITEX ReSkin.
+L&apos;azienda INDITEX propone un sistema innovativo chiamato INDITEX ReSkin.
 L&apos;obiettivo principale di questo sistema &egrave; creare un canale di comunicazione che
 consenta a piccoli artigiani
 e innovative start-up italiane di acquistare a prezzi vantaggiosi il materiale di produzione in
@@ -11,7 +11,16 @@ il quale viene riutilizzato in un altro processo produttivo come materia prima n
 derivanti dalla produzione di capi per
 i suoi principali brand di Fast Fashion.
 
-[Documentazione](./Documentation)</p>
+## Autori
+
+- [Andrea Ruggiero](https://github.com/andrearuggiero150)
+- [Giovanni Gurrali](https://github.com/ggurrali)
+
+[##Documentazione](./Documentation)</p>
+
+
+
+
 
 
 

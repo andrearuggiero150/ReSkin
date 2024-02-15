@@ -1,4 +1,4 @@
-<p align="center">![ReSkin](./src/main/webapp/resources/logo.png)</p>
+![ReSkin](./src/main/webapp/resources/logo.png)
 
 L&apos;azienda INDITEX propone quindi un sistema innovativo chiamato INDITEX ReSkin.
 L&apos;obiettivo principale di questo sistema &egrave; creare un canale di comunicazione che

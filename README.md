@@ -1,5 +1,7 @@
 ![ReSkin](./src/main/webapp/resources/logo.png)
 
+## Descrizione
+
 L&apos;azienda INDITEX propone un sistema innovativo chiamato INDITEX ReSkin.
 L&apos;obiettivo principale di questo sistema &egrave; creare un canale di comunicazione che
 consenta a piccoli artigiani
@@ -13,25 +15,34 @@ i suoi principali brand di Fast Fashion.
 
 ## Autori
 
-- [Andrea Ruggiero](https://github.com/andrearuggiero150)
-- [Giovanni Gurrali](https://github.com/ggurrali)
+- [Andrea Ruggiero](https://github.com/andrearuggiero150) - *Team Member*
+- [Giovanni Gurrali](https://github.com/ggurrali) - *Team Member*
 
-[##Documentazione](./Documentation)</p>
+## Documentazione 
+
+- [Documentazione](./Documentation)
+- [Manuale di installazione](./Documentation/Manuali/INDITEXReSkin_MI_1.0)
+- [Manuale utente](./Documentation/Manuali/INDITEXReSkin_MU_1.0)
+
+## Contribuire
+
+Se desideri contribuire a questo progetto, segui queste linee guida:
+
+1. Fork del repository
+2. Crea un branch per le tue modifiche (`git checkout -b feature/aggiungi-nuova-funzionalita`)
+3. Committa le tue modifiche (`git commit -am 'Aggiungi nuova funzionalità'`)
+4. Pusha il branch (`git push origin feature/aggiungi-nuova-funzionalita`)
+5. Apri una Pull Request
+
+Assicurati di descrivere chiaramente le tue modifiche e di includere informazioni rilevanti o screenshot, se necessario.
+
+## Built with
+
+[![My Skills](https://skillicons.dev/icons?i=java,html,css,js,jquery,bootstrap,msql&perline=7)](https://skillicons.dev)
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-Tutti gli elaborati sono frutto di immaginazione e prodotti al solo scopo didattico.
-
-
-
+`Tutti gli elaborati sono frutto di immaginazione e prodotti al solo scopo didattico.`
